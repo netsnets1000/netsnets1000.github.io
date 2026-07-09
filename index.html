@@ -74,36 +74,50 @@
 
     <!-- record / answer card -->
     <div class="hero__record">
-      <div class="record" id="record">
-        <div class="record__head">
-          <span class="record__avatar">
-            <svg viewBox="0 0 24 24" width="17" height="17"><path d="M12 3l1.6 5.2L19 10l-5.4 1.8L12 17l-1.6-5.2L5 10l5.4-1.8z" fill="#fff"/></svg>
-          </span>
-          <div class="record__id">
-            <span class="record__name">Tellera</span>
-            <span class="record__agent" data-rec="agent">Property findings</span>
+      <div class="record record--flow" id="record">
+        <div class="record__strip"></div>
+        <div class="rflow">
+          <!-- You -->
+          <div class="rflow__stage">
+            <span class="rflow__tag">You ask</span>
+            <div class="rflow__you">
+              <span class="rflow__av rflow__av--you">
+                <svg viewBox="0 0 24 24" width="15" height="15"><circle cx="12" cy="8" r="3.6" fill="currentColor"/><path d="M5 20c0-3.6 3.4-5.6 7-5.6s7 2 7 5.6z" fill="currentColor"/></svg>
+              </span>
+              <p class="rflow__q" data-rec="question">Who owns the house behind me?</p>
+            </div>
           </div>
-          <span class="record__time"><span class="dot"></span><span data-rec="time">Answered in 12s</span></span>
-        </div>
-        <div class="record__body">
-          <div class="record__q"><span data-rec="question">Who owns the house behind me?</span></div>
-          <div class="record__answer">
-            <div>
+          <div class="rflow__link"><span></span></div>
+          <!-- Tellera -->
+          <div class="rflow__stage">
+            <span class="rflow__tag">Tellera routes it</span>
+            <div class="rflow__tellera">
+              <span class="rflow__av rflow__av--t">
+                <svg viewBox="0 0 24 24" width="15" height="15"><path d="M12 3l1.6 5.2L19 10l-5.4 1.8L12 17l-1.6-5.2L5 10l5.4-1.8z" fill="#fff"/></svg>
+              </span>
+              <div class="rflow__tbody">
+                <div class="rflow__tname">Tellera <span class="rflow__tag2" data-rec="agent">Property findings</span></div>
+                <div class="rflow__dots" id="rflowDots"></div>
+              </div>
+              <span class="rflow__ttime"><span class="dot"></span><span data-rec="time">Answered in 12s</span></span>
+            </div>
+          </div>
+          <div class="rflow__link"><span></span></div>
+          <!-- Answer -->
+          <div class="rflow__stage">
+            <span class="rflow__tag">Your answer</span>
+            <div class="rflow__answer">
               <div class="record__label" data-rec="label">Owner of record</div>
-              <div class="display record__value" data-rec="value">Martin R. Decker</div>
+              <div class="record__valrow">
+                <span class="display record__value" data-rec="value">Martin R. Decker</span>
+                <span class="record__conf" data-rec="conf">HIGH</span>
+              </div>
               <div class="record__sub" data-rec="sub">1234 Oakridge Dr, Austin, TX 78704</div>
+              <div class="rflow__asrc">
+                <svg viewBox="0 0 24 24" width="12" height="12"><path d="M12 3l7 3v5c0 4.2-2.9 7.9-7 9-4.1-1.1-7-4.8-7-9V6l7-3z" fill="none" stroke="#2E6BFF" stroke-width="1.6"/><path d="M9 12l2 2 4-4" fill="none" stroke="#2E6BFF" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                <span data-rec="srcnote">Drawn from 4 public records</span>
+              </div>
             </div>
-            <div class="stamp" data-rec="stamp">
-              <div class="stamp__k">CONFIDENCE</div>
-              <div class="stamp__v" data-rec="conf">HIGH</div>
-            </div>
-          </div>
-          <div class="record__rule"></div>
-          <div class="record__label" data-rec="srchead">Sources</div>
-          <div class="record__sources" data-rec="sources"></div>
-          <div class="record__foot">
-            <svg viewBox="0 0 24 24" width="15" height="15"><path d="M12 3l7 3v5c0 4.2-2.9 7.9-7 9-4.1-1.1-7-4.8-7-9V6l7-3z" fill="none" stroke="#2E7BFF" stroke-width="1.6"/><path d="M9 12l2 2 4-4" fill="none" stroke="#2E7BFF" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            Drawn from licensed public records.
           </div>
         </div>
       </div>

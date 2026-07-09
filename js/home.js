@@ -172,24 +172,24 @@
     set(record, 'value', r.value);
     set(record, 'sub', r.sub);
     set(record, 'conf', r.conf);
-    set(record, 'srchead', 'Sources');
+    set(record, 'srcnote', 'Drawn from ' + r.sources.length + ' public records');
     var cc = confColors(r.conf);
-    var stamp = record.querySelector('[data-rec="stamp"]');
-    stamp.style.border = '1px solid ' + cc.ink;
-    stamp.style.color = cc.ink;
-    stamp.style.background = cc.bg;
-    var src = record.querySelector('[data-rec="sources"]');
-    src.innerHTML = r.sources.map(function (s) {
-      var off = s[1] === 1;
-      var dot = off ? '#357A46' : '#C89A2E';
-      var tk = off ? 'Official' : 'Third-party';
-      var ti = off ? '#357A46' : '#9A6B1E';
-      var tb = off ? 'rgba(53,122,70,0.10)' : 'rgba(154,107,30,0.10)';
-      return '<div class="srcrow"><span class="srcrow__dot" style="background:' + dot + '"></span>' +
-        '<span class="srcrow__name">' + esc(s[0]) + '</span>' +
-        '<span class="srcrow__type" style="color:' + ti + ';background:' + tb + '">' + tk + '</span></div>';
-    }).join('');
+    var conf = record.querySelector('[data-rec="conf"]');
+    if (conf) { conf.style.color = cc.ink; conf.style.background = cc.bg; }
+    var chips = record.querySelector('[data-rec="sources"]');
+    if (chips) {
+      var html = r.sources.slice(0, 2).map(function (s) {
+        return '<span class="record__chip"><span class="d" style="background:' + (s[1] === 1 ? '#357A46' : '#C89A2E') + '"></span><span class="n">' + esc(s[0]) + '</span></span>';
+      }).join('');
+      if (r.sources.length > 2) html += '<span class="record__chip record__chip--more">+' + (r.sources.length - 2) + ' more</span>';
+      chips.innerHTML = html;
+    }
   }
+  // 9-agent routing dots inside the Tellera node (flow layout)
+  var rfd = document.getElementById('rflowDots');
+  if (rfd) rfd.innerHTML = HOME_AGENTS.map(function (a) {
+    return '<span style="background:' + a.color + '"></span>';
+  }).join('');
   if (dotsWrap) {
     dotsWrap.innerHTML = T.RECORDS.map(function (_, i) {
       return '<button role="tab" aria-label="Example ' + (i + 1) + '" data-i="' + i + '" class="' + (i === 0 ? 'active' : '') + '"></button>';
