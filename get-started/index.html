@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tellera — Deep Search</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,300;0,400;0,600;0,700;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/styles/tokens.css">
+<link rel="stylesheet" href="/styles/deep-search.css">
+<link rel="stylesheet" href="/styles/funnel.css">
+</head>
+<body class="ds-body fn-funnel">
+
+<!-- ===================== SIDEBAR (dimmed / locked during the funnel) ===================== -->
+<aside class="ds-side" id="side" aria-hidden="true">
+  <div class="ds-side__brand">
+    <span class="ds-side__back">
+      <svg viewBox="0 0 24 24" width="22" height="22"><path d="M15 18l-6-6 6-6" fill="none" stroke="#5C6470" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </span>
+    <svg viewBox="0 0 40 40" width="26" height="26"><defs><linearGradient id="sbpb" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#2E7BFF"/><stop offset="1" stop-color="#B06BFF"/></linearGradient></defs><path d="M20 4 L34 31 L6 31 Z" fill="none" stroke="url(#sbpb)" stroke-width="2.4" stroke-linejoin="round"/><path d="M2 20 L15 20" stroke="#8A8475" stroke-width="2" stroke-linecap="round"/><path d="M25 16 L38 14" stroke="#2E7BFF" stroke-width="2" stroke-linecap="round"/><path d="M25.5 20 L39 20" stroke="#7B5BFF" stroke-width="2" stroke-linecap="round"/><path d="M25 24 L38 26" stroke="#B06BFF" stroke-width="2" stroke-linecap="round"/></svg>
+    <span class="ds-side__word">Tellera</span>
+  </div>
+  <span class="ds-new"><svg viewBox="0 0 24 24" width="20" height="20" style="flex:0 0 auto"><path d="M12 5v14M5 12h14" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round"/></svg>New search</span>
+  <nav class="ds-nav" aria-label="Deep Search">
+    <button class="ds-nav__item" tabindex="-1"><svg viewBox="0 0 24 24" fill="currentColor"><circle cx="5" cy="5" r="2"/><circle cx="12" cy="5" r="2"/><circle cx="19" cy="5" r="2"/><circle cx="5" cy="12" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="19" cy="12" r="2"/><circle cx="5" cy="19" r="2"/><circle cx="12" cy="19" r="2"/><circle cx="19" cy="19" r="2"/></svg>All agents</button>
+    <button class="ds-nav__item" tabindex="-1"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3h7l4 4v12.5A1.5 1.5 0 0 1 16.5 21H7A1.5 1.5 0 0 1 5.5 19.5V4.5A1.5 1.5 0 0 1 7 3z"/><path d="M14 3v4h4"/><path d="M9 12.5h6"/><path d="M9 16h6"/></svg>Saved findings</button>
+    <button class="ds-nav__item" tabindex="-1"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="6.5"/><path d="M20.5 20.5 16 16"/></svg>Search chats</button>
+    <button class="ds-nav__item" tabindex="-1"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 1.8"/></svg>Chat history</button>
+  </nav>
+  <div class="ds-side__spacer"></div>
+  <div class="fn-guest">
+    <div class="fn-guest__t">Save your searches</div>
+    <div class="fn-guest__d">Create a free account to view findings and keep your history.</div>
+    <span class="fn-guest__btn">Create free account</span>
+  </div>
+</aside>
+
+<!-- ===================== MAIN — chat bubble + giant response card ===================== -->
+<main class="ds-main">
+  <div class="fn2-thread">
+    <div class="fn-userq"><span id="fnQuery">Who owns 13 Roland Dr, and what is it worth?</span></div>
+
+    <div class="fn2-card" id="fnCard">
+      <div class="fn2-card__head">
+        <span class="fn-agent__avatar">PR</span>
+        <div class="fn-agent__id">
+          <span class="fn-agent__name">Tellera Property</span>
+          <span class="fn-agent__sub">Property records specialist</span>
+        </div>
+        <span class="fn2-card__status" id="fnStatus"><span class="fn-pulse"></span><span id="fnStatusText">Analyzing · 0%</span></span>
+      </div>
+      <div class="fn2-cardbar"><div class="fn2-cardbar__fill" id="fnBar"></div></div>
+
+      <div class="fn2-card__body">
+        <!-- loading sequence -->
+        <div class="fn2-stage" id="fnStage"><!-- screens injected by funnel.js --></div>
+
+        <!-- resolved (blurred) answer -->
+        <div class="fn2-answer" id="fnAnswer" hidden>
+          <div class="fn2-answer__lead">Here's what Tellera found for <b id="fnAnswerAddr">13 Roland Dr</b>:</div>
+          <div class="fn2-answer__map">
+            <svg class="fn-locked" viewBox="0 0 640 340">
+              <rect x="0" y="0" width="640" height="340" fill="#E8EDE6"/>
+              <path d="M430 -30 C 524 -42, 628 -18, 632 44 C 636 102, 556 114, 476 102 C 418 93, 398 10, 430 -30 Z" fill="#D2E2C8"/>
+              <path d="M14 6 C 78 -14, 152 10, 150 74 C 148 130, 66 140, 26 112 C -8 88, -12 30, 14 6 Z" fill="#D2E2C8"/>
+              <path d="M690 120 C 556 174, 544 258, 424 290 C 304 322, 262 396, 150 450" fill="none" stroke="#CDE3C6" stroke-width="48" stroke-linecap="round"/>
+              <path d="M690 120 C 556 174, 544 258, 424 290 C 304 322, 262 396, 150 450" fill="none" stroke="#A9CFE6" stroke-width="24" stroke-linecap="round"/>
+              <g fill="none" stroke="#C7D1C5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M-20 90 C 140 48, 250 138, 388 102 C 500 74, 590 96, 660 114" stroke-width="15"/>
+                <path d="M250 92 C 270 162, 214 210, 240 280 C 256 324, 214 372, 240 460" stroke-width="12"/>
+                <path d="M300 210 C 360 195, 432 218, 442 274 C 450 322, 404 360, 350 354 C 298 348, 282 300, 296 258 Z" stroke-width="12"/>
+              </g>
+              <g fill="none" stroke="#FFFFFF" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M-20 90 C 140 48, 250 138, 388 102 C 500 74, 590 96, 660 114" stroke-width="10"/>
+                <path d="M250 92 C 270 162, 214 210, 240 280 C 256 324, 214 372, 240 460" stroke-width="7"/>
+                <path d="M300 210 C 360 195, 432 218, 442 274 C 450 322, 404 360, 350 354 C 298 348, 282 300, 296 258 Z" stroke-width="7"/>
+              </g>
+              <g fill="#DADFD3">
+                <rect x="70" y="130" width="24" height="17" rx="3"/><rect x="104" y="130" width="24" height="17" rx="3"/><rect x="138" y="130" width="24" height="17" rx="3"/>
+                <rect x="150" y="218" width="24" height="17" rx="3"/><rect x="184" y="260" width="24" height="17" rx="3"/>
+                <rect x="486" y="110" width="24" height="17" rx="3"/><rect x="520" y="110" width="24" height="17" rx="3"/><rect x="486" y="160" width="24" height="17" rx="3"/>
+                <rect x="314" y="280" width="24" height="17" rx="3"/><rect x="410" y="250" width="24" height="17" rx="3"/>
+              </g>
+              <g fill="#BBD3AC"><circle cx="58" cy="68" r="7"/><circle cx="470" cy="12" r="7"/><circle cx="588" cy="30" r="6"/><circle cx="446" cy="312" r="7"/><circle cx="196" cy="392" r="7"/><circle cx="222" cy="148" r="6"/></g>
+              <rect x="350" y="180" width="58" height="48" rx="3" fill="rgba(252,196,28,0.16)" stroke="#FCC41C" stroke-width="3"/>
+              <g fill="#2E7BFF"><circle cx="326" cy="292" r="3.6"/><circle cx="422" cy="262" r="3.6"/><circle cx="196" cy="260" r="3.6"/></g>
+              <g transform="translate(379,206)"><ellipse cx="0" cy="3" rx="9" ry="3.5" fill="rgba(0,0,0,0.18)"/><path d="M0 0 C -12 -17 -13 -28 0 -36 C 13 -28 12 -17 0 0 Z" fill="#DC0015"/><circle cx="0" cy="-23" r="6" fill="#fff"/></g>
+              <text x="40" y="82" font-family="IBM Plex Mono, monospace" font-size="11" fill="#93998C">Roland Dr</text>
+            </svg>
+          </div>
+          <div class="fn-result__grid">
+            <div><div class="fn-result__k">Owner of record</div><div class="fn-result__v fn-locked">Martin R. Decker</div></div>
+            <div><div class="fn-result__k">Estimated value</div><div class="fn-result__v fn-result__v--val fn-locked">$742,000</div></div>
+            <div><div class="fn-result__k">Last sold</div><div class="fn-result__v fn-locked">$610,000 · 2019</div></div>
+            <div><div class="fn-result__k">Home details</div><div class="fn-result__v fn-locked">4 bd · 3 ba · 2,410 sf</div></div>
+            <div><div class="fn-result__k">Liens &amp; taxes</div><div class="fn-result__v fn-locked">No open liens · current</div></div>
+            <div><div class="fn-result__k">Property type</div><div class="fn-result__v fn-locked">Single-family · built 1998</div></div>
+          </div>
+          <div class="fn2-answer__hist fn-locked">
+            <div class="fn2-answer__histk">Sale history</div>
+            <div class="fn2-answer__histrow"><span>Mar 2019 · Warranty deed</span><span>$610,000</span></div>
+            <div class="fn2-answer__histrow"><span>Jul 2011 · Warranty deed</span><span>$432,000</span></div>
+            <div class="fn2-answer__histrow"><span>Sep 2004 · Warranty deed</span><span>$305,000</span></div>
+          </div>
+          <div class="fn-unlockedmsg">
+            <svg viewBox="0 0 24 24" width="18" height="18"><circle cx="12" cy="12" r="9" fill="none" stroke="#357A46" stroke-width="1.8"/><path d="M8 12l3 3 5-6" fill="none" stroke="#357A46" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Signed in — your full findings are unlocked. (Demo)
+          </div>
+        </div>
+
+        <!-- sign-up lock over the blurred answer -->
+        <div class="fn-lock" id="fnLock">
+          <span class="fn-lock__badge"><svg viewBox="0 0 24 24" width="24" height="24"><path d="M6 10V8a6 6 0 0 1 12 0v2" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round"/><rect x="4.5" y="10" width="15" height="10" rx="2.5" fill="none" stroke="#fff" stroke-width="1.8"/><circle cx="12" cy="15" r="1.4" fill="#fff"/></svg></span>
+          <div class="fn-lock__t">Your Property findings are ready</div>
+          <div class="fn-lock__d">Create a free account to see the owner, estimated value, liens &amp; taxes, and full sale history.</div>
+          <div class="fn-lock__actions">
+            <button class="fn-lock__cta" data-open-signup>Create free account</button>
+            <span class="fn-lock__signin" data-open-signin>Sign in</span>
+          </div>
+          <div class="fn-lock__fine">Not a consumer reporting agency. Findings can't be used for FCRA-covered decisions.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<!-- ===================== MOCK SIGN-UP / SIGN-IN MODAL ===================== -->
+<div class="fn-modal" id="fnModal" hidden>
+  <div class="fn-modal__card">
+    <div class="fn-modal__strip"></div>
+    <div class="fn-modal__pad" style="position:relative">
+      <button class="fn-modal__close" id="fnModalClose" aria-label="Close">×</button>
+      <div class="fn-modal__brand">
+        <svg viewBox="0 0 40 40" width="26" height="26"><defs><linearGradient id="mdpb" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#2E7BFF"/><stop offset="1" stop-color="#B06BFF"/></linearGradient></defs><path d="M20 4 L34 31 L6 31 Z" fill="none" stroke="url(#mdpb)" stroke-width="2.4" stroke-linejoin="round"/><path d="M2 20 L15 20" stroke="#8A8475" stroke-width="2" stroke-linecap="round"/><path d="M25 16 L38 14" stroke="#2E7BFF" stroke-width="2" stroke-linecap="round"/><path d="M25.5 20 L39 20" stroke="#7B5BFF" stroke-width="2" stroke-linecap="round"/><path d="M25 24 L38 26" stroke="#B06BFF" stroke-width="2" stroke-linecap="round"/></svg>
+        <span class="fn-modal__word">Tellera</span>
+      </div>
+      <div class="fn-modal__t" id="fnModalTitle">Create your free account</div>
+      <div class="fn-modal__d" id="fnModalDesc">See your Property findings and save your searches.</div>
+      <form id="fnModalForm">
+        <div class="fn-field"><label>Email</label><input type="email" required placeholder="you@email.com" autocomplete="email"></div>
+        <div class="fn-field"><label>Password</label><input type="password" required placeholder="••••••••" autocomplete="new-password"></div>
+        <button type="submit" class="fn-modal__submit" id="fnModalSubmit">Create account &amp; view findings</button>
+      </form>
+      <div class="fn-modal__alt" id="fnModalAlt">Already have an account? <a data-switch="signin">Sign in</a></div>
+      <div class="fn-modal__fine">Demo only — no real account is created and no data is submitted.</div>
+    </div>
+  </div>
+</div>
+
+<script src="/js/data.js"></script>
+<script src="/js/funnel.js"></script>
+</body>
+</html>

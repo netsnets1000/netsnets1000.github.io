@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tellera Property — Know the story behind any address</title>
+<meta name="description" content="Owner of record, value, liens, taxes, and sale history — pulled from county records and licensed data.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,300;0,400;0,600;0,700;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/styles/tokens.css">
+<link rel="stylesheet" href="/styles/property.css">
+</head>
+<body class="prop-body">
+<div class="prism-bar"></div>
+
+<!-- ===================== NAV ===================== -->
+<header class="pnav">
+  <div class="pnav__inner">
+    <a class="pnav__brand" href="/">
+      <svg viewBox="0 0 40 40" width="30" height="30"><defs><linearGradient id="navpb" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#2E7BFF"/><stop offset="1" stop-color="#B06BFF"/></linearGradient></defs><path d="M20 4 L34 31 L6 31 Z" fill="none" stroke="url(#navpb)" stroke-width="2.4" stroke-linejoin="round"/><path d="M2 20 L15 20" stroke="#8A8475" stroke-width="2" stroke-linecap="round"/><path d="M25 16 L38 14" stroke="#2E7BFF" stroke-width="2" stroke-linecap="round"/><path d="M25.5 20 L39 20" stroke="#7B5BFF" stroke-width="2" stroke-linecap="round"/><path d="M25 24 L38 26" stroke="#B06BFF" stroke-width="2" stroke-linecap="round"/></svg>
+      <span class="pnav__word">Tellera</span>
+      <span class="pnav__tag">Property</span>
+    </a>
+    <nav class="pnav__links" aria-label="Primary">
+      <a href="#features">Features</a><a href="#howitworks">How it works</a><a href="#data">Our data</a><a href="#developers">Developers</a>
+    </nav>
+    <div class="pnav__cta">
+      <a href="#" class="pnav__signin">Sign in</a>
+      <a href="#search" class="pnav__search">Search a property</a>
+    </div>
+    <button class="pnav__burger" id="pnavBurger" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button>
+  </div>
+  <div class="pnav__menu" id="pnavMenu">
+    <a href="#features">Features</a>
+    <a href="#howitworks">How it works</a>
+    <a href="#data">Our data</a>
+    <a href="#developers">Developers</a>
+    <a href="#">Sign in</a>
+    <a href="#search">Search a property</a>
+  </div>
+</header>
+
+<!-- ===================== HERO ===================== -->
+<section id="search" class="phero">
+  <span class="phero__glow"></span>
+  <div class="phero__rays" id="pheroRays" aria-hidden="true"></div>
+  <div class="phero__inner">
+    <div>
+      <div class="phero__eyebrow">Property records · powered by Tellera</div>
+      <h1 class="phero__h1">Know the story<br>behind <span class="phero__accent">any address.</span></h1>
+      <p class="phero__lede">Owner of record, value, liens, taxes, and sale history — pulled from county records and licensed data. Ask a question, get a straight answer.</p>
+      <form class="psearch" data-property-search>
+        <svg viewBox="0 0 24 24" width="20" height="20" style="flex:0 0 auto"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 0 1 0-5 2.5 2.5 0 0 1 0 5z" fill="#5B45E0"/></svg>
+        <input id="pheroAddress" class="psearch__input" type="text" placeholder="Enter an address…" autocomplete="off" aria-label="Enter an address">
+        <button class="psearch__btn" type="submit">Search</button>
+      </form>
+
+      <div class="pask-or"><span>or ask Tellera</span></div>
+
+      <form class="pask" data-property-ask>
+        <span class="pask__strip"></span>
+        <span class="pask__spark"><svg viewBox="0 0 24 24" width="20" height="20"><path d="M12 3l1.6 5.2L19 10l-5.4 1.8L12 17l-1.6-5.2L5 10l5.4-1.8z" fill="currentColor"/></svg></span>
+        <input id="pheroAsk" class="pask__input" type="text" placeholder="Ask anything about a property…" autocomplete="off" aria-label="Ask Tellera anything about a property">
+        <button class="pask__go" type="submit" aria-label="Ask Tellera"><svg viewBox="0 0 24 24" width="20" height="20"><path d="M12 20V6M6 12l6-6 6 6" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+      </form>
+
+      <div class="phero__ask-hint">Try:</div>
+      <div class="phero__chips">
+        <button class="qchip" data-seed="Who owns the house on the corner?">who owns the house on the corner?</button>
+        <button class="qchip" data-seed="Are there any liens on this property?">any liens on this property?</button>
+        <button class="qchip" data-seed="What did it last sell for?">what did it last sell for?</button>
+      </div>
+    </div>
+
+    <!-- MAP + PROPERTY CARD -->
+    <div class="pmap">
+      <svg class="pmap__svg" viewBox="0 0 640 500">
+        <rect x="0" y="0" width="640" height="500" fill="#E8EDE6"/>
+        <path d="M430 18 C 524 6, 628 30, 632 92 C 636 150, 556 162, 476 150 C 418 141, 398 58, 430 18 Z" fill="#D2E2C8"/>
+        <path d="M14 54 C 78 34, 152 58, 150 122 C 148 178, 66 188, 26 160 C -8 136, -12 78, 14 54 Z" fill="#D2E2C8"/>
+        <path d="M690 190 C 556 244, 544 328, 424 360 C 304 392, 262 466, 150 520" fill="none" stroke="#CDE3C6" stroke-width="48" stroke-linecap="round"/>
+        <path d="M690 190 C 556 244, 544 328, 424 360 C 304 392, 262 466, 150 520" fill="none" stroke="#A9CFE6" stroke-width="24" stroke-linecap="round"/>
+        <path d="M690 196 C 556 250, 544 332, 428 364 C 310 396, 266 468, 156 520" fill="none" stroke="#C4DFF1" stroke-width="6" stroke-linecap="round"/>
+        <g fill="none" stroke="#C7D1C5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M-20 128 C 140 86, 250 176, 388 140 C 500 112, 590 134, 660 152" stroke-width="15"/>
+          <path d="M250 130 C 270 200, 214 248, 240 318 C 256 362, 214 410, 240 520" stroke-width="12"/>
+          <path d="M300 250 C 360 235, 432 258, 442 314 C 450 362, 404 400, 350 394 C 298 388, 282 340, 296 298 C 303 277, 300 264, 300 250 Z" stroke-width="12"/>
+          <path d="M196 108 L196 58" stroke-width="12"/>
+          <path d="M512 120 C 512 172, 540 208, 512 250" stroke-width="12"/>
+          <path d="M236 470 L300 470" stroke-width="12"/>
+          <circle cx="196" cy="52" r="15" fill="#C7D1C5"/><circle cx="512" cy="256" r="15" fill="#C7D1C5"/><circle cx="306" cy="470" r="15" fill="#C7D1C5"/>
+        </g>
+        <g fill="none" stroke="#FFFFFF" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M-20 128 C 140 86, 250 176, 388 140 C 500 112, 590 134, 660 152" stroke-width="10"/>
+          <path d="M250 130 C 270 200, 214 248, 240 318 C 256 362, 214 410, 240 520" stroke-width="7"/>
+          <path d="M300 250 C 360 235, 432 258, 442 314 C 450 362, 404 400, 350 394 C 298 388, 282 340, 296 298 C 303 277, 300 264, 300 250 Z" stroke-width="7"/>
+          <path d="M196 108 L196 58" stroke-width="7"/>
+          <path d="M512 120 C 512 172, 540 208, 512 250" stroke-width="7"/>
+          <path d="M236 470 L300 470" stroke-width="7"/>
+          <circle cx="196" cy="52" r="10.5" fill="#FFFFFF"/><circle cx="512" cy="256" r="10.5" fill="#FFFFFF"/><circle cx="306" cy="470" r="10.5" fill="#FFFFFF"/>
+        </g>
+        <g fill="#BBD3AC">
+          <circle cx="58" cy="108" r="7"/><circle cx="98" cy="88" r="6"/><circle cx="128" cy="138" r="6"/><circle cx="470" cy="52" r="7"/><circle cx="520" cy="40" r="6"/><circle cx="588" cy="70" r="6"/><circle cx="474" cy="120" r="6"/><circle cx="446" cy="352" r="7"/><circle cx="408" cy="392" r="6"/><circle cx="196" cy="432" r="7"/><circle cx="158" cy="470" r="6"/><circle cx="588" cy="330" r="7"/><circle cx="612" cy="366" r="6"/><circle cx="330" cy="112" r="6"/><circle cx="222" cy="188" r="6"/>
+        </g>
+        <g fill="#DADFD3">
+          <rect x="70" y="170" width="24" height="17" rx="3"/><rect x="104" y="170" width="24" height="17" rx="3"/><rect x="138" y="170" width="24" height="17" rx="3"/>
+          <rect x="150" y="258" width="24" height="17" rx="3"/><rect x="150" y="292" width="24" height="17" rx="3"/><rect x="184" y="300" width="24" height="17" rx="3"/>
+          <rect x="252" y="428" width="24" height="17" rx="3"/><rect x="286" y="428" width="24" height="17" rx="3"/><rect x="252" y="460" width="24" height="17" rx="3"/>
+          <rect x="486" y="150" width="24" height="17" rx="3"/><rect x="520" y="150" width="24" height="17" rx="3"/><rect x="486" y="200" width="24" height="17" rx="3"/><rect x="548" y="200" width="24" height="17" rx="3"/>
+          <rect x="314" y="320" width="24" height="17" rx="3"/><rect x="348" y="320" width="24" height="17" rx="3"/><rect x="410" y="320" width="24" height="17" rx="3"/><rect x="410" y="290" width="24" height="17" rx="3"/>
+          <rect x="486" y="240" width="24" height="17" rx="3"/><rect x="520" y="240" width="24" height="17" rx="3"/>
+        </g>
+        <rect x="350" y="220" width="58" height="48" rx="3" fill="rgba(252,196,28,0.14)" stroke="#FCC41C" stroke-width="3"/>
+        <g fill="#2E7BFF"><circle cx="326" cy="332" r="3.6"/><circle cx="360" cy="332" r="3.6"/><circle cx="422" cy="332" r="3.6"/><circle cx="422" cy="302" r="3.6"/><circle cx="196" cy="300" r="3.6"/></g>
+        <g transform="translate(379,246)">
+          <ellipse cx="0" cy="3" rx="9" ry="3.5" fill="rgba(0,0,0,0.18)"/>
+          <path d="M0 0 C -12 -17 -13 -28 0 -36 C 13 -28 12 -17 0 0 Z" fill="#DC0015"/>
+          <circle cx="0" cy="-23" r="6" fill="#fff"/>
+        </g>
+        <text x="40" y="116" font-family="IBM Plex Mono, monospace" font-size="10" fill="#93998C">Oakridge Dr</text>
+        <text x="150" y="52" font-family="IBM Plex Mono, monospace" font-size="10" fill="#93998C">Maple Ct</text>
+        <text x="470" y="332" font-family="IBM Plex Mono, monospace" font-size="10" fill="#7FA6C0" transform="rotate(-26 470 332)">Willow Creek</text>
+      </svg>
+      <div class="pmap__controls">
+        <span class="sw"><span style="width:12px;height:12px;border:1.5px solid #8A93A1;border-radius:2px;display:inline-block"></span>Road</span>
+        <span class="sw"><span style="width:12px;height:12px;border-radius:2px;background:#FCC41C;display:inline-block"></span>Boundary</span>
+      </div>
+      <div class="pmap__cited">
+        <svg viewBox="0 0 24 24" width="15" height="15"><path d="M12 3l7 3v5c0 4.2-2.9 7.9-7 9-4.1-1.1-7-4.8-7-9V6l7-3z" fill="none" stroke="#357A46" stroke-width="1.6"/><path d="M9 12l2 2 4-4" fill="none" stroke="#357A46" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        6 sources
+      </div>
+      <div class="pcard">
+        <div class="pcard__head">
+          <span class="pcard__icon"><svg viewBox="0 0 24 24" width="16" height="16"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" fill="#fff"/></svg></span>
+          <div>
+            <div class="pcard__addr">1234 Oakridge Dr</div>
+            <div class="pcard__city">Austin, TX 78704</div>
+          </div>
+          <span class="pcard__conf">HIGH</span>
+        </div>
+        <div class="pcard__grid">
+          <div><div class="pcard__k">Owner of record</div><div class="pcard__v">Martin R. Decker</div></div>
+          <div><div class="pcard__k">Est. value</div><div class="pcard__v pcard__v--val">$742,000</div></div>
+          <div><div class="pcard__k">Last sold</div><div class="pcard__v-sm">$610K · 2019</div></div>
+          <div><div class="pcard__k">Details</div><div class="pcard__v-sm dim">4 bd · 3 ba · 2,410 sf</div></div>
+        </div>
+        <div class="pcard__tags">
+          <span class="pcard__tag" style="color:#357A46;background:rgba(53,122,70,0.1)">No open liens</span>
+          <span class="pcard__tag" style="color:#2E6BFF;background:rgba(46,107,255,0.1)">Taxes current</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== TRUST STRIP ===================== -->
+<section class="ptrust">
+  <div class="ptrust__inner">
+    <div class="ptrust__label">Built on 15 years of records infrastructure</div>
+    <div class="ptrust__stat"><div class="ptrust__n">150M+</div><div class="ptrust__l">U.S. properties</div></div>
+    <div class="ptrust__stat"><div class="ptrust__n">3,000+</div><div class="ptrust__l">counties covered</div></div>
+    <div class="ptrust__stat"><div class="ptrust__n">11</div><div class="ptrust__l">data partners</div></div>
+    <div class="ptrust__stat"><div class="ptrust__n">~12s</div><div class="ptrust__l">to an answer</div></div>
+  </div>
+</section>
+
+<!-- ===================== FEATURES ===================== -->
+<section id="features" class="pfeat">
+  <div class="pfeat__head">
+    <div class="pfeat__eyebrow">Everything on one address</div>
+    <h2 class="pfeat__title">Six questions, one answer.</h2>
+    <p class="pfeat__lede">Other tools hand you a data dump. Tellera Property answers the question you actually asked — and shows you the records behind it.</p>
+  </div>
+  <div class="pfeat__grid">
+    <article class="pfeat-card"><span class="pfeat-card__icon" style="background:#EEEBFF;color:#7C6BFF"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg></span><h3 class="pfeat-card__title">Who owns it</h3><p class="pfeat-card__desc">Owner of record, mailing address, and how long they’ve held title — straight from the county deed.</p></article>
+    <article class="pfeat-card"><span class="pfeat-card__icon" style="background:#E5EEFF;color:#2E6BFF"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg></span><h3 class="pfeat-card__title">Liens, taxes &amp; title</h3><p class="pfeat-card__desc">Open liens, mortgage records, tax status, and title history so there are no surprises.</p></article>
+    <article class="pfeat-card"><span class="pfeat-card__icon" style="background:#E7F1E8;color:#357A46"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 1 3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg></span><h3 class="pfeat-card__title">Pre-buy due diligence</h3><p class="pfeat-card__desc">Everything you’d want to know before an offer — ownership, encumbrances, and red flags, in one answer.</p></article>
+    <article class="pfeat-card"><span class="pfeat-card__icon" style="background:#FBEAE6;color:#B0402F"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 0 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg></span><h3 class="pfeat-card__title">Neighborhood &amp; nearby</h3><p class="pfeat-card__desc">See who owns the houses around you and what nearby records say about the block.</p></article>
+    <article class="pfeat-card"><span class="pfeat-card__icon" style="background:#EEEBFF;color:#5B45E0"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 3a9 9 0 0 0-9 9H1l3.89 3.89.07.14L9 12H6a7 7 0 1 1 7 7c-1.93 0-3.68-.79-4.94-2.06l-1.42 1.42A8.98 8.98 0 0 0 13 21a9 9 0 0 0 0-18zm-1 5v5l4.28 2.54.72-1.21-3.5-2.08V8H12z"/></svg></span><h3 class="pfeat-card__title">Sale &amp; ownership history</h3><p class="pfeat-card__desc">A full chain of sales, prices, and prior owners — as far back as the record goes.</p></article>
+    <article class="pfeat-card"><span class="pfeat-card__icon" style="background:#E5EEFF;color:#2E6BFF"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 6l2.29 2.29-4.88 4.88-4-4L2 16.59 3.41 18l6-6 4 4 6.3-6.29L22 12V6z"/></svg></span><h3 class="pfeat-card__title">Value &amp; equity</h3><p class="pfeat-card__desc">A market-derived value estimate and equity picture, sourced from comparable sales.</p></article>
+  </div>
+</section>
+
+<!-- ===================== HOW IT WORKS ===================== -->
+<section id="howitworks" class="phow">
+  <div class="phow__panel">
+    <span class="phow__glow"></span>
+    <div class="phow__grid">
+      <div>
+        <div class="phow__eyebrow">Ask anything</div>
+        <h2 class="phow__title">Ask a generic AI. Then ask Tellera Property.</h2>
+        <p class="phow__lede">Type a question the way you'd say it out loud. Tellera routes it to licensed property records and returns a plain answer — with the sources attached so you can trust it.</p>
+        <div class="phow__compare" id="phowCompare"></div>
+      </div>
+      <div class="phow__steps">
+        <div class="phow-step"><span class="phow-step__n">1</span><div><div class="phow-step__t">Enter an address</div><div class="phow-step__d">Type any U.S. address, or just ask a question the way you’d say it.</div></div></div>
+        <div class="phow-step"><span class="phow-step__n">2</span><div><div class="phow-step__t">Tellera routes it</div><div class="phow-step__d">The property specialist queries the right county and licensed sources.</div></div></div>
+        <div class="phow-step"><span class="phow-step__n">3</span><div><div class="phow-step__t">Sources checked</div><div class="phow-step__d">We pull from the deed, assessment, or registry behind it, where it’s on record.</div></div></div>
+        <div class="phow-step"><span class="phow-step__n">4</span><div><div class="phow-step__t">You get one answer</div><div class="phow-step__d">A plain-language answer with a confidence score — and the sources to check it.</div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== DATA ===================== -->
+<section id="data" class="pdata">
+  <div class="pdata__inner">
+    <div class="pdata__grid">
+      <div>
+        <div class="pdata__eyebrow">Where the answers come from</div>
+        <h2 class="pdata__title">Real records. Never guesses.</h2>
+        <p class="pdata__lede">Tellera Property draws from county assessors and clerks, licensed valuation partners, and title registries. Every figure in an answer links back to the record it came from.</p>
+        <div class="pdata__tags">
+          <span>County assessors</span><span>Clerk &amp; deed records</span><span>Title &amp; lien registries</span><span>MLS-derived valuations</span>
+        </div>
+        <div class="pdata__graphic">
+          <svg viewBox="0 0 470 400">
+            <polygon points="45,300 210,309 375,300 210,291" fill="none"/>
+            <polygon points="45,300 210,382 210,391 45,309" fill="#DFE5EC"/>
+            <polygon points="375,300 210,382 210,391 375,309" fill="#D3DBE4"/>
+            <polygon points="210,218 375,300 210,382 45,300" fill="#FFFFFF" fill-opacity="0.95" stroke="#C7D2DE" stroke-width="1"/>
+            <line x1="120" y1="272" x2="300" y2="328" stroke="#EEF2F7" stroke-width="7" stroke-linecap="round"/>
+            <line x1="150" y1="330" x2="270" y2="270" stroke="#EEF2F7" stroke-width="5" stroke-linecap="round"/>
+            <polygon points="250,290 268,300 250,310 232,300" fill="rgba(252,196,28,0.45)" stroke="#E0B24C" stroke-width="1.5"/>
+            <circle cx="150" cy="300" r="15" fill="#357A46"/>
+            <svg x="141" y="291" width="18" height="18" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 0 1 0-5 2.5 2.5 0 0 1 0 5z" fill="#fff"/></svg>
+            <polygon points="45,248 210,330 210,339 45,257" fill="#DFE5EC"/>
+            <polygon points="375,248 210,330 210,339 375,257" fill="#D3DBE4"/>
+            <polygon points="210,166 375,248 210,330 45,248" fill="#FFFFFF" fill-opacity="0.95" stroke="#C7D2DE" stroke-width="1"/>
+            <polygon points="248,242 260,248 248,254 236,248" fill="#9CC0FF"/>
+            <polygon points="272,236 284,242 272,248 260,242" fill="#9CC0FF"/>
+            <polygon points="260,254 272,260 260,266 248,260" fill="#9CC0FF"/>
+            <circle cx="150" cy="248" r="15" fill="#2E7BFF"/>
+            <svg x="141" y="239" width="18" height="18" viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" fill="#fff"/></svg>
+            <polygon points="45,196 210,278 210,287 45,205" fill="#DFE5EC"/>
+            <polygon points="375,196 210,278 210,287 375,205" fill="#D3DBE4"/>
+            <polygon points="210,114 375,196 210,278 45,196" fill="#F5F3FF" fill-opacity="0.97" stroke="#C7D2DE" stroke-width="1"/>
+            <rect x="228" y="188" width="60" height="19" rx="5" fill="#EEEBFF" stroke="#C9BEFF" stroke-width="1" transform="skewX(-30)" transform-origin="258 197"/>
+            <text x="258" y="201" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="11" font-weight="600" fill="#5B45E0">$742K</text>
+            <circle cx="150" cy="196" r="15" fill="#7C6BFF"/>
+            <svg x="141" y="187" width="18" height="18" viewBox="0 0 24 24"><path d="M16 6l2.29 2.29-4.88 4.88-4-4L2 16.59 3.41 18l6-6 4 4 6.3-6.29L22 12V6z" fill="#fff"/></svg>
+            <polygon points="45,144 210,226 210,235 45,153" fill="#DFE5EC"/>
+            <polygon points="375,144 210,226 210,235 375,153" fill="#D3DBE4"/>
+            <polygon points="210,62 375,144 210,226 45,144" fill="#EFF3EA" fill-opacity="0.98" stroke="#C7D2DE" stroke-width="1"/>
+            <line x1="120" y1="116" x2="300" y2="172" stroke="#FFFFFF" stroke-width="7" stroke-linecap="round"/>
+            <line x1="150" y1="174" x2="270" y2="114" stroke="#FFFFFF" stroke-width="5" stroke-linecap="round"/>
+            <polygon points="250,134 268,144 250,154 232,144" fill="rgba(252,196,28,0.5)" stroke="#E0B24C" stroke-width="1.5"/>
+            <circle cx="150" cy="144" r="15" fill="#B0402F"/>
+            <svg x="141" y="135" width="18" height="18" viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" fill="#fff"/></svg>
+            <line x1="250" y1="300" x2="250" y2="96" stroke="#DC0015" stroke-width="1.6" stroke-dasharray="2 4" stroke-opacity="0.7"/>
+            <g transform="translate(250,92)"><path d="M0 0 C -12 -17 -13 -28 0 -36 C 13 -28 12 -17 0 0 Z" fill="#DC0015"/><circle cx="0" cy="-23" r="6" fill="#fff"/></g>
+          </svg>
+        </div>
+      </div>
+      <div class="psrc-list">
+        <div class="psrc"><span class="psrc__bar" style="background:#7C6BFF"></span><div style="flex:1;min-width:0"><div class="psrc__name">Ownerly</div><div class="psrc__desc">Home ownership, valuations, tax and lien records across residential property.</div></div><span class="psrc__cat">Value &amp; ownership</span></div>
+        <div class="psrc"><span class="psrc__bar" style="background:#2E6BFF"></span><div style="flex:1;min-width:0"><div class="psrc__name">County assessors</div><div class="psrc__desc">Parcel data, assessed values, and tax status from 3,000+ county offices.</div></div><span class="psrc__cat">Assessments</span></div>
+        <div class="psrc"><span class="psrc__bar" style="background:#357A46"></span><div style="flex:1;min-width:0"><div class="psrc__name">Clerk &amp; deed records</div><div class="psrc__desc">Recorded deeds, transfers, and ownership history filed at the county clerk.</div></div><span class="psrc__cat">Title chain</span></div>
+        <div class="psrc"><span class="psrc__bar" style="background:#B0402F"></span><div style="flex:1;min-width:0"><div class="psrc__name">Title &amp; lien registries</div><div class="psrc__desc">Open liens, mortgages, and judgments tied to a parcel.</div></div><span class="psrc__cat">Encumbrances</span></div>
+        <div class="psrc-sum">
+          <div class="psrc-sum__col"><div class="psrc-sum__n">15 yrs</div><div class="psrc-sum__l">in the data business</div></div>
+          <div class="psrc-sum__col"><div class="psrc-sum__n">Billions</div><div class="psrc-sum__l">of records indexed</div></div>
+          <div class="psrc-sum__txt">The same infrastructure that has powered public-records search for over a decade — now behind every property answer.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== AGENTS ===================== -->
+<section class="pagents">
+  <div class="pagents__head">
+    <div class="pagents__lead">
+      <div class="pagents__eyebrow">One suite, nine specialists</div>
+      <h2 class="pagents__title">Property is one of nine Tellera agents.</h2>
+      <p class="pagents__lede">Every Tellera account includes all nine — one login, one API. Look up a house today and a phone number tomorrow; the orchestrator routes each question to the right specialist.</p>
+    </div>
+    <a href="/" class="pagents__all">See the full platform →</a>
+  </div>
+  <div class="pagents__rail" data-drag-scroll>
+    <div class="pagents__track" id="pagentTrack"></div>
+  </div>
+</section>
+
+<!-- ===================== DEVELOPERS ===================== -->
+<section id="developers" class="pdev">
+  <div class="pdev__inner">
+    <div>
+      <div class="pdev__eyebrow">For developers</div>
+      <h2 class="pdev__title">Property intelligence, by API and MCP.</h2>
+      <p class="pdev__lede">Drop Tellera Property into your own app, model, or workflow. A REST endpoint for your backend, an MCP server for your agents — same real records, same confidence scoring.</p>
+      <div class="pdev__points">
+        <div class="pdev__pt"><svg viewBox="0 0 24 24" width="20" height="20"><path d="M9 16.17 4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" fill="#8FA8FF"/></svg><div><b>Single-call property answer</b> <span class="dim">— owner, value, liens, taxes, and sale history in one response.</span></div></div>
+        <div class="pdev__pt"><svg viewBox="0 0 24 24" width="20" height="20"><path d="M9 16.17 4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" fill="#8FA8FF"/></svg><div><b>Sources where we have them</b> <span class="dim">— each figure carries the record behind it where available, and a confidence score.</span></div></div>
+        <div class="pdev__pt"><svg viewBox="0 0 24 24" width="20" height="20"><path d="M9 16.17 4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" fill="#8FA8FF"/></svg><div><b>REST, MCP, and GraphQL</b> <span class="dim">— wire it into a backend or hand it to an agent.</span></div></div>
+      </div>
+      <div class="pdev__actions">
+        <a href="#" class="pdev__btn-solid">Read the docs</a>
+        <a href="#" class="pdev__btn-ghost">Get an API key</a>
+      </div>
+    </div>
+    <div class="pcode">
+      <div class="pcode__tabs" id="codeTabs"></div>
+      <pre class="pcode__pre" id="codeBody"></pre>
+      <div class="pcode__foot">→ 200 OK · owner, value, liens, taxes, sale_history · <span>6 sources</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== FINAL CTA ===================== -->
+<section class="pcta">
+  <span class="pcta__glow"></span>
+  <div class="pcta__inner">
+    <svg viewBox="0 0 40 40" width="46" height="46" style="margin:0 auto"><defs><linearGradient id="ctapb" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#2E7BFF"/><stop offset="1" stop-color="#7C6BFF"/></linearGradient></defs><path d="M20 4 L34 31 L6 31 Z" fill="none" stroke="url(#ctapb)" stroke-width="2.4" stroke-linejoin="round"/><path d="M2 20 L15 20" stroke="#8A8475" stroke-width="2" stroke-linecap="round"/><path d="M25 16 L38 14" stroke="#2E7BFF" stroke-width="2" stroke-linecap="round"/><path d="M25.5 20 L39 20" stroke="#7B5BFF" stroke-width="2" stroke-linecap="round"/><path d="M25 24 L38 26" stroke="#B06BFF" stroke-width="2" stroke-linecap="round"/></svg>
+    <h2 class="pcta__title">Look up any address<br>in the United States.</h2>
+    <p class="pcta__lede">Owner, value, liens, taxes, and history — one search, real answers, your control.</p>
+    <form class="psearch" data-property-search>
+      <svg viewBox="0 0 24 24" width="20" height="20" style="flex:0 0 auto"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 0 1 0-5 2.5 2.5 0 0 1 0 5z" fill="#5B45E0"/></svg>
+      <input class="psearch__input" type="text" placeholder="Enter an address…" autocomplete="off" aria-label="Enter an address">
+      <button class="psearch__btn" type="submit">Search</button>
+    </form>
+    <div class="pcta__fine">Not a consumer reporting agency. Findings can't be used for FCRA-covered decisions.</div>
+  </div>
+</section>
+
+<!-- ===================== FOOTER ===================== -->
+<div class="prism-bar prism-bar--footer"></div>
+<footer class="pfooter">
+  <div class="pfooter__inner">
+    <div class="pfooter__grid">
+      <div>
+        <div class="pfooter__brand">
+          <svg viewBox="0 0 40 40" width="26" height="26"><defs><linearGradient id="ftpb" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#2E7BFF"/><stop offset="1" stop-color="#B06BFF"/></linearGradient></defs><path d="M20 4 L34 31 L6 31 Z" fill="none" stroke="url(#ftpb)" stroke-width="2.4" stroke-linejoin="round"/><path d="M2 20 L15 20" stroke="#8F8A7E" stroke-width="2" stroke-linecap="round"/><path d="M25 16 L38 14" stroke="#5AA0FF" stroke-width="2" stroke-linecap="round"/><path d="M25.5 20 L39 20" stroke="#7B5BFF" stroke-width="2" stroke-linecap="round"/><path d="M25 24 L38 26" stroke="#B06BFF" stroke-width="2" stroke-linecap="round"/></svg>
+          <span class="pfooter__word">Tellera <em>Property</em></span>
+        </div>
+        <div class="pfooter__tag">Owner, value, liens, taxes, and history for any U.S. address — drawn from real county and licensed records.</div>
+        <a href="/" class="pfooter__back">← Back to all Tellera agents</a>
+      </div>
+      <div>
+        <div class="pfooter__h">Product</div>
+        <div class="pfooter__col"><a href="#features">Features</a><a href="#data">Our data</a><a href="#developers">Developers</a><a href="#">Sample answer</a></div>
+      </div>
+      <div>
+        <div class="pfooter__h">Company</div>
+        <div class="pfooter__col"><a href="#">About</a><a href="#">Contact us</a><a href="#">Cancel my account</a><a href="#">Trust Center</a></div>
+      </div>
+      <div>
+        <div class="pfooter__h">Legal</div>
+        <div class="pfooter__col"><a href="#">Privacy</a><a href="#">Do not sell or share</a><a href="#">Terms</a></div>
+      </div>
+    </div>
+    <div class="pfooter__links-m">
+      <a href="#features">Features</a><a href="#data">Our data</a><a href="#developers">Developers</a><a href="#">Contact us</a><a href="#">Privacy</a><a href="#">Terms</a>
+    </div>
+    <div class="pfooter__base">
+      <span class="pfooter__copy">© 2026 Tellera, Inc.</span>
+      <span class="pfooter__fcra">Tellera is not a consumer reporting agency under the FCRA. Don't use Tellera findings to make decisions about credit, employment, tenant screening, or any purpose covered by the Fair Credit Reporting Act.</span>
+      <div class="pfooter__social">
+        <a href="#" aria-label="X"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24h-6.66l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231 5.45-6.231Zm-1.161 17.52h1.833L7.084 4.126H5.117L17.083 19.77Z"/></svg></a>
+        <a href="#" aria-label="LinkedIn"><svg viewBox="0 0 24 24" width="19" height="19" fill="currentColor"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.13 1.44-2.13 2.94v5.67H9.35V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28ZM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13ZM7.12 20.45H3.55V9h3.57v11.45ZM22.22 0H1.77C.79 0 0 .77 0 1.72v20.55C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.72C24 .77 23.2 0 22.22 0Z"/></svg></a>
+        <a href="#" aria-label="Facebook"><svg viewBox="0 0 24 24" width="19" height="19" fill="currentColor"><path d="M24 12.07C24 5.4 18.63 0 12 0S0 5.4 0 12.07C0 18.1 4.39 23.1 10.13 24v-8.44H7.08v-3.49h3.05V9.41c0-3.02 1.79-4.69 4.53-4.69 1.31 0 2.68.24 2.68.24v2.97h-1.51c-1.49 0-1.96.93-1.96 1.89v2.25h3.33l-.53 3.49h-2.8V24C19.61 23.1 24 18.1 24 12.07Z"/></svg></a>
+        <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24" width="19" height="19" fill="currentColor"><path d="M12 2.16c3.2 0 3.58.01 4.85.07 1.17.05 1.8.25 2.23.41.56.22.96.48 1.38.9.42.42.68.82.9 1.38.16.42.36 1.06.41 2.23.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.05 1.17-.25 1.8-.41 2.23-.22.56-.48.96-.9 1.38-.42.42-.82.68-1.38.9-.42.16-1.06.36-2.23.41-1.27.06-1.65.07-4.85.07s-3.58-.01-4.85-.07c-1.17-.05-1.8-.25-2.23-.41a3.7 3.7 0 0 1-1.38-.9 3.7 3.7 0 0 1-.9-1.38c-.16-.42-.36-1.06-.41-2.23-.06-1.27-.07-1.65-.07-4.85s.01-3.58.07-4.85c.05-1.17.25-1.8.41-2.23.22-.56.48-.96.9-1.38.42-.42.82-.68 1.38-.9.42-.16 1.06-.36 2.23-.41C8.42 2.17 8.8 2.16 12 2.16ZM12 0C8.74 0 8.33.01 7.05.07 5.78.13 4.9.33 4.14.63c-.79.3-1.46.72-2.12 1.38A5.86 5.86 0 0 0 .63 4.14c-.3.76-.5 1.64-.56 2.9C.01 8.33 0 8.74 0 12s.01 3.67.07 4.95c.06 1.27.26 2.15.56 2.91.3.79.72 1.46 1.38 2.12.66.66 1.33 1.08 2.12 1.38.76.3 1.64.5 2.91.56C8.33 23.99 8.74 24 12 24s3.67-.01 4.95-.07c1.27-.06 2.15-.26 2.91-.56a5.86 5.86 0 0 0 2.12-1.38 5.86 5.86 0 0 0 1.38-2.12c.3-.76.5-1.64.56-2.91.06-1.28.07-1.69.07-4.95s-.01-3.67-.07-4.95c-.06-1.27-.26-2.15-.56-2.91a5.86 5.86 0 0 0-1.38-2.12A5.86 5.86 0 0 0 19.86.63c-.76-.3-1.64-.5-2.91-.56C15.67.01 15.26 0 12 0Zm0 5.84a6.16 6.16 0 1 0 0 12.32 6.16 6.16 0 0 0 0-12.32ZM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8Zm6.41-10.85a1.44 1.44 0 1 0 0 2.88 1.44 1.44 0 0 0 0-2.88Z"/></svg></a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="/js/data.js"></script>
+<script src="/js/property.js"></script>
+</body>
+</html>

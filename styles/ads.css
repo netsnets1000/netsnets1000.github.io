@@ -1,0 +1,224 @@
+/* Tellera — mock ad concepts gallery. Built on tokens.css. */
+.ads-body{background:#E7EAF1;background-image:radial-gradient(circle at 1px 1px,rgba(0,0,0,.05) 1px,transparent 0);
+  background-size:26px 26px;min-height:100vh;color:var(--ink);}
+.ads-shell{max-width:1180px;margin:0 auto;padding:0 32px 90px;}
+
+/* nav */
+.ads-nav{position:sticky;top:0;z-index:50;background:rgba(231,234,241,.9);backdrop-filter:blur(10px);border-bottom:1px solid var(--bd);}
+.ads-nav__inner{max-width:1180px;margin:0 auto;display:flex;align-items:center;gap:14px;padding:14px 32px;}
+.ads-nav__word{font-family:var(--font-display);font-size:22px;font-weight:700;}
+.ads-nav__tag{font-family:var(--font-mono);font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--violet-ink);background:var(--chip-violet-bg);border:1px solid var(--chip-violet-bd);padding:3px 9px;border-radius:999px;}
+.ads-nav__links{margin-left:auto;display:flex;gap:22px;font-family:var(--font-mono);font-size:13px;text-transform:uppercase;letter-spacing:.04em;}
+.ads-nav__links a{color:#545C6B;}
+.ads-nav__links a:hover{color:var(--blue);}
+
+/* hero */
+.ads-hero{padding:56px 0 12px;}
+.ads-hero__eyebrow{font-family:var(--font-mono);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--violet-ink);}
+.ads-hero__h1{font-family:var(--font-display);font-size:52px;font-weight:700;letter-spacing:-.02em;line-height:1.05;margin-top:14px;}
+.ads-hero__sub{font-size:18px;line-height:1.6;color:var(--ink-2);margin-top:16px;max-width:620px;}
+
+/* grid */
+.ads-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:32px;align-items:start;margin-top:44px;}
+.ads-item--wide{grid-column:1 / -1;}
+.ads-label{display:flex;align-items:center;gap:9px;font-family:var(--font-mono);font-size:12px;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--ink-3);margin-bottom:12px;}
+.ads-label__dot{width:9px;height:9px;border-radius:50%;flex:0 0 auto;}
+.ads-note{font-family:var(--font-body);font-size:13px;color:var(--muted);text-transform:none;letter-spacing:0;margin-left:auto;}
+
+.mock{background:#fff;border-radius:16px;overflow:hidden;box-shadow:0 24px 54px -30px rgba(20,30,55,.5);border:1px solid rgba(20,30,55,.06);}
+
+/* ============ shared Tellera creative (the ad "image") ============ */
+.cre{position:relative;overflow:hidden;background:linear-gradient(140deg,#17142B 0%,#0B0A16 100%);color:#fff;}
+.cre__glow{position:absolute;top:-80px;right:-60px;width:340px;height:340px;border-radius:50%;
+  background:radial-gradient(circle,rgba(123,91,255,.4),transparent 62%);pointer-events:none;}
+.cre__rays{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;opacity:.5;}
+.cre__in{position:relative;padding:30px 30px 26px;}
+.cre__lockup{display:flex;align-items:center;gap:8px;}
+.cre__word{font-family:var(--font-display);font-size:18px;font-weight:700;color:#fff;}
+.cre__eyebrow{font-family:var(--font-mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;
+  background:linear-gradient(90deg,#5AA0FF,#B06BFF);-webkit-background-clip:text;background-clip:text;color:transparent;}
+.cre__h{font-family:var(--font-display);font-weight:700;line-height:1.08;letter-spacing:-.015em;}
+.cre__h .i{font-style:italic;font-weight:400;background:var(--prism-headline);-webkit-background-clip:text;background-clip:text;color:transparent;}
+.cre__sub{color:#AEB4C6;line-height:1.5;}
+.cre__pill{display:inline-flex;align-items:center;gap:7px;background:#fff;color:#14161B;font-weight:700;
+  border-radius:999px;padding:9px 16px;font-size:14px;}
+
+/* ============ Instagram ============ */
+.ig__head{display:flex;align-items:center;gap:10px;padding:12px 14px;}
+.ig__avatar{width:34px;height:34px;border-radius:50%;padding:2px;background:linear-gradient(135deg,#2E7BFF,#7B5BFF,#B0402F);flex:0 0 auto;}
+.ig__avatar span{display:flex;width:100%;height:100%;border-radius:50%;background:#fff;align-items:center;justify-content:center;}
+.ig__name{font-size:13px;font-weight:700;line-height:1.2;}
+.ig__spon{font-size:12px;color:#8A93A1;}
+.ig__more{margin-left:auto;color:#8A93A1;font-weight:700;letter-spacing:1px;}
+.ig__cre{aspect-ratio:1/1;}
+.ig__cta{display:flex;align-items:center;justify-content:space-between;padding:12px 14px;background:#FAFAFA;border-top:1px solid #EFEFEF;font-size:14px;font-weight:600;color:#14161B;}
+.ig__actions{display:flex;align-items:center;gap:16px;padding:10px 14px 6px;color:#262626;}
+.ig__actions svg{width:24px;height:24px;}
+.ig__actions .sp{margin-left:auto;}
+.ig__likes{padding:0 14px;font-size:13px;font-weight:700;}
+.ig__cap{padding:4px 14px 14px;font-size:13px;line-height:1.5;color:#262626;}
+.ig__cap b{font-weight:700;}
+.ig__tags{color:#3860A0;}
+
+/* ============ Facebook ============ */
+.fb__head{display:flex;align-items:center;gap:10px;padding:12px 14px;}
+.fb__avatar{width:40px;height:40px;border-radius:50%;flex:0 0 auto;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#2E7BFF,#5B45E0);}
+.fb__name{font-size:14px;font-weight:700;color:#050505;}
+.fb__meta{font-size:12px;color:#65676B;display:flex;align-items:center;gap:5px;}
+.fb__body{padding:0 14px 12px;font-size:14px;line-height:1.5;color:#050505;}
+.fb__cre{aspect-ratio:1.91/1;}
+.fb__card{display:flex;align-items:center;gap:12px;background:#F0F2F5;padding:12px 14px;}
+.fb__card-txt{min-width:0;flex:1;}
+.fb__domain{font-size:11px;letter-spacing:.04em;text-transform:uppercase;color:#65676B;}
+.fb__headline{font-size:15px;font-weight:700;color:#050505;margin-top:2px;line-height:1.2;}
+.fb__desc{font-size:13px;color:#65676B;margin-top:2px;}
+.fb__btn{flex:0 0 auto;background:#E4E6EB;color:#050505;font-weight:700;font-size:14px;border-radius:8px;padding:9px 16px;}
+.fb__react{display:flex;align-items:center;gap:6px;padding:10px 14px;border-top:1px solid #E4E6EB;font-size:13px;color:#65676B;}
+
+/* ============ Google Search ============ */
+.gg{padding:18px 20px 22px;font-family:arial,var(--font-body),sans-serif;}
+.gg__bar{display:flex;align-items:center;gap:12px;border:1px solid #DFE1E5;border-radius:999px;padding:10px 18px;box-shadow:0 1px 4px rgba(0,0,0,.06);}
+.gg__q{flex:1;font-size:15px;color:#202124;}
+.gg__bar svg{flex:0 0 auto;}
+.gg__res{margin-top:22px;}
+.gg__spon{font-size:12px;font-weight:700;color:#202124;margin-bottom:8px;}
+.gg__site{display:flex;align-items:center;gap:9px;}
+.gg__fav{width:26px;height:26px;border-radius:50%;background:#0B0A16;display:flex;align-items:center;justify-content:center;flex:0 0 auto;}
+.gg__url{font-size:12px;color:#202124;line-height:1.2;}
+.gg__url b{display:block;font-size:14px;font-weight:400;}
+.gg__title{font-family:arial,sans-serif;font-size:20px;color:#1a0dab;margin-top:6px;line-height:1.3;}
+.gg__desc{font-size:14px;color:#4d5156;line-height:1.58;margin-top:4px;}
+.gg__links{display:flex;gap:26px;margin-top:12px;flex-wrap:wrap;}
+.gg__links a{font-size:14px;color:#1a0dab;}
+
+/* ============ YouTube ============ */
+.yt__player{position:relative;aspect-ratio:16/9;background:#000;}
+.yt__badge{position:absolute;left:12px;bottom:12px;background:#ffc800;color:#111;font-size:11px;font-weight:700;padding:2px 5px;border-radius:2px;}
+.yt__skip{position:absolute;right:0;bottom:14px;background:rgba(0,0,0,.55);color:#fff;font-size:14px;font-weight:600;
+  padding:9px 16px;display:flex;align-items:center;gap:8px;border-left:2px solid rgba(255,255,255,.6);}
+.yt__prog{position:absolute;left:0;right:0;bottom:0;height:3px;background:rgba(255,255,255,.3);}
+.yt__prog span{display:block;height:100%;width:22%;background:#ffc800;}
+.yt__bar{display:flex;align-items:center;gap:12px;padding:12px 14px;}
+.yt__ch{width:38px;height:38px;border-radius:50%;flex:0 0 auto;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#2E7BFF,#7B5BFF);}
+.yt__t{font-size:14px;font-weight:700;color:#0f0f0f;line-height:1.3;}
+.yt__sub{font-size:12px;color:#606060;}
+.yt__cta{margin-left:auto;flex:0 0 auto;border:1px solid #d3d3d3;border-radius:999px;padding:8px 15px;font-size:13px;font-weight:700;color:#065fd4;}
+
+/* ============ Reddit ============ */
+.rd{display:flex;}
+.rd__vote{flex:0 0 auto;width:44px;background:#F8F9FA;display:flex;flex-direction:column;align-items:center;padding:10px 0;gap:4px;color:#878A8C;}
+.rd__vote svg{width:20px;height:20px;}
+.rd__up{color:#FF4500;}
+.rd__count{font-size:12px;font-weight:700;color:#1A1A1B;}
+.rd__body{flex:1;min-width:0;padding:10px 14px 12px;}
+.rd__meta{display:flex;align-items:center;gap:6px;font-size:12px;color:#787C7E;}
+.rd__sub{font-weight:700;color:#1A1A1B;}
+.rd__promo{color:#787C7E;}
+.rd__title{font-size:17px;font-weight:600;color:#1A1A1B;margin-top:7px;line-height:1.3;}
+.rd__cre{margin-top:12px;border-radius:8px;overflow:hidden;aspect-ratio:2/1;}
+.rd__cta{display:flex;align-items:center;justify-content:space-between;margin-top:12px;border:1px solid #EDEFF1;border-radius:8px;padding:10px 14px;}
+.rd__cta-t{font-size:13px;color:#1A1A1B;font-weight:700;}
+.rd__cta-btn{background:#0079D3;color:#fff;font-size:13px;font-weight:700;border-radius:999px;padding:6px 16px;}
+.rd__foot{display:flex;gap:16px;margin-top:10px;font-size:12px;font-weight:700;color:#878A8C;}
+
+/* ============ Product Hunt ============ */
+.ph{display:flex;gap:16px;padding:18px 20px;align-items:center;}
+.ph__logo{width:56px;height:56px;border-radius:14px;flex:0 0 auto;display:flex;align-items:center;justify-content:center;
+  background:linear-gradient(140deg,#17142B,#0B0A16);}
+.ph__name{font-size:17px;font-weight:700;color:#21293C;display:flex;align-items:center;gap:8px;}
+.ph__rank{font-size:11px;font-weight:700;color:#DA552F;background:#FDEEE9;border-radius:999px;padding:3px 9px;}
+.ph__tag{font-size:15px;color:#4B587C;margin-top:3px;line-height:1.4;}
+.ph__topics{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap;}
+.ph__topic{font-size:12px;color:#4B587C;background:#F5F6FA;border-radius:999px;padding:4px 11px;}
+.ph__vote{flex:0 0 auto;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;
+  border:1px solid #DA552F;color:#DA552F;border-radius:12px;padding:10px 16px;min-width:66px;}
+.ph__vote svg{width:16px;height:16px;}
+.ph__vote-n{font-size:17px;font-weight:700;}
+
+/* ============ display banners ============ */
+.bn-row{display:flex;flex-wrap:wrap;gap:24px;align-items:flex-start;}
+.bn{border-radius:12px;overflow:hidden;box-shadow:0 18px 44px -28px rgba(20,30,55,.5);border:1px solid rgba(20,30,55,.06);}
+.bn--lead{width:728px;max-width:100%;height:90px;}
+.bn--rect{width:300px;height:250px;}
+.bn__lead{height:100%;display:flex;align-items:center;gap:18px;padding:0 22px;}
+.bn__lead .cre__h{font-size:20px;}
+.bn__lead .cre__pill{padding:8px 15px;font-size:13px;white-space:nowrap;margin-left:auto;}
+.bn__rect{height:100%;display:flex;flex-direction:column;justify-content:center;padding:24px;}
+
+/* ===================== SET 02 — bolder concepts ===================== */
+.ads-divider{margin:64px 0 6px;padding-top:40px;border-top:2px solid rgba(20,30,55,.12);}
+.ads-divider__eyebrow{font-family:var(--font-mono);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--rust);}
+.ads-divider__h{font-family:var(--font-display);font-size:38px;font-weight:700;letter-spacing:-.02em;margin-top:10px;}
+.ads-divider__sub{font-size:16px;color:var(--ink-2);margin-top:10px;max-width:600px;}
+
+/* redaction creative (Instagram) */
+.b2-redact{aspect-ratio:1/1;background:#F0E8D2;position:relative;padding:28px 26px;overflow:hidden;
+  font-family:var(--font-mono);color:#2A2620;display:flex;flex-direction:column;}
+.b2-redact::before{content:"";position:absolute;inset:0;background:repeating-linear-gradient(0deg,rgba(0,0,0,.028) 0 1px,transparent 1px 26px);pointer-events:none;}
+.b2-redact__stamp{position:absolute;top:20px;right:-6px;transform:rotate(6deg);border:2px solid #B0402F;color:#B0402F;
+  font-size:11px;font-weight:600;letter-spacing:.14em;padding:5px 12px;border-radius:3px;opacity:.85;}
+.b2-redact__hdr{font-size:11px;letter-spacing:.12em;color:#8A8064;}
+.b2-redact__rows{margin-top:20px;display:flex;flex-direction:column;gap:16px;flex:1;justify-content:center;}
+.b2-redact__k{font-size:10px;letter-spacing:.1em;color:#8A8064;margin-bottom:6px;}
+.b2-bar{height:19px;background:#14161B;border-radius:3px;}
+.b2-reveal{display:inline-block;font-family:var(--font-display);font-size:22px;font-weight:700;color:#fff;
+  background:var(--prism-bar);padding:3px 12px;border-radius:4px;box-shadow:0 6px 16px -8px rgba(46,107,255,.6);}
+.b2-redact__foot{margin-top:22px;font-family:var(--font-display);font-size:26px;font-weight:700;line-height:1.1;color:#14161B;letter-spacing:-.01em;}
+.b2-redact__foot em{font-style:normal;background:var(--prism-headline);-webkit-background-clip:text;background-clip:text;color:transparent;}
+
+/* generic-AI-vs-Tellera split (Facebook) */
+.b2-split{aspect-ratio:1.91/1;display:flex;position:relative;}
+.b2-split__side{flex:1;padding:20px 18px;display:flex;flex-direction:column;gap:10px;}
+.b2-split__l{background:#E6E8EC;color:#6B7280;}
+.b2-split__r{background:linear-gradient(150deg,#2E7BFF,#5B45E0);color:#fff;}
+.b2-split__tag{font-family:var(--font-mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;opacity:.85;}
+.b2-q{align-self:flex-end;background:rgba(0,0,0,.08);border-radius:12px 12px 3px 12px;padding:8px 12px;font-size:12px;max-width:88%;}
+.b2-split__r .b2-q{background:rgba(255,255,255,.18);}
+.b2-a{background:#fff;color:#9AA0AE;border-radius:12px 12px 12px 3px;padding:9px 12px;font-size:12.5px;max-width:92%;font-style:italic;}
+.b2-split__r .b2-a{color:#14161B;font-style:normal;font-weight:700;}
+.b2-vs{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:34px;height:34px;border-radius:50%;
+  background:#14161B;color:#fff;display:flex;align-items:center;justify-content:center;font-family:var(--font-display);font-weight:700;font-size:13px;z-index:2;box-shadow:0 6px 16px -6px rgba(0,0,0,.5);}
+
+/* kinetic type (YouTube) */
+.b2-type{aspect-ratio:16/9;background:linear-gradient(120deg,#2E7BFF 0%,#7B5BFF 50%,#C0483A 100%);position:relative;overflow:hidden;
+  color:#fff;display:flex;flex-direction:column;justify-content:center;padding:30px 34px;}
+.b2-type__q{position:absolute;right:24px;top:-30px;font-family:var(--font-display);font-size:220px;font-weight:700;color:rgba(255,255,255,.12);line-height:1;}
+.b2-type__big{font-family:var(--font-display);font-size:52px;font-weight:700;letter-spacing:-.02em;line-height:.98;position:relative;}
+.b2-type__stack{margin-top:16px;position:relative;}
+.b2-type__stack div{font-family:var(--font-mono);font-size:14px;letter-spacing:.06em;text-transform:uppercase;}
+.b2-type__stack div:nth-child(1){opacity:.85;}
+.b2-type__stack div:nth-child(2){opacity:.5;}
+.b2-type__stack div:nth-child(3){opacity:.28;}
+.b2-type__cta{position:relative;margin-top:22px;align-self:flex-start;background:#fff;color:#14161B;font-family:var(--font-body);
+  font-weight:700;font-size:15px;border-radius:999px;padding:10px 20px;}
+
+/* Reddit meme */
+.b2-meme{aspect-ratio:2/1;position:relative;overflow:hidden;background:linear-gradient(135deg,#1B1E27,#0C0A16);
+  display:flex;flex-direction:column;justify-content:space-between;padding:20px 22px;text-align:center;}
+.b2-meme__glow{position:absolute;inset:0;background:radial-gradient(circle at 70% 20%,rgba(123,91,255,.5),transparent 55%);pointer-events:none;}
+.b2-meme__top,.b2-meme__bot{position:relative;font-family:var(--font-display);font-weight:700;font-size:22px;line-height:1.12;
+  color:#fff;text-transform:uppercase;letter-spacing:.01em;}
+.b2-meme__bot em{font-style:normal;background:var(--prism-headline);-webkit-background-clip:text;background-clip:text;color:transparent;}
+
+/* sticker banners */
+.b2-lead{height:100%;display:flex;align-items:center;gap:16px;padding:0 22px;background:#2E6BFF;color:#fff;position:relative;overflow:hidden;}
+.b2-lead__big{font-family:var(--font-display);font-size:22px;font-weight:700;line-height:1;letter-spacing:-.01em;}
+.b2-lead__sticker{font-family:var(--font-body);font-weight:700;font-size:13px;background:#fff;color:#2E6BFF;border-radius:999px;padding:7px 14px;transform:rotate(-3deg);white-space:nowrap;}
+.b2-lead__cta{margin-left:auto;background:#14161B;color:#fff;font-weight:700;font-size:13px;border-radius:999px;padding:9px 16px;white-space:nowrap;}
+.b2-rect{height:100%;background:linear-gradient(150deg,#5B45E0,#2E6BFF);color:#fff;position:relative;overflow:hidden;
+  display:flex;flex-direction:column;justify-content:center;padding:24px;}
+.b2-rect__mark{font-family:var(--font-display);position:absolute;right:-6px;top:-30px;font-size:150px;font-weight:700;color:rgba(255,255,255,.14);}
+.b2-rect__h{font-family:var(--font-display);font-size:25px;font-weight:700;line-height:1.08;position:relative;}
+.b2-rect__cta{position:relative;margin-top:16px;align-self:flex-start;background:#fff;color:#2E6BFF;font-family:var(--font-body);font-weight:700;font-size:13px;border-radius:999px;padding:9px 16px;}
+
+
+@media (max-width:900px){
+  .ads-hero__h1{font-size:36px;}
+  .ads-grid{grid-template-columns:minmax(0,1fr);}
+  .ads-nav__links{display:none;}
+  .ads-divider__h{font-size:28px;}
+  .b2-type__big{font-size:38px;}
+  .b2-type__q{font-size:150px;}
+}

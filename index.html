@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tellera — The AI for what AI doesn't tell you</title>
+<meta name="description" content="Tellera answers real-world questions from licensed public records — people, phones, addresses, property, vehicles, court records — and cites every fact to its source.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,300;0,400;0,600;0,700;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles/tokens.css">
+<link rel="stylesheet" href="styles/home.css">
+</head>
+<body class="home-body">
+<div class="shell">
+  <div class="prism-bar"></div>
+
+  <!-- ===================== NAV ===================== -->
+  <header class="nav">
+    <a class="nav__brand" href="index.html" aria-label="Tellera home">
+      <svg viewBox="0 0 40 40" width="34" height="34"><defs><linearGradient id="pb" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#2E7BFF"/><stop offset="1" stop-color="#B06BFF"/></linearGradient></defs><path d="M20 4 L34 31 L6 31 Z" fill="none" stroke="url(#pb)" stroke-width="2.4" stroke-linejoin="round"/><path d="M2 20 L15 20" stroke="#8A8475" stroke-width="2" stroke-linecap="round"/><path d="M25 16 L38 14" stroke="#2E7BFF" stroke-width="2" stroke-linecap="round"/><path d="M25.5 20 L39 20" stroke="#7B5BFF" stroke-width="2" stroke-linecap="round"/><path d="M25 24 L38 26" stroke="#B06BFF" stroke-width="2" stroke-linecap="round"/></svg>
+      <span class="nav__word">Tellera</span>
+    </a>
+    <nav class="nav__links" aria-label="Primary">
+      <a href="#agents">Agents</a><a href="#developers">Developers</a><a href="#data">Our data</a><a href="#comparison">Trust</a><a href="#">Pricing</a>
+    </nav>
+    <div class="nav__cta">
+      <a href="#" class="nav__signin">Sign in</a>
+      <a href="/deep-search" class="btn btn--dark">Get started</a>
+    </div>
+    <a href="#" class="nav__signin-m">Sign in</a>
+    <button class="nav__burger" id="burger" aria-label="Menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </header>
+
+  <!-- ===================== HERO ===================== -->
+  <section class="hero">
+    <div class="hero__rays" id="heroRays" aria-hidden="true"></div>
+    <svg class="hero__prism-m" viewBox="0 0 250 200" aria-hidden="true">
+      <defs><linearGradient id="mprism" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#2E7BFF"/><stop offset="1" stop-color="#B06BFF"/></linearGradient></defs>
+      <path d="M2 78 L70 92" stroke="#AEB4C4" stroke-width="2" stroke-linecap="round"/>
+      <path d="M92 48 L126 116 L58 116 Z" fill="none" stroke="url(#mprism)" stroke-width="3.4" stroke-linejoin="round"/>
+      <path d="M116 92 L250 52" stroke="#2E7BFF" stroke-width="2.6" stroke-linecap="round"/>
+      <path d="M118 98 L250 88" stroke="#7B5BFF" stroke-width="2.6" stroke-linecap="round"/>
+      <path d="M119 104 L250 122" stroke="#9B57E6" stroke-width="2.6" stroke-linecap="round"/>
+      <path d="M120 110 L250 158" stroke="#B0402F" stroke-width="2.6" stroke-linecap="round"/>
+    </svg>
+
+    <div class="hero__copy">
+      <div class="eyebrow">The AI for what AI doesn't tell you</div>
+      <h1 class="display hero__h1">Real answers.<br><span class="accent-italic">Real records.</span><br>Your control.</h1>
+      <p class="hero__lede">Tellera answers the real-world questions other AIs refuse — drawn from licensed public records, not guesswork.</p>
+
+      <form class="askbar" data-seed-target action="/deep-search">
+        <span class="askbar__spark"><svg viewBox="0 0 24 24" width="22" height="22"><path d="M12 3l1.6 5.2L19 10l-5.4 1.8L12 17l-1.6-5.2L5 10l5.4-1.8z" fill="currentColor"/></svg></span>
+        <span class="caret"></span>
+        <span class="askbar__ph" data-ph>Ask Tellera anything…</span>
+        <button type="button" class="askbar__mic" title="Voice input" aria-label="Voice input">
+          <svg viewBox="0 0 24 24" width="24" height="24"><rect x="9" y="3" width="6" height="11" rx="3" fill="none" stroke="#5A554A" stroke-width="1.8"/><path d="M6 11a6 6 0 0 0 12 0" fill="none" stroke="#5A554A" stroke-width="1.8" stroke-linecap="round"/><path d="M12 17v4M9 21h6" fill="none" stroke="#5A554A" stroke-width="1.8" stroke-linecap="round"/></svg>
+        </button>
+        <button type="submit" class="askbar__go" aria-label="Ask">
+          <svg viewBox="0 0 24 24" width="26" height="26"><path d="M12 20V6M6 12l6-6 6 6" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </form>
+
+      <div class="hero__chips">
+        <button class="qchip" data-seed="who owns this property?">who owns this property?</button>
+        <button class="qchip" data-seed="is this VIN clean?">is this VIN clean?</button>
+        <button class="qchip qchip--m" data-seed="who's calling from this number?">who's calling from this number?</button>
+        <button class="qchip" data-seed="what's in this court file?">what's in this court file?</button>
+      </div>
+    </div>
+
+    <!-- record / answer card -->
+    <div class="hero__record">
+      <div class="record" id="record">
+        <div class="record__head">
+          <span class="record__avatar">
+            <svg viewBox="0 0 24 24" width="17" height="17"><path d="M12 3l1.6 5.2L19 10l-5.4 1.8L12 17l-1.6-5.2L5 10l5.4-1.8z" fill="#fff"/></svg>
+          </span>
+          <div class="record__id">
+            <span class="record__name">Tellera</span>
+            <span class="record__agent" data-rec="agent">Property findings</span>
+          </div>
+          <span class="record__time"><span class="dot"></span><span data-rec="time">Answered in 12s</span></span>
+        </div>
+        <div class="record__body">
+          <div class="record__q"><span data-rec="question">Who owns the house behind me?</span></div>
+          <div class="record__answer">
+            <div>
+              <div class="record__label" data-rec="label">Owner of record</div>
+              <div class="display record__value" data-rec="value">Martin R. Decker</div>
+              <div class="record__sub" data-rec="sub">1234 Oakridge Dr, Austin, TX 78704</div>
+            </div>
+            <div class="stamp" data-rec="stamp">
+              <div class="stamp__k">CONFIDENCE</div>
+              <div class="stamp__v" data-rec="conf">HIGH</div>
+            </div>
+          </div>
+          <div class="record__rule"></div>
+          <div class="record__label" data-rec="srchead">Sources</div>
+          <div class="record__sources" data-rec="sources"></div>
+          <div class="record__foot">
+            <svg viewBox="0 0 24 24" width="15" height="15"><path d="M12 3l7 3v5c0 4.2-2.9 7.9-7 9-4.1-1.1-7-4.8-7-9V6l7-3z" fill="none" stroke="#2E7BFF" stroke-width="1.6"/><path d="M9 12l2 2 4-4" fill="none" stroke="#2E7BFF" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Drawn from licensed public records.
+          </div>
+        </div>
+      </div>
+      <div class="record__dots" id="recordDots" role="tablist" aria-label="Example answers"></div>
+    </div>
+  </section>
+
+  <!-- ===================== AGENTS ===================== -->
+  <section id="agents" class="agents">
+    <div class="agents__head">
+      <div>
+        <div class="eyebrow">The platform</div>
+        <h2 class="display agents__title">Nine agents. One account.</h2>
+      </div>
+      <span class="agents__note mono"><span class="agents__note-d">Each a named specialist — one suite, one login. Scroll to browse →</span><span class="agents__note-m">Swipe to browse →</span></span>
+    </div>
+    <div class="agents__rail no-sb" data-drag-scroll>
+      <div class="agents__track" id="agentTrack"></div>
+    </div>
+  </section>
+
+  <!-- ===================== DEVELOPERS ===================== -->
+  <div id="developers">
+  <section class="dev dev--d">
+    <div class="dev__panel">
+      <span class="dev__glow dev__glow--v"></span>
+      <span class="dev__glow dev__glow--b"></span>
+      <div class="dev__grid">
+        <div>
+          <div class="eyebrow dev__eyebrow">Build on Tellera</div>
+          <h2 class="display dev__title">Every agent, available by API and MCP.</h2>
+          <p class="dev__lede">Drop Tellera's researchers into your own app, agent, or workflow. A REST API for your backend, and a native MCP server so any LLM can query real, licensed records instead of guessing.</p>
+          <div class="dev__tags mono">
+            <span>REST &amp; GraphQL</span><span>MCP server</span><span>Webhooks</span><span>Sandbox keys</span><span>SOC 2</span>
+          </div>
+          <div class="dev__actions">
+            <a href="#" class="btn dev__btn-primary">Read the docs</a>
+            <a href="#" class="dev__btn-ghost">View MCP reference →</a>
+          </div>
+        </div>
+        <div class="term">
+          <div class="term__bar">
+            <span class="term__dot" style="background:#E0574C"></span>
+            <span class="term__dot" style="background:#E0B44C"></span>
+            <span class="term__dot" style="background:#4CC38A"></span>
+            <span class="term__title mono">tellera-mcp · people.lookup</span>
+          </div>
+<pre class="term__code"><span style="color:#7B5BFF;">$</span> tellera mcp call <span style="color:#5AA0FF;">people.lookup</span> \
+    --name <span style="color:#6FCF97;">"Martin R. Decker"</span> --state <span style="color:#6FCF97;">TX</span>
+
+{
+  <span style="color:#8AA6FF;">"owner"</span>:      <span style="color:#6FCF97;">"Martin R. Decker"</span>,
+  <span style="color:#8AA6FF;">"confidence"</span>: <span style="color:#6FCF97;">"high"</span>,
+  <span style="color:#8AA6FF;">"sources"</span>: [
+    { <span style="color:#8AA6FF;">"name"</span>: <span style="color:#6FCF97;">"Travis County Deed"</span>, <span style="color:#8AA6FF;">"type"</span>: <span style="color:#6FCF97;">"official"</span> },
+    { <span style="color:#8AA6FF;">"name"</span>: <span style="color:#6FCF97;">"USPS NCOA"</span>,          <span style="color:#8AA6FF;">"type"</span>: <span style="color:#6FCF97;">"official"</span> }
+  ]
+}</pre>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- condensed mobile version of the developers/MCP section -->
+  <section class="dev dev--m">
+    <div class="dev__panel">
+      <span class="dev__glow dev__glow--v"></span>
+      <span class="dev__glow dev__glow--b"></span>
+      <div class="dev__m-inner">
+        <div class="eyebrow dev__eyebrow">Build on Tellera</div>
+        <h2 class="display dev__title dev__title--m">Every agent, by API and MCP.</h2>
+        <p class="dev__lede dev__lede--m">Drop Tellera's researchers into your own app or agent. A REST API and a native MCP server — querying real, licensed records.</p>
+        <div class="dev__tags dev__tags--m mono">
+          <span>REST &amp; GraphQL</span><span>MCP server</span><span>SOC 2</span>
+        </div>
+        <div class="term term--m">
+          <div class="term__bar">
+            <span class="term__dot" style="background:#E0574C"></span>
+            <span class="term__dot" style="background:#E0B44C"></span>
+            <span class="term__dot" style="background:#4CC38A"></span>
+            <span class="term__title mono">tellera-mcp · people.lookup</span>
+          </div>
+<pre class="term__code term__code--m"><span style="color:#7B5BFF;">$</span> tellera mcp call <span style="color:#5AA0FF;">people.lookup</span> \
+  --name <span style="color:#6FCF97;">"Martin R. Decker"</span>
+
+{
+  <span style="color:#8AA6FF;">"owner"</span>:      <span style="color:#6FCF97;">"Martin R. Decker"</span>,
+  <span style="color:#8AA6FF;">"confidence"</span>: <span style="color:#6FCF97;">"high"</span>,
+  <span style="color:#8AA6FF;">"sources"</span>: <span style="color:#6FCF97;">2 official</span>
+}</pre>
+        </div>
+        <div class="dev__actions dev__actions--m">
+          <a href="#" class="btn dev__btn-primary">Read the docs</a>
+          <a href="#" class="dev__btn-ghost">MCP reference →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+  </div>
+
+  <!-- ===================== COMPARISON ===================== -->
+  <section id="comparison" class="compare">
+    <h2 class="display compare__title">Ask a generic AI. Then ask Tellera.</h2>
+    <p class="compare__sub">Same question — one declines, one files the record.</p>
+    <div class="compare__table">
+      <div class="compare__thead">
+        <div class="mono">The question</div>
+        <div class="mono">Generic AI</div>
+        <div class="mono compare__th-good">Tellera</div>
+      </div>
+      <div id="compareRows"></div>
+    </div>
+  </section>
+
+  <!-- ===================== FLOW ===================== -->
+  <section class="flow">
+    <div class="flow__intro">
+      <div class="eyebrow">How it works</div>
+      <h2 class="display flow__title">One question in. A real answer out.</h2>
+      <p class="flow__lede">You ask once. Tellera's orchestrator routes the question to the right specialists, each queries its own licensed sources, and the platform returns a single answer — every fact traced to where it came from.</p>
+    </div>
+    <div class="flow__stage">
+      <div class="flow__diagram" id="flowDiagram">
+        <!-- SVG connector lines + agent nodes injected by home.js -->
+        <div class="flow__lbl" style="left:106px">You ask</div>
+        <div class="flow__lbl" style="left:295px">Tellera routes</div>
+        <div class="flow__lbl" style="left:588px">9 specialists research</div>
+        <div class="flow__lbl" style="left:957px">Sources checked</div>
+        <div class="flow__lbl flow__lbl--blue" style="left:1250px">The answer</div>
+
+        <div class="flow__you">
+          <div class="flow__you-head">
+            <svg viewBox="0 0 24 24" width="20" height="20"><circle cx="12" cy="8" r="4" fill="none" stroke="#5A554A" stroke-width="1.6"/><path d="M5 20c0-3.3 3.1-5 7-5s7 1.7 7 5" fill="none" stroke="#5A554A" stroke-width="1.6" stroke-linecap="round"/></svg>
+            <span class="flow__you-name">You</span>
+          </div>
+          <div class="flow__you-q">“Who owns the house behind me?”</div>
+        </div>
+
+        <div class="flow__hub">
+          <svg viewBox="0 0 40 40" width="30" height="30"><defs><linearGradient id="hubg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#2E7BFF"/><stop offset="1" stop-color="#B06BFF"/></linearGradient></defs><path d="M20 4 L34 31 L6 31 Z" fill="none" stroke="url(#hubg)" stroke-width="2.4" stroke-linejoin="round"/><path d="M2 20 L15 20" stroke="#A6ACBD" stroke-width="2" stroke-linecap="round"/><path d="M25 16 L38 14" stroke="#5AA0FF" stroke-width="2" stroke-linecap="round"/><path d="M25.5 20 L39 20" stroke="#7B5BFF" stroke-width="2" stroke-linecap="round"/><path d="M25 24 L38 26" stroke="#B06BFF" stroke-width="2" stroke-linecap="round"/></svg>
+          <div class="flow__hub-name">Tellera</div>
+          <div class="flow__hub-sub">Orchestrator</div>
+        </div>
+
+        <div class="flow__src" style="top:72px"><div class="flow__src-t">11 partner brands</div><div class="flow__src-d">BeenVerified, Bumper, Ownerly, FamFinder +7</div></div>
+        <div class="flow__src" style="top:192px"><div class="flow__src-t">Public records</div><div class="flow__src-d">County, state &amp; federal — dozens of official sources</div></div>
+        <div class="flow__src" style="top:312px"><div class="flow__src-t">Vetted vendors</div><div class="flow__src-d">Audited third-party data suppliers</div></div>
+
+        <div class="flow__ans">
+          <div class="flow__ans-strip"></div>
+          <div class="flow__ans-pad">
+            <div class="flow__ans-k">
+              <svg viewBox="0 0 24 24" width="16" height="16"><circle cx="12" cy="12" r="9" fill="none" stroke="#357A46" stroke-width="1.8"/><path d="M8 12l3 3 5-6" fill="none" stroke="#357A46" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              <span class="flow__ans-klbl">The answer</span>
+            </div>
+            <div class="flow__ans-name">Martin R. Decker</div>
+            <div class="flow__ans-sub">1234 Oakridge Dr, Austin TX</div>
+            <div class="flow__ans-tags">
+              <span class="flow__ans-conf">High confidence</span>
+              <span class="flow__ans-src">4 sources</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- condensed mobile version: vertical 3-step stack -->
+    <div class="flow__m">
+      <div class="flow__m-card">
+        <div class="flow__m-head">
+          <svg viewBox="0 0 24 24" width="20" height="20"><circle cx="12" cy="8" r="4" fill="none" stroke="#5A554A" stroke-width="1.6"/><path d="M5 20c0-3.3 3.1-5 7-5s7 1.7 7 5" fill="none" stroke="#5A554A" stroke-width="1.6" stroke-linecap="round"/></svg>
+          <span class="flow__m-you-name">You</span>
+          <span class="flow__m-lbl mono">You ask</span>
+        </div>
+        <div class="flow__m-q">“Who owns the house behind me?”</div>
+      </div>
+      <svg class="flow__m-arrow" width="18" height="30" viewBox="0 0 18 30"><path d="M9 0 L9 22 M4 17 L9 23 L14 17" fill="none" stroke="#B7C0CE" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <div class="flow__m-hub">
+        <svg viewBox="0 0 40 40" width="30" height="30" style="margin:0 auto"><defs><linearGradient id="mhubg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#2E7BFF"/><stop offset="1" stop-color="#B06BFF"/></linearGradient></defs><path d="M20 4 L34 31 L6 31 Z" fill="none" stroke="url(#mhubg)" stroke-width="2.4" stroke-linejoin="round"/><path d="M2 20 L15 20" stroke="#A6ACBD" stroke-width="2" stroke-linecap="round"/><path d="M25 16 L38 14" stroke="#5AA0FF" stroke-width="2" stroke-linecap="round"/><path d="M25.5 20 L39 20" stroke="#7B5BFF" stroke-width="2" stroke-linecap="round"/><path d="M25 24 L38 26" stroke="#B06BFF" stroke-width="2" stroke-linecap="round"/></svg>
+        <div class="flow__m-hub-name">Tellera</div>
+        <div class="flow__m-hub-sub mono">Orchestrator</div>
+        <div class="flow__m-dots" id="flowMDots"></div>
+        <div class="flow__m-hub-note">Routed to 9 specialists · licensed sources</div>
+      </div>
+      <svg class="flow__m-arrow" width="18" height="30" viewBox="0 0 18 30"><path d="M9 0 L9 22 M4 17 L9 23 L14 17" fill="none" stroke="#B7C0CE" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <div class="flow__m-card flow__m-ans">
+        <div class="flow__ans-strip"></div>
+        <div class="flow__m-ans-pad">
+          <div class="flow__ans-k"><svg viewBox="0 0 24 24" width="16" height="16"><circle cx="12" cy="12" r="9" fill="none" stroke="#357A46" stroke-width="1.8"/><path d="M8 12l3 3 5-6" fill="none" stroke="#357A46" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="flow__ans-klbl">The answer</span></div>
+          <div class="flow__m-ans-name">Martin R. Decker</div>
+          <div class="flow__m-ans-sub">1234 Oakridge Dr, Austin TX</div>
+          <div class="flow__ans-tags"><span class="flow__ans-conf">High confidence</span><span class="flow__ans-src">4 sources</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== HISTORY / DATA ===================== -->
+  <section id="data" class="history">
+    <div class="history__grid">
+      <div>
+        <div class="eyebrow">Our track record</div>
+        <h2 class="display history__title">Fifteen years in the data business.</h2>
+        <p class="history__lede">Tellera isn't new to records. Our team has spent 15 years building the infrastructure behind eleven trusted consumer brands — securing top-tier sources, maintaining large-scale data indexes, and vetting dozens of vendors for accuracy and compliance.</p>
+        <div class="history__stats">
+          <div class="statcard"><div class="display statcard__n">15</div><div class="statcard__l mono">Years of expertise</div></div>
+          <div class="statcard"><div class="display statcard__n">11</div><div class="statcard__l mono">Brands of data</div></div>
+          <div class="statcard"><div class="display statcard__n">Billions</div><div class="statcard__l mono">Records indexed</div></div>
+        </div>
+      </div>
+      <div class="history__brands" id="brandGrid"></div>
+    </div>
+    <div class="history__note">
+      <span>BeenVerified, Bumper.com, Ownerly and FamFinder are four of the <strong>eleven brands</strong> whose data powers Tellera.</span>
+      <a href="#">Explore all data sources →</a>
+    </div>
+    <div class="history__pillars">
+      <div><div class="display history__pillar-t">Top sources</div><div class="history__pillar-d">Licensed access to official public-record providers — county, state, and federal — refreshed on a continuous cycle.</div></div>
+      <div><div class="display history__pillar-t">Data indexes</div><div class="history__pillar-d">Billions of records normalized and cross-linked, so a name, address, or number resolves to the right match fast.</div></div>
+      <div><div class="display history__pillar-t">Vetted vendors</div><div class="history__pillar-d">Every third-party supplier is audited for accuracy, freshness, and compliance before it reaches an answer.</div></div>
+    </div>
+  </section>
+
+  <!-- ===================== FOOTER ===================== -->
+  <div class="prism-bar prism-bar--footer"></div>
+  <footer class="footer">
+    <div class="footer__grid">
+      <div>
+        <div class="footer__brand">
+          <svg viewBox="0 0 40 40" width="26" height="26"><defs><linearGradient id="pbf" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#2E7BFF"/><stop offset="1" stop-color="#B06BFF"/></linearGradient></defs><path d="M20 4 L34 31 L6 31 Z" fill="none" stroke="url(#pbf)" stroke-width="2.4" stroke-linejoin="round"/><path d="M2 20 L15 20" stroke="#8F8A7E" stroke-width="2" stroke-linecap="round"/><path d="M25 16 L38 14" stroke="#5AA0FF" stroke-width="2" stroke-linecap="round"/><path d="M25.5 20 L39 20" stroke="#7B5BFF" stroke-width="2" stroke-linecap="round"/><path d="M25 24 L38 26" stroke="#B06BFF" stroke-width="2" stroke-linecap="round"/></svg>
+          <span class="display footer__word">Tellera</span>
+        </div>
+        <p class="footer__tag mono">the AI for what AI doesn't tell you — real answers, real records, your control.</p>
+      </div>
+      <div>
+        <div class="footer__h mono">Agents</div>
+        <div class="footer__col"><a href="/deep-search">Tellera Phone</a><a href="/property">Tellera Property</a><a href="/deep-search">VIN Pro</a><a href="/deep-search">Docket Pro</a><a href="/deep-search">View all agents →</a></div>
+      </div>
+      <div>
+        <div class="footer__h mono">Platform</div>
+        <div class="footer__col"><a href="#developers">API &amp; MCP</a><a href="#">Documentation</a><a href="#data">Our data</a><a href="#">Pricing</a><a href="#">Status</a></div>
+      </div>
+      <div>
+        <div class="footer__h mono">Company</div>
+        <div class="footer__col"><a href="#">About</a><a href="#">Trust Center</a><a href="#">Contact us</a><a href="#">Cancel my account</a><a href="#">Privacy</a><a href="#">Do not sell or share</a><a href="#">Terms</a></div>
+      </div>
+    </div>
+    <div class="footer__links-m">
+      <a href="#agents">Agents</a><a href="#developers">Developers</a><a href="#data">Our data</a><a href="#">Contact us</a><a href="#">Privacy</a><a href="#">Terms</a>
+    </div>
+    <div class="footer__base">
+      <span class="mono footer__copy">© 2026 Tellera, Inc.</span>
+      <span class="footer__fcra">Tellera is not a consumer reporting agency under the FCRA. Don't use Tellera findings to make decisions about credit, employment, tenant screening, or any purpose covered by the Fair Credit Reporting Act.</span>
+      <div class="footer__social">
+        <a href="#" aria-label="X"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24h-6.66l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231 5.45-6.231Zm-1.161 17.52h1.833L7.084 4.126H5.117L17.083 19.77Z"/></svg></a>
+        <a href="#" aria-label="LinkedIn"><svg viewBox="0 0 24 24" width="19" height="19" fill="currentColor"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.13 1.44-2.13 2.94v5.67H9.35V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28ZM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13ZM7.12 20.45H3.55V9h3.57v11.45ZM22.22 0H1.77C.79 0 0 .77 0 1.72v20.55C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.72C24 .77 23.2 0 22.22 0Z"/></svg></a>
+        <a href="#" aria-label="Facebook"><svg viewBox="0 0 24 24" width="19" height="19" fill="currentColor"><path d="M24 12.07C24 5.4 18.63 0 12 0S0 5.4 0 12.07C0 18.1 4.39 23.1 10.13 24v-8.44H7.08v-3.49h3.05V9.41c0-3.02 1.79-4.69 4.53-4.69 1.31 0 2.68.24 2.68.24v2.97h-1.51c-1.49 0-1.96.93-1.96 1.89v2.25h3.33l-.53 3.49h-2.8V24C19.61 23.1 24 18.1 24 12.07Z"/></svg></a>
+        <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24" width="19" height="19" fill="currentColor"><path d="M12 2.16c3.2 0 3.58.01 4.85.07 1.17.05 1.8.25 2.23.41.56.22.96.48 1.38.9.42.42.68.82.9 1.38.16.42.36 1.06.41 2.23.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.05 1.17-.25 1.8-.41 2.23-.22.56-.48.96-.9 1.38-.42.42-.82.68-1.38.9-.42.16-1.06.36-2.23.41-1.27.06-1.65.07-4.85.07s-3.58-.01-4.85-.07c-1.17-.05-1.8-.25-2.23-.41a3.7 3.7 0 0 1-1.38-.9 3.7 3.7 0 0 1-.9-1.38c-.16-.42-.36-1.06-.41-2.23-.06-1.27-.07-1.65-.07-4.85s.01-3.58.07-4.85c.05-1.17.25-1.8.41-2.23.22-.56.48-.96.9-1.38.42-.42.82-.68 1.38-.9.42-.16 1.06-.36 2.23-.41C8.42 2.17 8.8 2.16 12 2.16ZM12 0C8.74 0 8.33.01 7.05.07 5.78.13 4.9.33 4.14.63c-.79.3-1.46.72-2.12 1.38A5.86 5.86 0 0 0 .63 4.14c-.3.76-.5 1.64-.56 2.9C.01 8.33 0 8.74 0 12s.01 3.67.07 4.95c.06 1.27.26 2.15.56 2.91.3.79.72 1.46 1.38 2.12.66.66 1.33 1.08 2.12 1.38.76.3 1.64.5 2.91.56C8.33 23.99 8.74 24 12 24s3.67-.01 4.95-.07c1.27-.06 2.15-.26 2.91-.56a5.86 5.86 0 0 0 2.12-1.38 5.86 5.86 0 0 0 1.38-2.12c.3-.76.5-1.64.56-2.91.06-1.28.07-1.69.07-4.95s-.01-3.67-.07-4.95c-.06-1.27-.26-2.15-.56-2.91a5.86 5.86 0 0 0-1.38-2.12A5.86 5.86 0 0 0 19.86.63c-.76-.3-1.64-.5-2.91-.56C15.67.01 15.26 0 12 0Zm0 5.84a6.16 6.16 0 1 0 0 12.32 6.16 6.16 0 0 0 0-12.32ZM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8Zm6.41-10.85a1.44 1.44 0 1 0 0 2.88 1.44 1.44 0 0 0 0-2.88Z"/></svg></a>
+      </div>
+    </div>
+  </footer>
+</div>
+
+<script src="js/data.js"></script>
+<script src="js/home.js"></script>
+</body>
+</html>
