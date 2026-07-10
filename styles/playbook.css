@@ -1,0 +1,27 @@
+/* Tellera — internal growth playbook. Built on tokens.css + vision.css. */
+
+/* Numbered "things to think about" cards */
+.pb-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:34px;}
+.pb-item{position:relative;background:#fff;border:1px solid var(--bd-card);border-radius:16px;
+  padding:24px 24px 22px;display:flex;flex-direction:column;box-shadow:var(--sh-card);}
+.pb-item__head{display:flex;align-items:baseline;gap:13px;}
+.pb-num{font-family:var(--font-mono);font-size:13px;font-weight:600;color:var(--blue);letter-spacing:.06em;flex:0 0 auto;}
+.pb-item__t{font-family:var(--font-display);font-size:20px;font-weight:700;line-height:1.22;color:var(--ink);}
+.pb-item__d{font-size:14.5px;line-height:1.62;color:var(--ink-2);margin-top:11px;}
+.pb-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:auto;padding-top:16px;}
+.pb-tag{font-family:var(--font-mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase;
+  color:var(--ink-3);background:var(--panel);border:1px solid var(--bd-inner);border-radius:999px;padding:3px 10px;}
+.pb-tag--start{color:#357A46;background:rgba(53,122,70,.09);border-color:rgba(53,122,70,.28);}
+.pb-tag--risk{color:var(--violet-ink);background:var(--chip-violet-bg);border-color:var(--chip-violet-bd);}
+
+/* Quick-wins callout list */
+.pb-quick{margin-top:20px;display:flex;flex-direction:column;gap:14px;}
+.pb-quick__row{display:flex;gap:14px;align-items:flex-start;}
+.pb-quick__n{font-family:var(--font-mono);font-size:12px;font-weight:600;color:var(--blue);
+  border:1px solid var(--bd-chip);border-radius:8px;padding:4px 8px;flex:0 0 auto;background:#fff;}
+.pb-quick__t{font-size:15.5px;line-height:1.55;color:var(--ink-2);}
+.pb-quick__t strong{color:var(--ink);font-weight:700;}
+
+@media (max-width:900px){
+  .pb-grid{grid-template-columns:1fr;}
+}
