@@ -47,29 +47,8 @@
 .cs-sub{font-size:clamp(16px,2.2vw,19px);line-height:1.62;color:var(--ink-2);
   margin:22px auto 0;max-width:540px;}
 
-/* Notify form */
-.cs-form{margin:34px auto 0;max-width:460px;display:flex;gap:10px;}
-.cs-form input{flex:1;min-width:0;font-family:var(--font-body);font-size:15px;color:var(--ink);
-  background:#fff;border:1px solid var(--bd-card);border-radius:var(--r-btn);padding:13px 16px;
-  transition:border-color .15s var(--ease),box-shadow .15s var(--ease);}
-.cs-form input::placeholder{color:var(--muted-2);}
-.cs-form input:focus{outline:none;border-color:var(--blue);box-shadow:0 0 0 3px rgba(46,107,255,.14);}
-.cs-form button{flex:0 0 auto;}
-.cs-note{margin-top:12px;font-family:var(--font-mono);font-size:11.5px;color:var(--muted);}
-
-/* Success state */
-.cs-success{display:none;margin:34px auto 0;max-width:460px;
-  background:#fff;border:1px solid var(--bd-card);border-radius:var(--r-hero-card);
-  padding:20px 22px;box-shadow:var(--sh-card);align-items:center;gap:13px;text-align:left;}
-.cs-success.show{display:flex;}
-.cs-success__ic{width:38px;height:38px;border-radius:10px;flex:0 0 auto;
-  background:linear-gradient(135deg,#2E7BFF,#5B45E0);display:flex;align-items:center;justify-content:center;
-  box-shadow:0 8px 20px -8px rgba(46,107,255,.6);}
-.cs-success__t{font-family:var(--font-display);font-size:17px;font-weight:700;color:var(--ink);}
-.cs-success__d{font-size:13.5px;color:var(--ink-3);margin-top:2px;}
-
 /* Specialists strip */
-.cs-agents{margin-top:44px;}
+.cs-agents{margin-top:40px;}
 .cs-agents__label{font-family:var(--font-mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted-2);}
 .cs-agents__row{margin-top:14px;display:flex;flex-wrap:wrap;justify-content:center;gap:8px;}
 .cs-chip{font-family:var(--font-mono);font-size:12px;color:var(--ink-3);
@@ -82,7 +61,5 @@
 .cs-footer__line a:hover{color:var(--blue);}
 
 @media (max-width:520px){
-  .cs-form{flex-direction:column;}
-  .cs-form button{width:100%;padding:13px;}
   .cs-brand__word{font-size:26px;}
 }

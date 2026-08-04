@@ -43,22 +43,6 @@
 
     <p class="cs-sub">Real answers to real-world questions — people, property, vehicles, phones, and court records — drawn from licensed public records, not guesswork. One assistant, nine specialists. We're putting the finishing touches on it.</p>
 
-    <form class="cs-form" id="csForm" novalidate>
-      <input type="email" id="csEmail" name="email" placeholder="you@email.com" autocomplete="email" aria-label="Email address" required>
-      <button type="submit" class="btn btn--prism">Notify me</button>
-    </form>
-    <div class="cs-note" id="csNote">Be the first to know when Tellera goes live. No spam.</div>
-
-    <div class="cs-success" id="csSuccess" role="status" aria-live="polite">
-      <span class="cs-success__ic">
-        <svg viewBox="0 0 24 24" width="18" height="18"><path d="M5 12.5l4 4 10-10.5" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      </span>
-      <div>
-        <div class="cs-success__t">You're on the list.</div>
-        <div class="cs-success__d">We'll email you the moment Tellera launches.</div>
-      </div>
-    </div>
-
     <div class="cs-agents">
       <div class="cs-agents__label">Nine specialists · one account</div>
       <div class="cs-agents__row">
@@ -80,33 +64,5 @@
   <div class="cs-footer__line">tellera.com · © 2026 Tellera · an <a href="https://theltvco.com" target="_blank" rel="noopener">LTV</a> company</div>
 </footer>
 
-<script>
-(function(){
-  var form = document.getElementById('csForm');
-  var email = document.getElementById('csEmail');
-  var note = document.getElementById('csNote');
-  var success = document.getElementById('csSuccess');
-  form.addEventListener('submit', function(e){
-    e.preventDefault();
-    var v = (email.value || '').trim();
-    if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v)){
-      email.focus();
-      email.style.borderColor = '#DC0015';
-      note.textContent = 'Please enter a valid email address.';
-      note.style.color = '#DC0015';
-      return;
-    }
-    // Prototype: no backend wired yet — show the success state.
-    form.style.display = 'none';
-    note.style.display = 'none';
-    success.classList.add('show');
-  });
-  email.addEventListener('input', function(){
-    email.style.borderColor = '';
-    note.style.color = '';
-    note.textContent = 'Be the first to know when Tellera goes live. No spam.';
-  });
-})();
-</script>
 </body>
 </html>
