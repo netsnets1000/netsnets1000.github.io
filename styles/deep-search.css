@@ -8,6 +8,7 @@
 .ds-side__brand{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:0 4px;}
 .ds-side__logo{display:flex;align-items:center;gap:10px;}
 .ds-side__mark{height:24px;width:auto;display:block;flex:0 0 auto;}
+.ds-side__wordimg{height:26px;width:auto;display:block;flex:0 0 auto;}
 .ds-side__collapse{width:32px;height:32px;border:none;background:transparent;cursor:pointer;border-radius:8px;
   display:inline-flex;align-items:center;justify-content:center;color:var(--ink-3);flex:0 0 auto;}
 .ds-side__collapse:hover{background:var(--hover-neutral);}
@@ -61,6 +62,7 @@
 .ds-lockup{text-align:center;}
 .ds-lockup__row{display:inline-flex;align-items:center;gap:10px;}
 .ds-lockup__mark{height:26px;width:auto;display:block;}
+.ds-lockup__wordimg{height:30px;width:auto;display:block;}
 .ds-lockup__word{font-family:var(--font-display);font-size:26px;font-weight:700;}
 .ds-tag{font-family:var(--font-mono);font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;
   color:var(--blue);background:var(--chip-blue-bg);border:1px solid var(--chip-blue-bd);padding:3px 9px;border-radius:999px;}
