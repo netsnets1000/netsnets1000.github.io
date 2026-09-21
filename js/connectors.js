@@ -104,6 +104,32 @@ window.TELLERA_API = (function () {
       features: ['On-prem / BAA options', 'Custom SLAs', 'Permissible-purpose review', 'Solutions engineer'] }
   ];
 
+  var SPARK = '<svg viewBox="0 0 24 24" width="26" height="26"><path d="M12 3l1.6 5.2L19 10l-5.4 1.8L12 17l-1.6-5.2L5 10l5.4-1.8z" fill="#7B5BFF"/><path d="M18.6 3.4l.6 1.9 1.9.6-1.9.6-.6 1.9-.6-1.9-1.9-.6 1.9-.6z" fill="#2E7BFF"/></svg>';
+
+  // #1 — the orchestrator "ask" endpoint (Tellera-only: routes across agents, one cited answer)
+  var ASK = {
+    slug: 'ask', app: 'Tellera Ask', bucket: 'web', iconSvg: SPARK, price: 0.06, badge: 'Orchestrator',
+    desc: 'One endpoint for any real-world question. Tellera routes it to the right specialists, cross-checks the record, and returns a single synthesized answer with confidence and sources.',
+    prompts: ['Who owns the house behind me at 13 Roland Dr, White Plains NY?', 'Is the seller of VIN 1FTFW1E5… the real registered owner?', 'What can you tell me about Martin R. Decker in Austin, TX?'],
+    endpoints: [
+      { m: 'POST', path: '/v1/ask', name: 'ask', price: 0.06, desc: 'Ask a natural-language question. Tellera orchestrates the right agents and returns a synthesized, source-cited answer with a confidence score.',
+        params: [
+          { n: 'question', t: 'string', req: true, d: 'The natural-language question to answer.' },
+          { n: 'min_confidence', t: 'string', req: false, d: 'low | medium | high — drop fields below this confidence.' },
+          { n: 'sources', t: 'string', req: false, d: 'official | all — restrict to official records only.' }
+        ] }
+    ]
+  };
+
+  // #5 — monitors / webhooks (standing watches on records)
+  var MONITORS = [
+    { subject: '13 Roland Dr, White Plains NY', agent: 'Tellera Property', trigger: 'Ownership or sale changes', delivery: 'Webhook', dest: 'hooks.acme.com/tellera', status: 'Active', last: '2d ago' },
+    { subject: 'VIN 1FTFW1E5XKFA00000', agent: 'Tellera Vehicle', trigger: 'Title or lien status changes', delivery: 'Email', dest: 'alerts@acme.com', status: 'Active', last: '—' },
+    { subject: '(512) 555-0142', agent: 'Tellera Phone', trigger: 'Carrier or owner reassignment', delivery: 'Webhook', dest: 'hooks.acme.com/tellera', status: 'Paused', last: '6d ago' },
+    { subject: 'Martin R. Decker · Travis County', agent: 'Tellera Court', trigger: 'A new filing appears', delivery: 'Webhook', dest: 'hooks.acme.com/tellera', status: 'Active', last: '11h ago' }
+  ];
+  var WEBHOOKS = { url: 'https://hooks.acme.com/tellera', secret: 'whsec_····································9f2', events: ['record.changed', 'monitor.fired', 'call.completed'] };
+
   // one-off credit top-ups (replaces pay-as-you-go)
   var CREDITS = { balance: 42.50, presets: [25, 50, 100, 250] };
 
@@ -162,6 +188,7 @@ window.TELLERA_API = (function () {
     { name: 'Salesforce', cat: 'CRM', desc: 'Enrich accounts and leads.' }
   ];
 
-  return { BUCKETS: BUCKETS, AGENTS: AGENTS, COMING: COMING, PLANS: PLANS, CREDITS: CREDITS, OVERVIEW: OVERVIEW,
-    RECENT: RECENT, TOP: TOP, USAGE_ROWS: USAGE_ROWS, LOGS: LOGS, KEYS: KEYS, INTEGRATIONS: INTEGRATIONS };
+  return { BUCKETS: BUCKETS, AGENTS: AGENTS, ASK: ASK, COMING: COMING, PLANS: PLANS, CREDITS: CREDITS, OVERVIEW: OVERVIEW,
+    RECENT: RECENT, TOP: TOP, USAGE_ROWS: USAGE_ROWS, LOGS: LOGS, KEYS: KEYS, INTEGRATIONS: INTEGRATIONS,
+    MONITORS: MONITORS, WEBHOOKS: WEBHOOKS };
 })();

@@ -46,9 +46,11 @@
     <button class="pf-nav__item active" data-view="overview"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 13h7V4H4zM13 20h7V4h-7zM4 20h7v-4H4z"/></svg>Overview</button>
     <button class="pf-nav__item" data-view="agents"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M12 3l8 4.5v9L12 21l-8-4.5v-9z"/><path d="M4 7.5l8 4.5 8-4.5M12 12v9"/></svg>Agents &amp; endpoints<span class="pf-nav__badge">10</span></button>
     <button class="pf-nav__item" data-view="connect"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M9 12l-3 3a3 3 0 0 0 4 4l3-3M15 12l3-3a3 3 0 0 0-4-4l-3 3M8.5 15.5l7-7"/></svg>Connect to your agent</button>
+    <button class="pf-nav__item" data-view="playground"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M12 3l1.9 5.6L19.5 10.5 13.9 12.4 12 18 10.1 12.4 4.5 10.5 10.1 8.6z"/></svg>Ask playground</button>
     <div class="pf-nav__sec">Monitor</div>
     <button class="pf-nav__item" data-view="usage"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19V5M4 15l4-4 4 3 6-7"/></svg>Usage</button>
     <button class="pf-nav__item" data-view="logs"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M5 5h14M5 12h14M5 19h9"/></svg>Logs</button>
+    <button class="pf-nav__item" data-view="monitors"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9M13.7 21a2 2 0 0 1-3.4 0"/></svg>Monitors</button>
     <div class="pf-nav__sec">Account</div>
     <button class="pf-nav__item" data-view="keys"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="8" cy="15" r="4"/><path d="M11 12l8-8M17 4l3 3M14 7l2 2"/></svg>API keys</button>
     <button class="pf-nav__item" data-view="plans"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 10h18"/></svg>Plans &amp; billing</button>
@@ -125,6 +127,22 @@
     <section class="pf-view" data-view="agents">
       <div class="pf-crumb">Dashboard <b>/ Agents &amp; endpoints</b></div>
       <div class="pf-head"><div><h1 class="pf-title">Agents &amp; endpoints</h1><p class="pf-sub">Every Tellera specialist, available by API and MCP — one connector per agent, priced per call.</p></div></div>
+      <div class="pf-ask">
+        <div class="pf-ask__inner">
+          <div>
+            <span class="pf-ask__eyebrow"><span class="pf-meth">POST</span> /v1/ask · orchestrator</span>
+            <div class="pf-ask__h">Ask anything. One endpoint, one cited answer.</div>
+            <p class="pf-ask__d">Skip picking endpoints. Send a plain-language question and Tellera routes it to the right specialists, cross-checks the record, and returns a single synthesized answer with confidence and sources — the same engine behind Tellera Chat.</p>
+            <div class="pf-ask__actions"><button class="pf-btn pf-btn--prism" id="pfAskView">View the /ask endpoint →</button><button class="pf-btn pf-btn--ghost" data-view="playground">Open playground</button></div>
+          </div>
+          <div class="pf-ask__demo"><span class="m"># one call, any question</span>
+<span class="q">"question"</span>: <span class="g">"Who owns 13 Roland Dr?"</span>
+<span class="m">→ routed: Property · People · Court</span>
+{ <span class="q">"answer"</span>: <span class="a">"Harris &amp; Randye Jacobs"</span>,
+  <span class="q">"confidence"</span>: <span class="g">"high"</span>,
+  <span class="q">"sources"</span>: <span class="g">4</span> }</div>
+        </div>
+      </div>
       <div class="pf-cats" id="pfCats"></div>
       <div class="pf-conns" id="pfConns"></div>
       <div class="pf-head" style="margin-top:36px;"><div><h2 class="pf-card__h" style="font-size:20px;">Coming soon</h2><p class="pf-sub">New specialists we're bringing online.</p></div></div>
@@ -135,6 +153,41 @@
     <section class="pf-view" data-view="endpoint">
       <a class="pf-back" data-view="agents" href="#"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"/></svg>All agents</a>
       <div id="pfEpDetail"></div>
+    </section>
+
+    <!-- PLAYGROUND -->
+    <section class="pf-view" data-view="playground">
+      <div class="pf-crumb">Dashboard <b>/ Ask playground</b></div>
+      <div class="pf-head"><div><h1 class="pf-title">Ask playground</h1><p class="pf-sub">Prototype a question against <span style="font-family:var(--font-mono);font-size:13px;">/v1/ask</span>, then copy the exact call — or open it in Tellera Chat.</p></div></div>
+      <div class="pf-play__box">
+        <div class="pf-play__field">
+          <span class="pf-play__spark"><svg viewBox="0 0 24 24" width="22" height="22"><path d="M12 3l1.6 5.2L19 10l-5.4 1.8L12 17l-1.6-5.2L5 10l5.4-1.8z" fill="#5B45E0"/></svg></span>
+          <textarea class="pf-play__input" id="pfPlayInput" rows="2" placeholder="Ask Tellera anything… e.g. Who owns 13 Roland Dr, White Plains NY?"></textarea>
+        </div>
+        <div class="pf-play__foot"><span class="pf-play__hint">POST /v1/ask · routed automatically</span><button class="pf-btn pf-btn--prism" id="pfPlayRun">Run</button></div>
+      </div>
+      <div class="pf-play__chips" id="pfPlayChips"></div>
+      <div class="pf-play__out" id="pfPlayOut">
+        <div class="pf-play__ans">
+          <div class="pf-play__ans-head"><span class="pf-play__ans-av"><svg viewBox="0 0 24 24" width="16" height="16"><path d="M12 3l1.6 5.2L19 10l-5.4 1.8L12 17l-1.6-5.2L5 10l5.4-1.8z" fill="#fff"/></svg></span><span class="pf-play__ans-name">Tellera Ask</span><span class="pf-play__ans-conf">High confidence</span></div>
+          <div class="pf-play__ans-body" id="pfPlayAns">Owner of record: <b>Harris &amp; Randye Jacobs</b> — 13 Roland Dr, White Plains, NY 10605. Single-family home, owner-occupied. Routed across Property, People, and Court; no open liens on record.</div>
+          <div class="pf-play__ans-src"><span class="pf-play__srcchip"><span class="d"></span>Westchester County Clerk</span><span class="pf-play__srcchip"><span class="d"></span>Ownerly valuation</span><span class="pf-play__srcchip"><span class="d"></span>USPS NCOA</span><span class="pf-play__srcchip" style="color:var(--muted)">+1 more</span></div>
+        </div>
+        <div class="pf-play__codelabel">Reproduce this call</div>
+        <div class="pf-tabs" id="pfPlayTabs"><button class="pf-tab active" data-k="curl">cURL</button><button class="pf-tab" data-k="sdk">SDK</button><button class="pf-tab" data-k="mcp">MCP</button></div>
+        <div class="pf-tabbody"><pre id="pfPlayCode"></pre></div>
+        <div style="margin-top:14px;display:flex;gap:10px;"><a class="pf-trychat" id="pfPlayChat" href="/deep-search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8 8 0 0 1-11.5 7.2L4 20l1.1-4A8 8 0 1 1 21 12z"/></svg>Open in Tellera Chat</a><button class="pf-btn pf-btn--ghost" data-slug-open="ask" id="pfPlayDocs">See full /ask docs</button></div>
+      </div>
+    </section>
+
+    <!-- MONITORS -->
+    <section class="pf-view" data-view="monitors">
+      <div class="pf-crumb">Dashboard <b>/ Monitors</b></div>
+      <div class="pf-head"><div><h1 class="pf-title">Monitors</h1><p class="pf-sub">Standing watches on records — get a webhook or email the moment something changes.</p></div>
+        <div class="pf-head__actions"><button class="pf-btn" id="pfNewMonitor"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>New monitor</button></div></div>
+      <div class="pf-mon" id="pfMon"></div>
+      <div class="pf-head" style="margin-top:30px;"><div><h2 class="pf-card__h" style="font-size:20px;">Webhook endpoint</h2><p class="pf-sub">Where Tellera delivers monitor and record-change events.</p></div></div>
+      <div class="pf-webhook" id="pfWebhook"></div>
     </section>
 
     <!-- CONNECT -->
@@ -291,6 +344,27 @@
     <div class="pf-modal__actions">
       <button class="pf-btn pf-btn--ghost" id="upCancel">Not now</button>
       <button class="pf-btn pf-btn--prism" id="upConfirm">Confirm upgrade</button>
+    </div>
+  </div>
+</div>
+
+<!-- NEW MONITOR MODAL -->
+<div class="pf-modal" id="monitorModal">
+  <div class="pf-modal__card pf-modal__card--wide">
+    <div class="pf-modal__strip"></div>
+    <div class="pf-modal__t">New monitor</div>
+    <div class="pf-modal__d">Watch a record and get notified the moment it changes. Monitors bill at the agent's per-call rate each time they re-check.</div>
+    <div class="pf-form__label">Agent</div>
+    <select class="pf-form__select" id="monAgent"></select>
+    <div class="pf-form__label">Subject to watch</div>
+    <input class="pf-form__input" id="monSubject" placeholder="e.g. 88 Larkspur Ln, Austin TX  ·  VIN  ·  phone  ·  name">
+    <div class="pf-form__label">Notify me on</div>
+    <select class="pf-form__select" id="monTrigger"><option>Any change to the record</option><option>Ownership or sale changes</option><option>A new filing appears</option><option>Title or lien status changes</option></select>
+    <div class="pf-form__label">Delivery</div>
+    <select class="pf-form__select" id="monDelivery"><option>Webhook · hooks.acme.com/tellera</option><option>Email · alerts@acme.com</option></select>
+    <div class="pf-modal__actions">
+      <button class="pf-btn pf-btn--ghost" id="monCancel">Cancel</button>
+      <button class="pf-btn pf-btn--prism" id="monConfirm">Create monitor</button>
     </div>
   </div>
 </div>

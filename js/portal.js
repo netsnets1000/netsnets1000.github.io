@@ -213,7 +213,7 @@
   }
 
   /* ---------- endpoint / agent detail ---------- */
-  function agentBySlug(s) { for (var i = 0; i < T.AGENTS.length; i++) if (T.AGENTS[i].slug === s) return T.AGENTS[i]; return null; }
+  function agentBySlug(s) { if (s === 'ask') return T.ASK; for (var i = 0; i < T.AGENTS.length; i++) if (T.AGENTS[i].slug === s) return T.AGENTS[i]; return null; }
   function sampleVal(n) {
     var m = { name: '"Martin R. Decker"', state: '"TX"', city: '"Austin"', age: '52', address: '"1234 Oakridge Dr, Austin TX"',
       number: '"(512) 555-0142"', vin: '"1FTFW1E5XKFA00000"', query: '"latest news on Ramp"', person_id: '"prs_8c21f0"',
@@ -299,6 +299,61 @@
   }
   function openCredits() { $('#creditBal').textContent = '$' + T.CREDITS.balance.toFixed(2); renderCreditAmts(); $('#creditConfirm').textContent = 'Add $' + creditAmt + ' in credits'; creditModal.classList.add('open'); }
 
+  /* ---------- ask playground ---------- */
+  function askCode(q, kind) {
+    var qq = esc(q);
+    if (kind === 'curl') return '<span class="c-b">$</span> curl https://api.tellera.com<span class="c-v">/v1/ask</span> \\\n  -H <span class="c-g">"Authorization: Bearer $TELLERA_KEY"</span> \\\n  -d <span class="c-g">\x27</span>{ <span class="c-k">"question"</span>: <span class="c-g">"' + qq + '"</span> }<span class="c-g">\x27</span>';
+    if (kind === 'sdk') return 'import Tellera from <span class="c-g">"@tellera/sdk"</span>;\n\nconst tellera = new Tellera({ apiKey: process.env.TELLERA_API_KEY });\n\nconst res = await tellera.<span class="c-v">ask</span>(<span class="c-g">"' + qq + '"</span>);\nconsole.log(res.answer, res.confidence, res.sources);';
+    return '{\n  <span class="c-k">"tool"</span>: <span class="c-g">"ask"</span>,\n  <span class="c-k">"arguments"</span>: { <span class="c-k">"question"</span>: <span class="c-g">"' + qq + '"</span> }\n}';
+  }
+  function initPlayground() {
+    var chips = $('#pfPlayChips'), input = $('#pfPlayInput'), out = $('#pfPlayOut'), code = $('#pfPlayCode'), tabs = $('#pfPlayTabs'), chat = $('#pfPlayChat'), run = $('#pfPlayRun');
+    if (!input) return;
+    if (chips) chips.innerHTML = T.ASK.prompts.map(function (p) { return '<button class="pf-play__chip" data-q="' + esc(p) + '">' + esc(p) + '</button>'; }).join('');
+    var current = '';
+    function go() {
+      var q = (input.value || '').trim() || T.ASK.prompts[0];
+      current = q;
+      code.innerHTML = askCode(q, 'curl');
+      tabs.querySelectorAll('.pf-tab').forEach(function (b) { b.classList.toggle('active', b.getAttribute('data-k') === 'curl'); });
+      if (chat) chat.setAttribute('href', '/deep-search?q=' + encodeURIComponent(q));
+      out.classList.add('show');
+    }
+    if (run) run.addEventListener('click', go);
+    input.addEventListener('keydown', function (e) { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); go(); } });
+    if (chips) chips.addEventListener('click', function (e) { var b = e.target.closest('.pf-play__chip'); if (!b) return; input.value = b.getAttribute('data-q'); go(); });
+    if (tabs) tabs.addEventListener('click', function (e) { var t = e.target.closest('.pf-tab'); if (!t) return; tabs.querySelectorAll('.pf-tab').forEach(function (b) { b.classList.toggle('active', b === t); }); code.innerHTML = askCode(current || T.ASK.prompts[0], t.getAttribute('data-k')); });
+  }
+
+  /* ---------- monitors ---------- */
+  function renderMonitors() {
+    var el = $('#pfMon'); if (!el) return;
+    var head = '<div class="pf-mon__row pf-mon__row--h"><span>Subject</span><span>Agent</span><span>Trigger</span><span>Delivery</span><span>Status</span><span></span></div>';
+    el.innerHTML = head + T.MONITORS.map(function (m) {
+      var paused = m.status === 'Paused';
+      return '<div class="pf-mon__row"><span class="pf-mon__subj">' + esc(m.subject) + '</span>' +
+        '<span class="pf-mon__agent">' + esc(m.agent) + '</span>' +
+        '<span class="pf-mon__trig">' + esc(m.trigger) + '</span>' +
+        '<span class="pf-mon__deliv"><b>' + esc(m.delivery) + '</b>' + (m.dest ? ' · ' + esc(m.dest) : '') + '</span>' +
+        '<span><span class="pf-pill ' + (paused ? 'pf-pill--paused' : 'pf-pill--active') + '">' + esc(m.status) + '</span></span>' +
+        '<span class="pf-mon__actions"><button title="Edit">' + gearSvg + '</button><button title="Delete">' + trashSvg + '</button></span></div>';
+    }).join('');
+    var wh = $('#pfWebhook');
+    if (wh) {
+      var w = T.WEBHOOKS;
+      wh.innerHTML = '<div class="pf-webhook__row"><span class="pf-webhook__k">Endpoint URL</span><span class="pf-webhook__v">' + esc(w.url) + '</span></div>' +
+        '<div class="pf-webhook__row"><span class="pf-webhook__k">Signing secret</span><span class="pf-webhook__v">' + esc(w.secret) + '</span></div>' +
+        '<div class="pf-webhook__row"><span class="pf-webhook__k">Events</span><span class="pf-evt">' + w.events.map(function (e) { return '<span>' + esc(e) + '</span>'; }).join('') + '</span></div>';
+    }
+  }
+  var monModal = $('#monitorModal');
+  function openMonitor() {
+    var sel = $('#monAgent');
+    if (sel && !sel.__filled) { sel.innerHTML = T.AGENTS.map(function (a) { return '<option>' + esc(a.app) + '</option>'; }).join(''); sel.__filled = true; }
+    if ($('#monSubject')) $('#monSubject').value = '';
+    monModal.classList.add('open');
+  }
+
   /* ---------- cancel modal ---------- */
   var modal = $('#cancelModal');
   function openModal() { modal.classList.add('open'); }
@@ -346,4 +401,18 @@
     T.CREDITS.balance += creditAmt; $('#creditBal').textContent = '$' + T.CREDITS.balance.toFixed(2); creditModal.classList.remove('open');
   });
   if (creditModal) creditModal.addEventListener('click', function (e) { if (e.target === creditModal) creditModal.classList.remove('open'); });
+
+  renderMonitors(); initPlayground();
+
+  var askView = $('#pfAskView'); if (askView) askView.addEventListener('click', function () { openEndpoint('ask'); });
+  document.addEventListener('click', function (e) { var b = e.target.closest('[data-slug-open]'); if (b) openEndpoint(b.getAttribute('data-slug-open')); });
+
+  var newMon = $('#pfNewMonitor'); if (newMon) newMon.addEventListener('click', openMonitor);
+  var monCancel = $('#monCancel'); if (monCancel) monCancel.addEventListener('click', function () { monModal.classList.remove('open'); });
+  var monConfirm = $('#monConfirm'); if (monConfirm) monConfirm.addEventListener('click', function () {
+    var dv = ($('#monDelivery').value || '').split(' · ');
+    T.MONITORS.unshift({ subject: ($('#monSubject').value || '').trim() || 'New watch', agent: $('#monAgent').value, trigger: $('#monTrigger').value, delivery: dv[0], dest: dv[1] || '', status: 'Active', last: 'just now' });
+    renderMonitors(); monModal.classList.remove('open');
+  });
+  if (monModal) monModal.addEventListener('click', function (e) { if (e.target === monModal) monModal.classList.remove('open'); });
 })();
