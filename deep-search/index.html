@@ -7,7 +7,7 @@
 <meta name="description" content="Your research assistant for people, phones, addresses, property, vehicles, and court records — every answer traced back to its source.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,300;0,400;0,600;0,700;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,600&family=Spectral:ital,wght@0,300;0,400;0,600;0,700;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/styles/tokens.css">
 <link rel="stylesheet" href="/styles/deep-search.css">
 </head>
@@ -20,27 +20,26 @@
 <!-- ===================== SIDEBAR ===================== -->
 <aside class="ds-side" id="side">
   <div class="ds-side__brand">
-    <a class="ds-side__back" href="/" aria-label="Back to homepage">
-      <svg viewBox="0 0 24 24" width="22" height="22"><path d="M15 18l-6-6 6-6" fill="none" stroke="#5C6470" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    <a class="ds-side__logo" href="/" aria-label="Tellera home">
+      <img src="/assets/prism-logo-mark.svg" alt="" class="ds-side__mark">
+      <span class="ds-side__word">Tellera</span>
     </a>
-    <svg viewBox="0 0 40 40" width="26" height="26"><defs><linearGradient id="sbpb" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#2E7BFF"/><stop offset="1" stop-color="#B06BFF"/></linearGradient></defs><path d="M20 4 L34 31 L6 31 Z" fill="none" stroke="url(#sbpb)" stroke-width="2.4" stroke-linejoin="round"/><path d="M2 20 L15 20" stroke="#8A8475" stroke-width="2" stroke-linecap="round"/><path d="M25 16 L38 14" stroke="#2E7BFF" stroke-width="2" stroke-linecap="round"/><path d="M25.5 20 L39 20" stroke="#7B5BFF" stroke-width="2" stroke-linecap="round"/><path d="M25 24 L38 26" stroke="#B06BFF" stroke-width="2" stroke-linecap="round"/></svg>
-    <span class="ds-side__word">Tellera</span>
+    <button class="ds-side__collapse" id="sideCollapse" aria-label="Collapse menu">
+      <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="#5C6470" stroke-width="2" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+    </button>
   </div>
 
   <button class="ds-new" id="newSearch">
     <svg viewBox="0 0 24 24" width="20" height="20"><path d="M12 5v14M5 12h14" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round"/></svg>
-    New search
+    New Chat
   </button>
 
   <nav class="ds-nav" aria-label="Deep Search">
-    <button class="ds-nav__item"><svg viewBox="0 0 24 24" fill="currentColor"><circle cx="5" cy="5" r="2"/><circle cx="12" cy="5" r="2"/><circle cx="19" cy="5" r="2"/><circle cx="5" cy="12" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="19" cy="12" r="2"/><circle cx="5" cy="19" r="2"/><circle cx="12" cy="19" r="2"/><circle cx="19" cy="19" r="2"/></svg>All agents</button>
-    <button class="ds-nav__item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3h7l4 4v12.5A1.5 1.5 0 0 1 16.5 21H7A1.5 1.5 0 0 1 5.5 19.5V4.5A1.5 1.5 0 0 1 7 3z"/><path d="M14 3v4h4"/><path d="M9 12.5h6"/><path d="M9 16h6"/></svg>Saved findings</button>
-    <button class="ds-nav__item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="6.5"/><path d="M20.5 20.5 16 16"/></svg>Search chats</button>
-    <button class="ds-nav__item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 1.8"/></svg>Chat history</button>
+    <button class="ds-nav__item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3h7l4 4v12.5A1.5 1.5 0 0 1 16.5 21H7A1.5 1.5 0 0 1 5.5 19.5V4.5A1.5 1.5 0 0 1 7 3z"/><path d="M14 3v4h4"/><path d="M9 12.5h6"/><path d="M9 16h6"/></svg>Report Library</button>
   </nav>
 
   <div class="ds-recents" id="dsRecents">
-    <div class="ds-recents__label">Recents</div>
+    <div class="ds-recents__label">Recent Chats</div>
     <div class="ds-recents__list" id="dsRecentsList">
       <button class="ds-recent">VIN check — 2019 Ford F-150</button>
       <button class="ds-recent">Who owns 88 Larkspur Ln</button>
@@ -50,21 +49,18 @@
 
   <div class="ds-side__spacer"></div>
 
-  <div class="ds-usage">
-    <div class="ds-usage__row"><span class="ds-usage__k">Findings</span><span class="ds-usage__v">186 / 200 left</span></div>
-    <div class="ds-usage__bar"><div class="ds-usage__fill"></div></div>
-    <button class="ds-usage__btn">Upgrade your plan</button>
-    <a href="#" class="ds-usage__link">Manage my account →</a>
-  </div>
-
-  <div class="ds-user">
-    <button class="ds-user__btn">
-      <span class="ds-user__avatar">J</span>
-      <span>
-        <span class="ds-user__name">Jordan Lee</span><br>
-        <span class="ds-user__meta">200 findings / month</span>
-      </span>
-    </button>
+  <div class="ds-side__foot">
+    <button class="ds-nav__item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="6" r="2.5"/><circle cx="6" cy="18" r="2.5"/><circle cx="18" cy="12" r="2.5"/><path d="M8.2 7.1l7.6 3.8M8.2 16.9l7.6-3.8"/></svg>API / MCP</button>
+    <button class="ds-nav__item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M5 20c0-3.3 3.1-5 7-5s7 1.7 7 5"/></svg>Account</button>
+    <div class="ds-user">
+      <button class="ds-user__btn">
+        <span class="ds-user__avatar">J</span>
+        <span>
+          <span class="ds-user__name">Jordan Lee</span><br>
+          <span class="ds-user__meta">200 reports / month</span>
+        </span>
+      </button>
+    </div>
   </div>
 </aside>
 
@@ -88,28 +84,24 @@
         <div class="ds-inner">
           <div class="ds-lockup">
             <div class="ds-lockup__row">
-              <svg viewBox="0 0 40 40" width="30" height="30"><defs><linearGradient id="mnpb" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#2E7BFF"/><stop offset="1" stop-color="#B06BFF"/></linearGradient></defs><path d="M20 4 L34 31 L6 31 Z" fill="none" stroke="url(#mnpb)" stroke-width="2.4" stroke-linejoin="round"/><path d="M2 20 L15 20" stroke="#8A8475" stroke-width="2" stroke-linecap="round"/><path d="M25 16 L38 14" stroke="#2E7BFF" stroke-width="2" stroke-linecap="round"/><path d="M25.5 20 L39 20" stroke="#7B5BFF" stroke-width="2" stroke-linecap="round"/><path d="M25 24 L38 26" stroke="#B06BFF" stroke-width="2" stroke-linecap="round"/></svg>
+              <img src="/assets/prism-logo-mark.svg" alt="" class="ds-lockup__mark">
               <span class="ds-lockup__word">Tellera</span>
-              <span class="ds-tag">Deep Search</span>
             </div>
-            <h1 class="ds-h1">Ask anything. <span class="accent-italic">Real answers.</span></h1>
-            <p class="ds-sub">Your research assistant for people, phones, addresses, property, vehicles, and court records — drawn from real, licensed records.</p>
+            <h1 class="ds-h1">Ask More. <span class="accent-italic">Discover More.</span></h1>
+            <p class="ds-sub">Your AI assistant for in-depth searches on people, phones, addresses, emails, and vehicles.</p>
           </div>
 
           <form class="ds-prompt" id="dsForm">
-            <div class="ds-prompt__strip"></div>
             <div class="ds-prompt__pad">
               <div class="ds-prompt__field">
-                <span class="ds-prompt__spark"><svg viewBox="0 0 24 24" width="22" height="22"><path d="M12 3l1.6 5.2L19 10l-5.4 1.8L12 17l-1.6-5.2L5 10l5.4-1.8z" fill="currentColor"/></svg></span>
                 <textarea class="ds-prompt__input" id="dsInput" rows="1" placeholder="What can I help you find?" autocomplete="off"></textarea>
               </div>
               <div class="ds-prompt__foot">
                 <div class="ds-prompt__tools">
                   <button type="button" class="ds-prompt__tool" title="Attach a file" aria-label="Attach a file"><svg viewBox="0 0 24 24" width="21" height="21"><path d="M16.5 6.5 8.9 14.1a2 2 0 1 0 2.8 2.8l7.2-7.2a4 4 0 0 0-5.6-5.6l-7.4 7.4a6 6 0 0 0 8.5 8.5l6.6-6.6" fill="none" stroke="#5C6470" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
-                  <button type="button" class="ds-prompt__tool" title="Voice input" aria-label="Voice input"><svg viewBox="0 0 24 24" width="21" height="21"><rect x="9" y="3" width="6" height="11" rx="3" fill="none" stroke="#5C6470" stroke-width="1.7"/><path d="M6 11a6 6 0 0 0 12 0" fill="none" stroke="#5C6470" stroke-width="1.7" stroke-linecap="round"/><path d="M12 17v4M9 21h6" fill="none" stroke="#5C6470" stroke-width="1.7" stroke-linecap="round"/></svg></button>
                 </div>
                 <div class="ds-prompt__right">
-                  <span class="ds-prompt__hint">9 specialists · real records</span>
+                  <button type="button" class="ds-prompt__tool" title="Voice input" aria-label="Voice input"><svg viewBox="0 0 24 24" width="21" height="21"><rect x="9" y="3" width="6" height="11" rx="3" fill="none" stroke="#5C6470" stroke-width="1.7"/><path d="M6 11a6 6 0 0 0 12 0" fill="none" stroke="#5C6470" stroke-width="1.7" stroke-linecap="round"/><path d="M12 17v4M9 21h6" fill="none" stroke="#5C6470" stroke-width="1.7" stroke-linecap="round"/></svg></button>
                   <button type="submit" class="ds-prompt__go" aria-label="Ask"><svg viewBox="0 0 24 24" width="22" height="22"><path d="M12 20V6M6 12l6-6 6 6" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
                 </div>
               </div>
@@ -122,7 +114,8 @@
     </div>
     <div class="ds-disclaimer">
       <div class="ds-disclaimer__inner">
-        Tellera Deep Search is powered by AI. Tellera is not a consumer reporting agency under the FCRA, and Tellera findings may not be used to make decisions about credit, employment, tenant screening, or any purpose covered by the Fair Credit Reporting Act. Data is drawn from a wide range of public records and licensed sources and may not be fully accurate, complete, or current. Review the findings before you rely on a result.
+        <p>This chat feature is powered by artificial intelligence. Tellera is not responsible for any decisions, actions, or outcomes based on the information provided by the AI. The information provided or contained in any report and on our website is not necessarily 100% accurate, complete or up to date, nor a substitute for your own due diligence, especially concerning such sensitive items as criminal history, relatives, mortgages and liens. Our data comes from a wide variety of sources, but some municipalities and jurisdictions are slow to report and digitize their data, so we cannot guarantee or warrant full accuracy of ALL search results.</p>
+        <p>Tellera's mission is to give people easy and affordable access to public record information, but Tellera does not provide private investigator services or consumer reports, and is not a consumer reporting agency per the Fair Credit Reporting Act. You may not use our site or service or the information provided to make decisions about employment, admission, consumer credit, insurance, tenant screening or any other purpose that would require FCRA compliance. For more information governing permitted and prohibited uses, please review our <a href="#">Do's &amp; Don'ts</a> and our <a href="#">Terms &amp; Conditions</a>.</p>
       </div>
     </div>
   </div>

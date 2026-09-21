@@ -13,18 +13,22 @@
   var scroll = document.getElementById('dsScroll');
 
   /* ---- agent quick-action pills seed the prompt ---- */
+  var PILLS = [
+    { label: 'Tellera People', seed: "What's known about Martin R. Decker in Austin, TX?", icon: '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#7B5BFF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M5 20c0-3.3 3.1-5 7-5s7 1.7 7 5"/></svg>' },
+    { label: 'Tellera Phone', seed: 'Who owns (512) 555-0142?', icon: '<svg viewBox="0 0 24 24" width="18" height="18" fill="#2E7BFF"><path d="M20 15.5c-1.25 0-2.45-.2-3.57-.57a1 1 0 0 0-1.02.24l-2.2 2.2a15.05 15.05 0 0 1-6.59-6.59l2.2-2.21a.96.96 0 0 0 .25-1A11.36 11.36 0 0 1 8.5 4c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1 0 9.39 7.61 17 17 17 .55 0 1-.45 1-1v-3.5c0-.55-.45-1-1-1z"/></svg>' },
+    { label: 'Tellera Email', seed: 'Who is behind mail@domain.com?', icon: '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#4C8DFF" stroke-width="1.8" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M4 7l8 6 8-6"/></svg>' },
+    { label: 'Tellera Property', seed: 'Who owns 1234 Oakridge Dr, Austin TX?', icon: '<svg viewBox="0 0 24 24" width="18" height="18" fill="#B0402F"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>' },
+    { label: 'Tellera Vehicle', seed: 'Is VIN 1FTFW1E5… clean?', icon: '<svg viewBox="0 0 24 24" width="18" height="18" fill="#37B6A6"><path d="M18.92 6.01C18.72 5.42 18.16 5 17.5 5h-11c-.66 0-1.21.42-1.42 1.01L3 12v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99zM6.5 16c-.83 0-1.5-.67-1.5-1.5S5.67 13 6.5 13s1.5.67 1.5 1.5S7.33 16 6.5 16zm11 0c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zM5 11l1.5-4.5h11L19 11H5z"/></svg>' }
+  ];
   function renderPills() {
-    pillsWrap.innerHTML = T.AGENTS.map(function (a, i) {
-      return '<button class="ds-pill" data-i="' + i + '">' +
-        '<span class="ds-pill__badge" style="border:1.5px solid ' + a.color + ';color:' + a.color + '">' + a.code + '</span>' +
-        '<span class="ds-pill__col"><span class="ds-pill__app">' + esc(a.app) + '</span><span class="ds-pill__cat">' + esc(T.SEED_CAT[a.code]) + '</span></span>' +
-      '</button>';
+    pillsWrap.innerHTML = PILLS.map(function (p, i) {
+      return '<button class="ds-pill" data-i="' + i + '"><span class="ds-pill__ic">' + p.icon + '</span><span class="ds-pill__label">' + esc(p.label) + '</span></button>';
     }).join('');
   }
   renderPills();
   pillsWrap.addEventListener('click', function (e) {
     var b = e.target.closest('.ds-pill'); if (!b) return;
-    input.value = T.SEED[T.AGENTS[+b.getAttribute('data-i')].code];
+    input.value = PILLS[+b.getAttribute('data-i')].seed;
     input.focus(); autogrow();
   });
 
@@ -145,4 +149,6 @@
   var toggle = document.getElementById('sideToggle');
   var side = document.getElementById('side');
   if (toggle && side) toggle.addEventListener('click', function () { side.classList.toggle('open'); });
+  var collapse = document.getElementById('sideCollapse');
+  if (collapse && side) collapse.addEventListener('click', function () { side.classList.toggle('open'); });
 })();
