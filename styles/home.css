@@ -11,7 +11,9 @@
 }
 .home-body h1,.home-body h2,.home-body h3{font-family:'Spectral',Georgia,serif;margin:0;}
 .home-body p{margin:0;}
-.home-body a{text-decoration:none;color:inherit;}
+.home-body a{text-decoration:none;}
+a{color:inherit;}
+a:hover{color:inherit;}
 .home-body button{font-family:inherit;cursor:pointer;}
 .home-body img,.home-body svg{display:block;}
 .no-sb{scrollbar-width:none;-ms-overflow-style:none;}
