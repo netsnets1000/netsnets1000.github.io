@@ -69,10 +69,11 @@
 .ds-h1{font-family:var(--font-display);margin-top:20px;font-size:42px;font-weight:700;letter-spacing:-.015em;line-height:1.08;}
 .ds-sub{margin:14px auto 0;font-size:17px;line-height:1.55;color:var(--ink-2);max-width:600px;}
 
-.ds-prompt{margin-top:36px;position:relative;border:1px solid var(--bd-card);border-radius:18px;
-  background:var(--white);box-shadow:0 14px 34px -20px rgba(20,22,27,.30);
-  transition:border-color .15s var(--ease),box-shadow .15s var(--ease);}
-.ds-prompt:focus-within{border-color:var(--blue);box-shadow:0 0 0 3px rgba(46,107,255,.12),0 14px 34px -20px rgba(20,22,27,.30);}
+.ds-prompt{margin-top:36px;position:relative;border:3px solid transparent;border-radius:16px;
+  background:linear-gradient(#fff,#fff) padding-box,linear-gradient(107deg,#2E7BFF 44%,#7B5BFF 98%) border-box;
+  box-shadow:1px 7px 6px rgba(182,192,211,.64);
+  transition:box-shadow .15s var(--ease);}
+.ds-prompt:focus-within{box-shadow:0 0 0 3px rgba(46,107,255,.14),1px 7px 6px rgba(182,192,211,.64);}
 .ds-prompt__pad{padding:20px 18px 12px;}
 .ds-prompt__field{min-height:56px;font-size:18px;line-height:1.5;display:flex;gap:12px;align-items:flex-start;}
 .ds-prompt__spark{flex:0 0 auto;width:24px;height:24px;margin-top:1px;display:inline-flex;align-items:center;justify-content:center;color:var(--violet-ink);}
