@@ -116,14 +116,17 @@
       <div class="build__grid">
         <div class="build__copy">
           <div class="build__eyebrow">Build on Tellera</div>
-          <h2 class="build__h2">Everything Tellera knows,<br>now available in your app.</h2>
-          <p class="build__p">Connect through our API or MCP server and give your users trusted, source-backed answers.</p>
+          <h2 class="build__h2">A whole platform for<br>humans and agents.</h2>
+          <p class="build__p">Send one question to <b>/ask</b> and Tellera routes it across ten specialist agents — or call any agent directly. REST, a native MCP server, monitors, and webhooks, priced per call.</p>
           <div class="build__tags">
-            <span>REST &amp; GraphQL</span><span>MCP server</span><span>Webhooks</span><span>Sandbox keys</span><span>SOC 2</span>
+            <span>One /ask endpoint</span><span>10 agents</span><span>MCP server</span><span>Monitors &amp; webhooks</span><span>Sandbox keys</span><span>SOC 2</span>
           </div>
           <div class="build__actions">
             <a class="build__btn" href="/portal">Get API keys</a>
-            <a class="build__ghost" href="/developers">View MCP reference →</a>
+            <a class="build__ghost" href="/developers">Explore the developer platform →</a>
+          </div>
+          <div class="build__links">
+            <a href="/developers">Developers</a><span>·</span><a href="/pricing">Pricing</a><span>·</span><a href="/portal">Agent portal</a><span>·</span><a href="/deep-search">Tellera Chat</a>
           </div>
         </div>
         <div class="code">
@@ -131,19 +134,18 @@
             <span class="code__dot" style="background:#E0574C"></span>
             <span class="code__dot" style="background:#E0B44C"></span>
             <span class="code__dot" style="background:#357A46"></span>
-            <span class="code__title">tellera-mcp · people.lookup</span>
+            <span class="code__title">tellera · /v1/ask</span>
             <img src="assets/prism-logo-mark.svg" alt="Tellera" class="code__mark">
           </div>
-          <pre class="code__pre"><span class="c-blue">$</span> tellera mcp call <span class="c-violet">people.lookup</span> \
-    --name <span class="c-green">"Martin R. Decker"</span> --state <span class="c-green">TX</span>
+          <pre class="code__pre"><span class="c-blue">$</span> curl https://api.tellera.com<span class="c-violet">/v1/ask</span> \
+  -H <span class="c-green">"Authorization: Bearer $TELLERA_KEY"</span> \
+  -d <span class="c-green">'{ "question": "Who owns 13 Roland Dr?" }'</span>
 
+<span class="c-key"># routed: Property · People · Court</span>
 {
-  <span class="c-key">"owner"</span>:      <span class="c-green">"Martin R. Decker"</span>,
+  <span class="c-key">"answer"</span>:     <span class="c-green">"Harris &amp; Randye Jacobs"</span>,
   <span class="c-key">"confidence"</span>: <span class="c-green">"high"</span>,
-  <span class="c-key">"sources"</span>: [
-    { <span class="c-key">"name"</span>: <span class="c-green">"Travis County Deed"</span>, <span class="c-key">"type"</span>: <span class="c-green">"official"</span> },
-    { <span class="c-key">"name"</span>: <span class="c-green">"USPS NCOA"</span>,          <span class="c-key">"type"</span>: <span class="c-green">"official"</span> }
-  ]
+  <span class="c-key">"sources"</span>:    <span class="c-green">4</span>
 }</pre>
         </div>
       </div>
@@ -262,7 +264,7 @@
       </div>
       <div class="footer__col">
         <div class="footer__h">Platform</div>
-        <div class="footer__links"><a href="#build">API &amp; MCP</a><a href="#">Documentation</a><a href="#data">Our data</a><a href="#">Pricing</a><a href="#">Status</a></div>
+        <div class="footer__links"><a href="/developers">API &amp; MCP</a><a href="/portal">Agent portal</a><a href="#data">Our data</a><a href="/pricing">Pricing</a><a href="#">Status</a></div>
       </div>
       <div class="footer__col">
         <div class="footer__h">Company</div>
