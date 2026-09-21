@@ -75,6 +75,14 @@ a:hover{color:inherit;}
 .mega__tile{border:1px solid #E4EAF3;border-radius:10px;padding:14px;}
 .mega__tile-ic{display:inline-flex;align-items:center;justify-content:center;width:34px;height:34px;border-radius:8px;overflow:hidden;}
 .mega__tile-ic img{width:34px;height:34px;object-fit:contain;}
+.mega__tile-ic svg{width:28px;height:28px;}
+.mega__ask{display:flex;align-items:center;gap:14px;margin:16px 44px 0;padding:15px 18px;border-radius:12px;border:1.5px solid transparent;
+  background:linear-gradient(#fff,#fff) padding-box,linear-gradient(107deg,#2E7BFF,#7B5BFF 98%) border-box;transition:box-shadow .15s var(--ease);}
+.mega__ask:hover{box-shadow:0 14px 30px -18px rgba(46,107,255,.5);}
+.mega__ask-ic{width:40px;height:40px;border-radius:10px;background:var(--chip-violet-bg);display:flex;align-items:center;justify-content:center;flex:0 0 auto;}
+.mega__ask-t{font-size:15px;font-weight:700;color:var(--ink);}
+.mega__ask-d{font-size:12.5px;color:var(--muted);margin-top:2px;line-height:1.4;}
+.mega__ask-go{margin-left:auto;font-family:var(--font-mono);font-size:12px;font-weight:700;color:var(--violet-ink);white-space:nowrap;flex:0 0 auto;}
 .mega__tile-name{font-size:14px;font-weight:700;color:#14161B;margin-top:10px;}
 .mega__tile-desc{font-size:12px;color:#7E8798;margin-top:4px;line-height:1.4;}
 .mega__tile-cat{font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;margin-top:8px;}
@@ -141,6 +149,7 @@ a:hover{color:inherit;}
 .agent-card__body{padding:22px;display:flex;flex-direction:column;flex:1;position:relative;z-index:1;}
 .agent-card__ic{display:flex;align-items:center;justify-content:center;width:44px;height:44px;border-radius:12px;overflow:hidden;}
 .agent-card__ic img{width:44px;height:44px;object-fit:contain;}
+.agent-card__ic svg{width:36px;height:36px;}
 .agent-card__app{font-size:24px;font-weight:600;margin-top:48px;line-height:1.05;}
 .agent-card__desc{font-size:15px;color:#14161B;margin-top:8px;line-height:1.5;}
 .agent-card__extra{font-size:14px;color:#7E8798;margin-top:20px;line-height:1.5;flex:1;}

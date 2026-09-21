@@ -5,11 +5,14 @@
   var $ = function (s, r) { return (r || document).querySelector(s); };
   var esc = function (s) { return String(s).replace(/[&<>"]/g, function (c) { return ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]; }); };
 
+  var GLOBE = '<svg viewBox="0 0 24 24" fill="none" stroke="#2E6BFF" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.5 3.8 5.7 3.8 9S14.5 18.5 12 21c-2.5-2.5-3.8-5.7-3.8-9S9.5 5.5 12 3z" stroke-linecap="round"/></svg>';
+
   /* ---------- category groups ---------- */
   var GROUPS = {
     'People & identity': { color: '#565C99', tint200: '#C9CBDE', icon: 'assets/icon-cat-people-identity.svg', bg: 'assets/bg-cat-people-identity.svg' },
     'Property & assets': { color: '#2B8A88', tint200: '#BBDAD9', icon: 'assets/icon-cat-property-assets.svg', bg: 'assets/bg-cat-property-assets.svg' },
-    'Business & legal': { color: '#8B5E3C', tint200: '#DACBC1', icon: 'assets/icon-cat-business-legal.svg', bg: 'assets/bg-cat-business-legal.svg' }
+    'Business & legal': { color: '#8B5E3C', tint200: '#DACBC1', icon: 'assets/icon-cat-business-legal.svg', bg: 'assets/bg-cat-business-legal.svg' },
+    'Web & real-time': { color: '#2E6BFF', tint200: '#BFD4FF', icon: null, bg: null }
   };
 
   /* ---------- 9 agents (order = design rows) ---------- */
@@ -22,7 +25,8 @@
     { name: 'Family', app: 'Tellera Family', cat: 'FAMILY & KIN', group: 'People & identity', desc: 'Relatives, ancestry, marriages, and lineage.', ex: "who are Decker's relatives?", extra: "Some AI can generate your family crest — we'll help you fully explore your ancestry." },
     { name: 'Trust & Safety', app: 'Tellera Safety', cat: 'TRUST & SAFETY', group: 'Business & legal', desc: 'Risk signals, watchlists, and verifications.', ex: 'any watchlist hits?', extra: "Some AI can generate thousands of scams — we'll tell you which one just landed in your inbox." },
     { name: 'Business', app: 'Tellera Business', cat: 'BUSINESS & ENTITIES', group: 'Business & legal', desc: 'Companies, licenses, and financial information.', ex: 'who owns Oakridge LLC?', extra: "Some AI can draft your reply — we'll tell you who's really behind the address that sent it." },
-    { name: 'Money', app: 'Tellera Assets', cat: 'MONEY & ASSETS', group: 'Property & assets', desc: 'Bankruptcies, liens, judgments, and assets.', ex: 'any liens or judgments?', extra: "Some AI can help you forecast — we'll tell you about real money that's actually yours." }
+    { name: 'Money', app: 'Tellera Assets', cat: 'MONEY & ASSETS', group: 'Property & assets', desc: 'Bankruptcies, liens, judgments, and assets.', ex: 'any liens or judgments?', extra: "Some AI can help you forecast — we'll tell you about real money that's actually yours." },
+    { name: 'Web', app: 'Tellera Web Search', cat: 'WEB & REAL-TIME', group: 'Web & real-time', desc: 'Live web search across the open internet.', ex: 'latest news on Acme Corp', extra: "Most AI is frozen at its training cutoff — we search the live web for what's true right now.", iconSvg: GLOBE }
   ];
   AGENTS.forEach(function (a) { var g = GROUPS[a.group]; a.color = g.color; a.tint200 = g.tint200; a.catIcon = g.icon; a.bgIcon = g.bg; });
 
@@ -62,9 +66,9 @@
   var railTrack = $('#agentsTrack'), catsWrap = $('#agentCats'), activeCat = 'All';
   function agentCard(a) {
     return '<a class="agent-card" href="/deep-search?q=' + encodeURIComponent(a.ex) + '">' +
-      '<div class="agent-card__bg" style="background-image:url(\'' + a.bgIcon + '\')"></div>' +
+      (a.bgIcon ? '<div class="agent-card__bg" style="background-image:url(\'' + a.bgIcon + '\')"></div>' : '<div class="agent-card__bg" style="background:radial-gradient(120px 120px at 22% 16%,' + a.tint200 + '77,transparent)"></div>') +
       '<div class="agent-card__body">' +
-        '<span class="agent-card__ic"><img src="' + a.catIcon + '" alt="' + esc(a.name) + '"></span>' +
+        '<span class="agent-card__ic">' + (a.iconSvg ? a.iconSvg : '<img src="' + a.catIcon + '" alt="' + esc(a.name) + '">') + '</span>' +
         '<div class="agent-card__app">' + esc(a.app) + '</div>' +
         '<div class="agent-card__desc">' + esc(a.desc) + '</div>' +
         '<div class="agent-card__extra">' + esc(a.extra) + '</div>' +
@@ -105,7 +109,7 @@
     var list = AGENTS.filter(function (a) { return menuCat === 'All' || a.group === menuCat; });
     megaGrid.innerHTML = list.map(function (a) {
       return '<a class="mega__tile" href="/deep-search?q=' + encodeURIComponent(a.ex) + '">' +
-        '<span class="mega__tile-ic"><img src="' + a.catIcon + '" alt="' + esc(a.name) + '"></span>' +
+        '<span class="mega__tile-ic">' + (a.iconSvg ? a.iconSvg : '<img src="' + a.catIcon + '" alt="' + esc(a.name) + '">') + '</span>' +
         '<div class="mega__tile-name">' + esc(a.app) + '</div>' +
         '<div class="mega__tile-desc">' + esc(a.desc) + '</div>' +
         '<div class="mega__tile-cat" style="color:' + a.color + '">' + esc(a.cat) + '</div></a>';
@@ -136,7 +140,7 @@
 
   /* ---------- flow diagram ---------- */
   var AXIS = 240, agentLeft = 510, agentW = 190, agentH = 34;
-  function rowY(i) { return 72 + i * 42; }
+  function rowY(i) { return 72 + i * 38; }
   function wavy(x1, y1, x2, y2, stroke, delay) {
     var midX = x1 + (x2 - x1) * 0.5, dy = (y2 - y1);
     var d = 'M' + x1 + ' ' + y1 + ' Q' + midX + ' ' + (y1 + dy * 0.15) + ' ' + midX + ' ' + ((y1 + y2) / 2) + ' T' + x2 + ' ' + y2;
