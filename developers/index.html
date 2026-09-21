@@ -74,41 +74,6 @@
   </div>
 </section>
 
-<!-- ask orchestrator -->
-<section class="dv-sec dv-sec--alt" id="ask">
-  <div class="dv-wrap">
-    <div class="dv-kicker">One endpoint</div>
-    <h2 class="dv-h2">Ask anything. Tellera routes it.</h2>
-    <p class="dv-lede">Don't wire up ten endpoints. Send a plain-language question to <b>/v1/ask</b> and Tellera's orchestrator picks the right specialists, cross-checks the record, and returns one synthesized answer — the same engine behind Tellera Chat.</p>
-    <div class="dv-ask">
-      <div class="dv-ask__inner">
-        <div>
-          <div class="dv-eyebrow"><span class="m">POST</span> /v1/ask · orchestrator</div>
-          <div class="dv-ask__h">The answer, not a pile of endpoints.</div>
-          <p class="dv-ask__d">Integrate once and get everything. Or call individual agents directly when you want to.</p>
-          <ul class="dv-ask__list">
-            <li><svg viewBox="0 0 24 24" width="18" height="18"><path d="M5 12l4 4 10-11" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span><b>Confidence + sources on every field</b> — official / partner / vendor tiers you can filter on.</span></li>
-            <li><svg viewBox="0 0 24 24" width="18" height="18"><path d="M5 12l4 4 10-11" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span><b>Permissible-purpose aware</b> — sensitive agents gate by declared use case.</span></li>
-            <li><svg viewBox="0 0 24 24" width="18" height="18"><path d="M5 12l4 4 10-11" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span><b>Same answer surface as the chat</b> — prototype in Tellera Chat, ship the code.</span></li>
-          </ul>
-        </div>
-        <div class="dv-code">
-          <div class="dv-code__bar"><span class="dv-code__dot" style="background:#E0574C"></span><span class="dv-code__dot" style="background:#E0B44C"></span><span class="dv-code__dot" style="background:#357A46"></span><span class="dv-code__title">tellera-mcp · ask</span></div>
-          <pre><span class="c-b">$</span> tellera mcp call <span class="c-v">ask</span> \
-    --question <span class="c-g">"Is this VIN's seller the real owner?"</span>
-
-{
-  <span class="c-k">"tool"</span>:      <span class="c-g">"ask"</span>,
-  <span class="c-k">"routed"</span>:    [<span class="c-g">"vehicle"</span>, <span class="c-g">"people"</span>],
-  <span class="c-k">"answer"</span>:    <span class="c-g">"Match — title holder = listed seller"</span>,
-  <span class="c-k">"confidence"</span>:<span class="c-g">"high"</span>
-}</pre>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
 <!-- connect -->
 <section class="dv-sec" id="connect">
   <div class="dv-wrap">
@@ -138,12 +103,43 @@
   </div>
 </section>
 
-<!-- agents -->
+<!-- agents + orchestrator -->
 <section class="dv-sec dv-sec--alt" id="agents">
   <div class="dv-wrap">
     <div class="dv-kicker">The catalog</div>
-    <h2 class="dv-h2">Ten specialist agents. One account.</h2>
-    <p class="dv-lede">Call the orchestrator, or hit any agent directly. Each is priced per call, with more on the way.</p>
+    <h2 class="dv-h2">One orchestrator. Ten specialists.</h2>
+    <p class="dv-lede">Start with <b>/v1/ask</b> and let Tellera route your question across the agents below — or call any specialist directly. Same records, same confidence and sources, priced per call.</p>
+
+    <div class="dv-ask" id="ask">
+      <div class="dv-ask__inner">
+        <div>
+          <div class="dv-eyebrow"><span class="m">POST</span> /v1/ask · orchestrator</div>
+          <div class="dv-ask__h">Ask anything — Tellera routes it.</div>
+          <p class="dv-ask__d">One endpoint that picks the right specialists below, cross-checks the record, and returns a single synthesized, cited answer. Integrate once and get everything — or drop down to a specific agent when you want to.</p>
+          <ul class="dv-ask__list">
+            <li><svg viewBox="0 0 24 24" width="18" height="18"><path d="M5 12l4 4 10-11" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span><b>Confidence + sources on every field</b> — official / partner / vendor tiers you can filter on.</span></li>
+            <li><svg viewBox="0 0 24 24" width="18" height="18"><path d="M5 12l4 4 10-11" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span><b>Permissible-purpose aware</b> — sensitive agents gate by declared use case.</span></li>
+            <li><svg viewBox="0 0 24 24" width="18" height="18"><path d="M5 12l4 4 10-11" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span><b>Prototype in Tellera Chat, ship the code</b> — the same answer surface as the API.</span></li>
+          </ul>
+          <div class="dv-hero__cta" style="margin-top:18px;"><a class="dv-btn dv-btn--prism" href="/portal">Try the /ask playground</a><a class="dv-btn dv-btn--ghost" href="#connect">See the docs</a></div>
+        </div>
+        <div class="dv-code">
+          <div class="dv-code__bar"><span class="dv-code__dot" style="background:#E0574C"></span><span class="dv-code__dot" style="background:#E0B44C"></span><span class="dv-code__dot" style="background:#357A46"></span><span class="dv-code__title">tellera-mcp · ask</span></div>
+          <pre><span class="c-b">$</span> tellera mcp call <span class="c-v">ask</span> \
+    --question <span class="c-g">"Is this VIN's seller the real owner?"</span>
+
+{
+  <span class="c-k">"tool"</span>:      <span class="c-g">"ask"</span>,
+  <span class="c-k">"routed"</span>:    [<span class="c-g">"vehicle"</span>, <span class="c-g">"people"</span>],
+  <span class="c-k">"answer"</span>:    <span class="c-g">"Match — title holder = listed seller"</span>,
+  <span class="c-k">"confidence"</span>:<span class="c-g">"high"</span>
+}</pre>
+        </div>
+      </div>
+    </div>
+
+    <div class="dv-catdiv"><span></span>Or call a specialist directly<span></span></div>
+
     <div class="dv-agents" id="dvAgents"></div>
   </div>
 </section>

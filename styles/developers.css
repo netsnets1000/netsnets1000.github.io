@@ -82,8 +82,12 @@
 .dv-opt__code{margin-top:14px;background:#14161B;border-radius:9px;padding:11px 13px;font-family:var(--font-mono);font-size:12px;color:#C7CCDA;overflow-x:auto;white-space:nowrap;}
 .dv-opt__code .c-b{color:#2E7BFF;}.dv-opt__code .c-g{color:#6FCF97;}
 
+/* orchestrator -> specialists divider */
+.dv-catdiv{display:flex;align-items:center;gap:14px;margin:30px 0 2px;font-family:var(--font-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted-2);}
+.dv-catdiv span{height:1px;flex:1;background:var(--bd-inner);}
+
 /* agents grid */
-.dv-agents{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:36px;}
+.dv-agents{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:20px;}
 .dv-agent{background:#fff;border:1px solid var(--bd-card);border-radius:13px;padding:16px 18px;display:flex;flex-direction:column;transition:box-shadow .18s var(--ease),transform .18s var(--ease);}
 .dv-agent:hover{box-shadow:0 16px 38px -22px rgba(20,22,27,.28);transform:translateY(-2px);}
 .dv-agent__top{display:flex;align-items:center;gap:11px;}
