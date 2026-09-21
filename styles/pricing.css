@@ -1,0 +1,53 @@
+/* Tellera — Pricing page. Loads on top of developers.css (reuses nav/btn/sec/footer/cta/auth). */
+.pr-toggle{display:inline-flex;background:#fff;border:1px solid var(--bd-card);border-radius:10px;padding:3px;gap:2px;margin-top:24px;}
+.pr-toggle button{border:none;background:transparent;font-size:13.5px;font-weight:700;color:var(--ink-3);border-radius:8px;padding:9px 16px;cursor:pointer;}
+.pr-toggle button.active{background:#14161B;color:#fff;}
+
+.pr-plans{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-top:22px;}
+.pr-plan{background:#fff;border:1px solid var(--bd-card);border-radius:16px;padding:20px 18px;display:flex;flex-direction:column;position:relative;}
+.pr-plan--pop{border-color:var(--blue);box-shadow:0 0 0 1px var(--blue) inset;}
+.pr-plan__badge{position:absolute;top:-10px;left:18px;font-size:10px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:#fff;background:linear-gradient(135deg,#2E7BFF,#7B5BFF);border-radius:999px;padding:4px 11px;}
+.pr-plan__name{font-size:14px;font-weight:700;}
+.pr-plan__price{font-family:var(--font-display);font-size:32px;font-weight:700;margin-top:8px;line-height:1;}
+.pr-plan__price span{font-family:var(--font-body);font-size:13px;font-weight:600;color:var(--muted);}
+.pr-plan__monnote{font-size:11.5px;color:var(--violet-ink);font-weight:700;margin-top:4px;}
+.pr-plan__monnote--muted{color:var(--muted);font-weight:600;}
+.pr-plan__calls{font-size:12.5px;font-weight:700;margin-top:10px;}
+.pr-plan__over{font-size:11.5px;color:var(--muted);margin-top:2px;}
+.pr-plan__feats{list-style:none;margin:14px 0 0;padding:14px 0 0;border-top:1px solid var(--bd-rule);display:flex;flex-direction:column;gap:8px;flex:1;}
+.pr-plan__feats li{display:flex;gap:8px;font-size:12.5px;color:var(--ink-2);line-height:1.4;}
+.pr-plan__feats li svg{flex:0 0 auto;margin-top:2px;color:#357A46;width:14px;height:14px;}
+.pr-plan__feats li.mon{color:var(--violet-ink);font-weight:700;}
+.pr-plan__feats li.mon svg{color:var(--violet-ink);}
+.pr-plan__cta{margin-top:16px;text-align:center;border:none;border-radius:9px;padding:10px;font-size:13.5px;font-weight:700;background:linear-gradient(135deg,#2E7BFF,#7B5BFF);color:#fff;cursor:pointer;display:block;}
+.pr-plan__cta--ghost{background:#fff;border:1px solid var(--bd-card);color:#14161B;}
+.pr-plan__cta--ghost:hover{background:var(--panel);}
+
+/* per-endpoint table */
+.pr-eptable{width:100%;border-collapse:collapse;margin-top:24px;background:#fff;border:1px solid var(--bd-card);border-radius:14px;overflow:hidden;}
+.pr-eptable th{text-align:left;font-family:var(--font-mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted-2);padding:14px 18px;border-bottom:1px solid var(--bd-rule);font-weight:600;}
+.pr-eptable td{padding:14px 18px;border-bottom:1px solid var(--bd-rule);font-size:14px;color:var(--ink-2);}
+.pr-eptable tr:last-child td{border-bottom:none;}
+.pr-eptable td.r,.pr-eptable th.r{text-align:right;}
+.pr-agent{display:flex;align-items:center;gap:10px;font-weight:700;color:var(--ink);}
+.pr-agent__ic{width:28px;height:28px;border-radius:7px;background:var(--panel);border:1px solid var(--bd-inner);display:flex;align-items:center;justify-content:center;overflow:hidden;flex:0 0 auto;}
+.pr-agent__ic img{width:18px;height:18px;object-fit:contain;}
+.pr-agent__ic svg{width:18px;height:18px;}
+.pr-epname{font-family:var(--font-mono);font-size:12.5px;color:var(--muted);}
+.pr-price{font-family:var(--font-mono);font-weight:700;color:var(--ink);}
+
+/* add-ons */
+.pr-addons{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:24px;}
+.pr-addon{background:#fff;border:1px solid var(--bd-card);border-radius:14px;padding:22px 24px;}
+.pr-addon__t{font-family:var(--font-display);font-size:20px;font-weight:700;}
+.pr-addon__d{font-size:14px;line-height:1.6;color:var(--ink-2);margin-top:8px;}
+.pr-addon__p{font-size:13px;color:var(--muted);margin-top:12px;}
+.pr-addon__p b{color:var(--ink);}
+
+/* faq */
+.pr-faq{display:grid;grid-template-columns:1fr 1fr;gap:20px 40px;margin-top:24px;}
+.pr-faq__q{font-size:16px;font-weight:700;}
+.pr-faq__a{font-size:14px;line-height:1.6;color:var(--ink-2);margin-top:6px;}
+
+@media (max-width:1000px){.pr-plans{grid-template-columns:1fr 1fr 1fr;}.pr-addons,.pr-faq{grid-template-columns:1fr;}}
+@media (max-width:600px){.pr-plans{grid-template-columns:1fr;}}

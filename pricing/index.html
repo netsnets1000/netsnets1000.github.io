@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tellera Pricing — API &amp; MCP</title>
+<meta name="description" content="Tellera developer pricing: start free, subscribe for included calls with overage, top up credits, and add monitoring. Per-endpoint pricing $0.01–$0.06 per call.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,600&family=Spectral:ital,wght@0,300;0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/styles/tokens.css">
+<link rel="stylesheet" href="/styles/developers.css">
+<link rel="stylesheet" href="/styles/pricing.css">
+</head>
+<body class="dv-body">
+
+<!-- nav -->
+<header class="dv-nav">
+  <div class="dv-nav__inner">
+    <a href="/" aria-label="Tellera home" style="display:flex;align-items:center;gap:10px;"><img src="/assets/tellera-wordmark-dark.svg" alt="Tellera" class="dv-nav__word"></a>
+    <span class="dv-nav__tag">Developers</span>
+    <nav class="dv-nav__links">
+      <a href="/developers#agents">Agents</a><a href="/developers#connect">MCP &amp; API</a><a href="/pricing" style="color:#14161B;">Pricing</a><a href="#">Docs</a>
+    </nav>
+    <div class="dv-nav__cta">
+      <a class="dv-nav__signin" href="/portal" data-auth="signin">Sign in</a>
+      <a class="dv-btn dv-btn--prism" href="/portal" data-auth="signup">Get API key</a>
+    </div>
+    <button class="dv-burger" id="prBurger" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+</header>
+
+<!-- hero + toggle -->
+<section class="dv-sec" style="padding:64px 0 36px;text-align:center;">
+  <div class="dv-wrap">
+    <div class="dv-kicker" style="color:var(--blue);">Pricing</div>
+    <h2 class="dv-h2" style="max-width:760px;margin:10px auto 0;">Start free. Pay for what you call.</h2>
+    <p class="dv-lede" style="margin:14px auto 0;">Subscribe for included calls with overage as you grow, top up credits any time, and add monitoring when you need it. No per-provider accounts to manage.</p>
+    <div class="pr-toggle" id="prToggle"><button class="active" data-mon="0">Without monitoring</button><button data-mon="1">With monitoring add-on</button></div>
+  </div>
+</section>
+
+<!-- plans -->
+<section class="dv-sec" style="padding-top:0;"><div class="dv-wrap"><div class="pr-plans" id="prPlans"></div></div></section>
+
+<!-- per-endpoint -->
+<section class="dv-sec dv-sec--alt">
+  <div class="dv-wrap">
+    <div class="dv-kicker">Per-call pricing</div>
+    <h2 class="dv-h2">Every endpoint, priced by call.</h2>
+    <p class="dv-lede">Call the orchestrator and it bills for the specialists it routes to, or hit an agent directly. Included calls draw from your plan first, then overage or credits.</p>
+    <table class="pr-eptable"><thead><tr><th>Agent</th><th>Primary endpoint</th><th>What it does</th><th class="r">Per call</th></tr></thead><tbody id="prEndpoints"></tbody></table>
+  </div>
+</section>
+
+<!-- add-ons -->
+<section class="dv-sec">
+  <div class="dv-wrap">
+    <div class="dv-kicker">Add-ons</div>
+    <h2 class="dv-h2">Credits &amp; monitoring.</h2>
+    <div class="pr-addons">
+      <div class="pr-addon">
+        <div class="pr-addon__t">Credits — one-off top-ups</div>
+        <div class="pr-addon__d">Top up a prepaid balance any time. 1 credit = $1.00. Credits cover overage and pay-per-call usage, and they never expire — no monthly commitment required.</div>
+        <div class="pr-addon__p">From <b>$25</b>, added instantly in the portal.</div>
+      </div>
+      <div class="pr-addon">
+        <div class="pr-addon__t">Monitoring — standing watches</div>
+        <div class="pr-addon__d">Watch a record and get a webhook or email the moment it changes — ownership, title, filings, and more. Each plan includes a set of active monitors and a check cadence; re-checks bill at the agent's per-call rate.</div>
+        <div class="pr-addon__p">Add-on from <b>$20/mo</b> · included with Enterprise.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- faq -->
+<section class="dv-sec dv-sec--alt">
+  <div class="dv-wrap">
+    <div class="dv-kicker">FAQ</div>
+    <h2 class="dv-h2">Questions, answered.</h2>
+    <div class="pr-faq">
+      <div><div class="pr-faq__q">Is there a free tier?</div><div class="pr-faq__a">Yes — the Sandbox plan is free with 100 test calls a month and sandbox API keys. No card required to start.</div></div>
+      <div><div class="pr-faq__q">How does overage work?</div><div class="pr-faq__a">If you exceed your monthly included calls, extra calls bill at your plan's overage rate. Set spending caps and low-balance alerts in the portal.</div></div>
+      <div><div class="pr-faq__q">Can I pay per call instead of subscribing?</div><div class="pr-faq__a">Yes. Top up a credit balance and pay per call at the endpoint rate, with no monthly commitment.</div></div>
+      <div><div class="pr-faq__q">What does an endpoint cost?</div><div class="pr-faq__a">$0.01–$0.06 per call depending on the agent. The orchestrator (<b>/ask</b>) bills for the specialists it routes to on your behalf.</div></div>
+      <div><div class="pr-faq__q">Do you gate sensitive data?</div><div class="pr-faq__a">Court and people endpoints are permissible-purpose gated — you declare your use case per key, and we keep an audit trail.</div></div>
+      <div><div class="pr-faq__q">Can I cancel anytime?</div><div class="pr-faq__a">Yes. You keep access through the current period, then move to the free Sandbox tier — your keys and history stay intact.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- cta -->
+<section class="dv-sec"><div class="dv-wrap">
+  <div class="dv-ctaband">
+    <div class="dv-ctaband__h">Start with a free sandbox key.</div>
+    <div class="dv-ctaband__d">No card required. Upgrade when you're ready to ship.</div>
+    <div class="dv-ctaband__cta"><a class="dv-btn dv-btn--lg" href="/portal" data-auth="signup">Get a free API key</a><a class="dv-btn dv-btn--out dv-btn--lg" href="/deep-search">Try it in Tellera Chat</a><a class="dv-btn dv-btn--out dv-btn--lg" href="#">Talk to sales</a></div>
+  </div>
+</div></section>
+
+<!-- footer -->
+<footer class="dv-footer">
+  <div class="dv-wrap">
+    <div class="dv-footer__grid">
+      <div>
+        <img src="/assets/tellera-wordmark-light.svg" alt="Tellera" class="dv-footer__word">
+        <div class="dv-footer__tag">the AI for what AI doesn't tell you — real answers, proven sources, your control.</div>
+      </div>
+      <div class="dv-footer__col"><div class="dv-footer__h">Platform</div><a href="/developers#agents">Agents</a><a href="/developers#connect">MCP server</a><a href="/pricing">Pricing</a><a href="#">Docs</a></div>
+      <div class="dv-footer__col"><div class="dv-footer__h">Product</div><a href="/">Homepage</a><a href="/deep-search">Tellera Chat</a><a href="/portal">Developer portal</a><a href="#">Status</a></div>
+      <div class="dv-footer__col"><div class="dv-footer__h">Company</div><a href="#">About</a><a href="#">Trust Center</a><a href="#">Contact sales</a><a href="#">Careers</a></div>
+    </div>
+    <div class="dv-footer__base">
+      <span>© 2026 Tellera, Inc.</span>
+      <span class="sep">·</span><a href="#">Privacy</a>
+      <span class="sep">·</span><a href="#">Do not sell or share my info</a>
+      <span class="sep">·</span><a href="#">Opt out / Remove my info</a>
+      <span class="sep">·</span><a href="#">Terms</a>
+      <span class="sep">·</span><span>Tellera is not a consumer reporting agency under the FCRA.</span>
+    </div>
+  </div>
+</footer>
+
+<div class="dv-mm" id="prMenu" hidden>
+  <a href="/developers#agents">Agents</a><a href="/developers#connect">MCP &amp; API</a><a href="/pricing">Pricing</a><a href="#">Docs</a>
+  <a href="/portal" data-auth="signin">Sign in</a><a class="g" href="/portal" data-auth="signup">Get API key</a>
+</div>
+
+<script src="/js/connectors.js"></script>
+<script src="/js/pricing.js"></script>
+<script src="/js/auth.js"></script>
+</body>
+</html>

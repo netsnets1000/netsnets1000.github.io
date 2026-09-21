@@ -57,7 +57,7 @@
   /* mobile menu */
   var burger = $('#dvBurger'), menu = $('#dvMenu');
   if (burger && menu) {
-    menu.innerHTML = '<a href="#agents">Agents</a><a href="#connect">MCP &amp; API</a><a href="#pricing">Pricing</a><a href="#">Docs</a><a href="/portal">Sign in</a><a class="g" href="/portal">Get API key</a>';
+    menu.innerHTML = '<a href="#agents">Agents</a><a href="#connect">MCP &amp; API</a><a href="/pricing">Pricing</a><a href="#">Docs</a><a href="/portal" data-auth="signin">Sign in</a><a class="g" href="/portal" data-auth="signup">Get API key</a>';
     menu.hidden = false;
     var open = false;
     burger.addEventListener('click', function () { open = !open; menu.classList.toggle('show', open); });

@@ -21,11 +21,11 @@
     <a href="/" aria-label="Tellera home" style="display:flex;align-items:center;gap:10px;"><img src="/assets/tellera-wordmark-dark.svg" alt="Tellera" class="dv-nav__word"></a>
     <span class="dv-nav__tag">Developers</span>
     <nav class="dv-nav__links">
-      <a href="#agents">Agents</a><a href="#connect">MCP &amp; API</a><a href="#pricing">Pricing</a><a href="#">Docs</a>
+      <a href="#agents">Agents</a><a href="#connect">MCP &amp; API</a><a href="/pricing">Pricing</a><a href="#">Docs</a>
     </nav>
     <div class="dv-nav__cta">
-      <a class="dv-nav__signin" href="/portal">Sign in</a>
-      <a class="dv-btn dv-btn--prism" href="/portal">Get API key</a>
+      <a class="dv-nav__signin" href="/portal" data-auth="signin">Sign in</a>
+      <a class="dv-btn dv-btn--prism" href="/portal" data-auth="signup">Get API key</a>
     </div>
     <button class="dv-burger" id="dvBurger" aria-label="Menu"><span></span><span></span><span></span></button>
   </div>
@@ -50,7 +50,7 @@
       <h1 class="dv-hero__h1">Give your agents the records <em>other AIs can't reach.</em></h1>
       <p class="dv-hero__sub">Real answers about people, property, vehicles, businesses, and court records — from licensed public records, with confidence and sources. One REST API, a native MCP server, priced per call.</p>
       <div class="dv-hero__cta">
-        <a class="dv-btn dv-btn--prism dv-btn--lg" href="/portal">Get a free API key</a>
+        <a class="dv-btn dv-btn--prism dv-btn--lg" href="/portal" data-auth="signup">Get a free API key</a>
         <a class="dv-btn dv-btn--ghost dv-btn--lg" href="#connect">Read the docs</a>
       </div>
       <div class="dv-hero__meta"><span>REST &amp; GraphQL</span><span>MCP server</span><span>Webhooks</span><span>Sandbox keys</span><span>SOC 2</span></div>
@@ -164,17 +164,6 @@
   </div>
 </section>
 
-<!-- pricing -->
-<section class="dv-sec" id="pricing">
-  <div class="dv-wrap">
-    <div class="dv-kicker">Pricing</div>
-    <h2 class="dv-h2">Start free. Pay for what you call.</h2>
-    <p class="dv-lede">Subscribe for included calls with overage as you grow, top up credits any time, or add monitoring. No per-provider accounts to manage.</p>
-    <div class="dv-price" id="dvPricing"></div>
-    <p class="dv-price__note">Per-endpoint pricing runs $0.01–$0.06 per call by agent. Monitoring add-on from $20/mo. <a href="/portal" style="color:var(--blue);font-weight:700;">See full pricing in the portal →</a></p>
-  </div>
-</section>
-
 <!-- split -->
 <section class="dv-sec dv-sec--alt">
   <div class="dv-wrap">
@@ -202,7 +191,7 @@
   <div class="dv-ctaband">
     <div class="dv-ctaband__h">Build with real-world truth.</div>
     <div class="dv-ctaband__d">Free sandbox key in two minutes. No card required to start.</div>
-    <div class="dv-ctaband__cta"><a class="dv-btn dv-btn--lg" href="/portal">Get a free API key</a><a class="dv-btn dv-btn--out dv-btn--lg" href="/deep-search">Try it in Tellera Chat</a><a class="dv-btn dv-btn--out dv-btn--lg" href="#">Talk to sales</a></div>
+    <div class="dv-ctaband__cta"><a class="dv-btn dv-btn--lg" href="/portal" data-auth="signup">Get a free API key</a><a class="dv-btn dv-btn--out dv-btn--lg" href="/deep-search">Try it in Tellera Chat</a><a class="dv-btn dv-btn--out dv-btn--lg" href="#">Talk to sales</a></div>
   </div>
 </div></section>
 
@@ -214,7 +203,7 @@
         <img src="/assets/tellera-wordmark-light.svg" alt="Tellera" class="dv-footer__word">
         <div class="dv-footer__tag">the AI for what AI doesn't tell you — real answers, proven sources, your control.</div>
       </div>
-      <div class="dv-footer__col"><div class="dv-footer__h">Platform</div><a href="#agents">Agents</a><a href="#ask">/ask API</a><a href="#connect">MCP server</a><a href="#pricing">Pricing</a><a href="#">Docs</a></div>
+      <div class="dv-footer__col"><div class="dv-footer__h">Platform</div><a href="#agents">Agents</a><a href="#ask">/ask API</a><a href="#connect">MCP server</a><a href="/pricing">Pricing</a><a href="#">Docs</a></div>
       <div class="dv-footer__col"><div class="dv-footer__h">Product</div><a href="/">Homepage</a><a href="/deep-search">Tellera Chat</a><a href="/portal">Developer portal</a><a href="#">Status</a></div>
       <div class="dv-footer__col"><div class="dv-footer__h">Company</div><a href="#">About</a><a href="#">Trust Center</a><a href="#">Contact sales</a><a href="#">Careers</a></div>
     </div>
@@ -233,5 +222,6 @@
 
 <script src="/js/connectors.js"></script>
 <script src="/js/developers.js"></script>
+<script src="/js/auth.js"></script>
 </body>
 </html>
