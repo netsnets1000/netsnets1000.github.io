@@ -92,15 +92,19 @@ window.TELLERA_API = (function () {
   ];
 
   var PLANS = [
-    { name: 'Sandbox', price: '$0', cadence: 'free', calls: '100 test calls / mo', overage: 'Sandbox only', badge: 'Free', cta: 'Start free', current: false,
+    { name: 'Sandbox', price: '$0', cadence: 'free', calls: '100 test calls / mo', overage: 'Sandbox only', badge: 'Free', cta: 'Start free', current: false, mon: null,
       features: ['All endpoints in sandbox', 'Sandbox API keys', 'MCP · REST · SDK', 'Community support'] },
     { name: 'Starter', price: '$49', cadence: '/mo', calls: '2,500 calls / mo', overage: '$0.03 / call over', cta: 'Choose Starter', current: false,
+      mon: { add: 20, count: '25 active monitors', cadence: 'Daily checks' },
       features: ['Live API keys', 'All agents', 'REST · GraphQL · MCP', 'Email support'] },
     { name: 'Pro', price: '$199', cadence: '/mo', calls: '15,000 calls / mo', overage: '$0.02 / call over', badge: 'Popular', cta: 'Current plan', current: true,
+      mon: { add: 49, count: '250 active monitors', cadence: 'Hourly checks' },
       features: ['Everything in Starter', 'Higher rate limits', 'Webhooks + logs export', 'Priority support'] },
     { name: 'Scale', price: '$749', cadence: '/mo', calls: '75,000 calls / mo', overage: '$0.015 / call over', cta: 'Choose Scale', current: false,
+      mon: { add: 149, count: '2,500 active monitors', cadence: 'Real-time checks' },
       features: ['Everything in Pro', 'Multi-seat + roles', 'SSO', 'SLA + dedicated support'] },
     { name: 'Enterprise', price: 'Custom', cadence: '', calls: 'Custom volume + terms', overage: 'Volume pricing', cta: 'Contact sales', current: false,
+      mon: { add: 'custom', count: 'Portfolio monitoring', cadence: 'Real-time + SLA' },
       features: ['On-prem / BAA options', 'Custom SLAs', 'Permissible-purpose review', 'Solutions engineer'] }
   ];
 

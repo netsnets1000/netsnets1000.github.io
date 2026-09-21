@@ -183,14 +183,29 @@
 
   /* ---------- plans ---------- */
   var checkSvg = '<svg viewBox="0 0 24 24" width="15" height="15"><path d="M5 12l4 4 10-11" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+  var plansWithMon = false;
   function renderPlans() {
     $('#pfPlans').innerHTML = T.PLANS.map(function (p) {
       var badge = p.badge ? '<span class="pf-plan__badge">' + esc(p.badge) + '</span>' : '';
+      var price = p.price, monNote = '', monFeat = '';
+      if (plansWithMon) {
+        if (p.mon && p.mon.add === 'custom') {
+          monNote = '<div class="pf-plan__monnote">Monitoring included</div>';
+          monFeat = '<li class="mon">' + checkSvg + '<span>Monitoring — ' + esc(p.mon.count) + ' · ' + esc(p.mon.cadence) + '</span></li>';
+        } else if (p.mon) {
+          var base = parseFloat(p.price.replace(/[^0-9.]/g, '')) || 0;
+          price = '$' + (base + p.mon.add);
+          monNote = '<div class="pf-plan__monnote">includes +$' + p.mon.add + '/mo monitoring</div>';
+          monFeat = '<li class="mon">' + checkSvg + '<span>Monitoring — ' + esc(p.mon.count) + ' · ' + esc(p.mon.cadence) + '</span></li>';
+        } else {
+          monNote = '<div class="pf-plan__monnote pf-plan__monnote--muted">Monitoring on Starter+</div>';
+        }
+      }
       return '<div class="pf-plan' + (p.current ? ' pf-plan--current' : '') + '">' + badge +
         '<div class="pf-plan__name">' + esc(p.name) + '</div>' +
-        '<div class="pf-plan__price">' + esc(p.price) + '<span>' + esc(p.cadence) + '</span></div>' +
+        '<div class="pf-plan__price">' + esc(price) + '<span>' + esc(p.cadence) + '</span></div>' + monNote +
         '<div class="pf-plan__calls">' + esc(p.calls) + '</div><div class="pf-plan__over">' + esc(p.overage) + '</div>' +
-        '<ul class="pf-plan__feats">' + p.features.map(function (f) { return '<li>' + checkSvg + '<span>' + esc(f) + '</span></li>'; }).join('') + '</ul>' +
+        '<ul class="pf-plan__feats">' + monFeat + p.features.map(function (f) { return '<li>' + checkSvg + '<span>' + esc(f) + '</span></li>'; }).join('') + '</ul>' +
         '<button class="pf-btn ' + (p.current ? 'pf-btn--ghost' : 'pf-btn--prism') + ' pf-plan__cta" data-plan="' + esc(p.name) + '"' + (p.current ? ' disabled style="opacity:.6"' : '') + '>' + esc(p.cta) + '</button></div>';
     }).join('');
     $$('#pfPlans .pf-plan__cta').forEach(function (b) {
@@ -403,6 +418,14 @@
   if (creditModal) creditModal.addEventListener('click', function (e) { if (e.target === creditModal) creditModal.classList.remove('open'); });
 
   renderMonitors(); initPlayground();
+
+  var planToggle = $('#pfPlanToggle');
+  if (planToggle) planToggle.addEventListener('click', function (e) {
+    var b = e.target.closest('button'); if (!b) return;
+    plansWithMon = b.getAttribute('data-mon') === '1';
+    planToggle.querySelectorAll('button').forEach(function (x) { x.classList.toggle('active', x === b); });
+    renderPlans();
+  });
 
   var askView = $('#pfAskView'); if (askView) askView.addEventListener('click', function () { openEndpoint('ask'); });
   document.addEventListener('click', function (e) { var b = e.target.closest('[data-slug-open]'); if (b) openEndpoint(b.getAttribute('data-slug-open')); });
