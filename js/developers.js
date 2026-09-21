@@ -6,16 +6,30 @@
   var esc = function (s) { return String(s).replace(/[&<>"]/g, function (c) { return ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]; }); };
   function icon(a) { if (a.iconSvg) return a.iconSvg; if (a.icon) return '<img src="' + a.icon + '" alt="">'; return ''; }
 
+  var chatSvg = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8 8 0 0 1-11.5 7.2L4 20l1.1-4A8 8 0 1 1 21 12z"/></svg>';
+
+  /* try-in-chat chip strip */
+  var TRY = [
+    'Who owns 13 Roland Dr, White Plains NY?',
+    "Who's calling from (512) 555-0142?",
+    'Is VIN 1FTFW1E5… salvage or clean?',
+    'Any court filings for M. Decker in Travis County?',
+    'Latest news on Ramp'
+  ];
+  var tryEl = $('#dvTryChips');
+  if (tryEl) tryEl.innerHTML = TRY.map(function (q) { return '<a class="dv-trychip" href="/deep-search?q=' + encodeURIComponent(q) + '">' + chatSvg + esc(q) + '</a>'; }).join('');
+
   /* agents catalog */
   var agentsEl = $('#dvAgents');
   if (agentsEl && T) {
     var cards = T.AGENTS.map(function (a) {
       var badge = a.badge ? '<span class="dv-agent__badge dv-agent__badge--new">' + esc(a.badge) + '</span>' : '';
-      return '<a class="dv-agent" href="/portal">' +
+      var q = (a.prompts && a.prompts[0]) || '';
+      return '<div class="dv-agent">' +
         '<div class="dv-agent__top"><span class="dv-agent__ic">' + icon(a) + '</span>' +
-        '<div style="min-width:0"><div class="dv-agent__name">' + esc(a.app) + '</div><div class="dv-agent__ep">' + esc(a.endpoints[0].name) + '</div></div>' + badge + '</div>' +
+        '<div style="min-width:0"><div class="dv-agent__name">' + esc(a.app) + '</div><div class="dv-agent__ep">' + esc(a.endpoints[0].name) + ' · from $' + a.price.toFixed(2) + '</div></div>' + badge + '</div>' +
         '<div class="dv-agent__desc">' + esc(a.desc) + '</div>' +
-        '<div class="dv-agent__foot"><span class="dv-agent__price">from <b>$' + a.price.toFixed(2) + '</b>/call</span><span class="dv-agent__price" style="color:var(--blue);font-weight:700">View →</span></div></a>';
+        '<div class="dv-agent__foot"><a class="dv-agent__try" href="/deep-search?q=' + encodeURIComponent(q) + '">' + chatSvg + 'Try in chat</a><a class="dv-agent__view" href="/portal">View API →</a></div></div>';
     }).join('');
     var soon = T.COMING.map(function (c) {
       return '<div class="dv-agent" style="opacity:.72">' +
