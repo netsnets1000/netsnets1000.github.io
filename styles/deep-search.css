@@ -97,7 +97,8 @@
   border-radius:999px;padding:9px 16px;cursor:pointer;font-family:var(--font-body);
   transition:background .15s var(--ease),border-color .15s var(--ease),box-shadow .15s var(--ease);}
 .ds-pill:hover{background:var(--panel);border-color:#B7C3D4;box-shadow:0 8px 20px -14px rgba(20,22,27,.35);}
-.ds-pill__ic{width:20px;height:20px;flex:0 0 auto;display:inline-flex;align-items:center;justify-content:center;}
+.ds-pill__ic{height:24px;flex:0 0 auto;display:inline-flex;align-items:center;justify-content:center;}
+.ds-pill__img{height:24px;width:auto;display:block;}
 .ds-pill__label{font-size:14px;font-weight:600;color:var(--ink);white-space:nowrap;}
 
 .ds-disclaimer{padding:24px 40px 34px;}
