@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tellera for Developers — Real-world records by API &amp; MCP</title>
+<meta name="description" content="Give your app or AI agent trusted, source-backed answers about people, property, vehicles, businesses and more — one API and a native MCP server, priced per call.">
+<meta property="og:title" content="Tellera for Developers — API &amp; MCP">
+<meta property="og:description" content="Real-world records by API and MCP. One /ask endpoint, 10 specialist agents, cited answers with confidence.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,600&family=Spectral:ital,wght@0,300;0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/styles/tokens.css">
+<link rel="stylesheet" href="/styles/developers.css">
+</head>
+<body class="dv-body">
+
+<!-- nav -->
+<header class="dv-nav">
+  <div class="dv-nav__inner">
+    <a href="/" aria-label="Tellera home" style="display:flex;align-items:center;gap:10px;"><img src="/assets/tellera-wordmark-dark.svg" alt="Tellera" class="dv-nav__word"></a>
+    <span class="dv-nav__tag">Developers</span>
+    <nav class="dv-nav__links">
+      <a href="#agents">Agents</a><a href="#connect">MCP &amp; API</a><a href="#pricing">Pricing</a><a href="#">Docs</a>
+    </nav>
+    <div class="dv-nav__cta">
+      <a class="dv-nav__signin" href="/portal">Sign in</a>
+      <a class="dv-btn dv-btn--prism" href="/portal">Get API key</a>
+    </div>
+    <button class="dv-burger" id="dvBurger" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+</header>
+
+<!-- hero -->
+<section class="dv-hero">
+  <svg class="dv-hero__rays" viewBox="0 0 1200 520" preserveAspectRatio="none" aria-hidden="true">
+    <g stroke-width="1.4" fill="none" stroke-linecap="round">
+      <line x1="600" y1="10" x2="80" y2="512" stroke="#2E7BFF" stroke-opacity="0.5"/>
+      <line x1="600" y1="10" x2="260" y2="512" stroke="#4C6BFF" stroke-opacity="0.45"/>
+      <line x1="600" y1="10" x2="440" y2="512" stroke="#6B5BFF" stroke-opacity="0.4"/>
+      <line x1="600" y1="10" x2="600" y2="512" stroke="#7B5BFF" stroke-opacity="0.4"/>
+      <line x1="600" y1="10" x2="760" y2="512" stroke="#9B57E6" stroke-opacity="0.4"/>
+      <line x1="600" y1="10" x2="940" y2="512" stroke="#B0553F" stroke-opacity="0.36"/>
+      <line x1="600" y1="10" x2="1120" y2="512" stroke="#C0483A" stroke-opacity="0.32"/>
+    </g>
+  </svg>
+  <div class="dv-wrap dv-hero__inner">
+    <div>
+      <span class="dv-eyebrow">Tellera for developers · API + MCP</span>
+      <h1 class="dv-hero__h1">Give your agents the records <em>other AIs can't reach.</em></h1>
+      <p class="dv-hero__sub">Real answers about people, property, vehicles, businesses, and court records — from licensed public records, with confidence and sources. One REST API, a native MCP server, priced per call.</p>
+      <div class="dv-hero__cta">
+        <a class="dv-btn dv-btn--prism dv-btn--lg" href="/portal">Get a free API key</a>
+        <a class="dv-btn dv-btn--ghost dv-btn--lg" href="#connect">Read the docs</a>
+      </div>
+      <div class="dv-hero__meta"><span>REST &amp; GraphQL</span><span>MCP server</span><span>Webhooks</span><span>Sandbox keys</span><span>SOC 2</span></div>
+    </div>
+    <div class="dv-code">
+      <div class="dv-code__bar"><span class="dv-code__dot" style="background:#E0574C"></span><span class="dv-code__dot" style="background:#E0B44C"></span><span class="dv-code__dot" style="background:#357A46"></span><span class="dv-code__title">tellera · /v1/ask</span><img src="/assets/prism-logo-mark.svg" alt="" class="dv-code__mark"></div>
+      <pre><span class="c-b">$</span> curl https://api.tellera.com<span class="c-v">/v1/ask</span> \
+  -H <span class="c-g">"Authorization: Bearer $TELLERA_KEY"</span> \
+  -d <span class="c-g">'{ "question": "Who owns 13 Roland Dr, White Plains NY?" }'</span>
+
+<span class="c-m"># Tellera routes across Property · People · Court</span>
+{
+  <span class="c-k">"answer"</span>:     <span class="c-g">"Harris &amp; Randye Jacobs"</span>,
+  <span class="c-k">"confidence"</span>: <span class="c-g">"high"</span>,
+  <span class="c-k">"sources"</span>: [
+    { <span class="c-k">"name"</span>: <span class="c-g">"Westchester County Clerk"</span>, <span class="c-k">"tier"</span>: <span class="c-g">"official"</span> },
+    { <span class="c-k">"name"</span>: <span class="c-g">"USPS NCOA"</span>,               <span class="c-k">"tier"</span>: <span class="c-g">"official"</span> }
+  ]
+}</pre>
+    </div>
+  </div>
+</section>
+
+<!-- ask orchestrator -->
+<section class="dv-sec dv-sec--alt" id="ask">
+  <div class="dv-wrap">
+    <div class="dv-kicker">One endpoint</div>
+    <h2 class="dv-h2">Ask anything. Tellera routes it.</h2>
+    <p class="dv-lede">Don't wire up ten endpoints. Send a plain-language question to <b>/v1/ask</b> and Tellera's orchestrator picks the right specialists, cross-checks the record, and returns one synthesized answer — the same engine behind Tellera Chat.</p>
+    <div class="dv-ask">
+      <div class="dv-ask__inner">
+        <div>
+          <div class="dv-eyebrow"><span class="m">POST</span> /v1/ask · orchestrator</div>
+          <div class="dv-ask__h">The answer, not a pile of endpoints.</div>
+          <p class="dv-ask__d">Integrate once and get everything. Or call individual agents directly when you want to.</p>
+          <ul class="dv-ask__list">
+            <li><svg viewBox="0 0 24 24" width="18" height="18"><path d="M5 12l4 4 10-11" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span><b>Confidence + sources on every field</b> — official / partner / vendor tiers you can filter on.</span></li>
+            <li><svg viewBox="0 0 24 24" width="18" height="18"><path d="M5 12l4 4 10-11" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span><b>Permissible-purpose aware</b> — sensitive agents gate by declared use case.</span></li>
+            <li><svg viewBox="0 0 24 24" width="18" height="18"><path d="M5 12l4 4 10-11" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span><b>Same answer surface as the chat</b> — prototype in Tellera Chat, ship the code.</span></li>
+          </ul>
+        </div>
+        <div class="dv-code">
+          <div class="dv-code__bar"><span class="dv-code__dot" style="background:#E0574C"></span><span class="dv-code__dot" style="background:#E0B44C"></span><span class="dv-code__dot" style="background:#357A46"></span><span class="dv-code__title">tellera-mcp · ask</span></div>
+          <pre><span class="c-b">$</span> tellera mcp call <span class="c-v">ask</span> \
+    --question <span class="c-g">"Is this VIN's seller the real owner?"</span>
+
+{
+  <span class="c-k">"tool"</span>:      <span class="c-g">"ask"</span>,
+  <span class="c-k">"routed"</span>:    [<span class="c-g">"vehicle"</span>, <span class="c-g">"people"</span>],
+  <span class="c-k">"answer"</span>:    <span class="c-g">"Match — title holder = listed seller"</span>,
+  <span class="c-k">"confidence"</span>:<span class="c-g">"high"</span>
+}</pre>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- connect -->
+<section class="dv-sec" id="connect">
+  <div class="dv-wrap">
+    <div class="dv-kicker">Connect in minutes</div>
+    <h2 class="dv-h2">MCP, REST, or SDK — your call.</h2>
+    <p class="dv-lede">Point your chat app, terminal agent, or backend at Tellera. Auth, routing, and billing are handled.</p>
+    <div class="dv-connect">
+      <div class="dv-opt">
+        <span class="dv-opt__ic"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M8 8l-4 4 4 4M16 8l4 4-4 4M13 5l-2 14"/></svg></span>
+        <div class="dv-opt__t">MCP server</div>
+        <div class="dv-opt__d">Add a custom connector in Claude, ChatGPT, or Cursor — your agent picks the right tool.</div>
+        <div class="dv-opt__code"><span class="c-g">https://mcp.tellera.com</span></div>
+      </div>
+      <div class="dv-opt">
+        <span class="dv-opt__ic"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 7l5 5-5 5M12 17h7"/></svg></span>
+        <div class="dv-opt__t">REST API</div>
+        <div class="dv-opt__d">A single call from any backend — JSON in, cited answer out.</div>
+        <div class="dv-opt__code"><span class="c-b">POST</span> <span class="c-g">https://api.tellera.com/v1/ask</span></div>
+      </div>
+      <div class="dv-opt">
+        <span class="dv-opt__ic"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 8l-3 4 3 4M15 8l3 4-3 4"/></svg></span>
+        <div class="dv-opt__t">SDK</div>
+        <div class="dv-opt__d">Typed clients for Node, Python, and Go.</div>
+        <div class="dv-opt__code"><span class="c-b">npm</span> install <span class="c-g">@tellera/sdk</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- agents -->
+<section class="dv-sec dv-sec--alt" id="agents">
+  <div class="dv-wrap">
+    <div class="dv-kicker">The catalog</div>
+    <h2 class="dv-h2">Ten specialist agents. One account.</h2>
+    <p class="dv-lede">Call the orchestrator, or hit any agent directly. Each is priced per call, with more on the way.</p>
+    <div class="dv-agents" id="dvAgents"></div>
+  </div>
+</section>
+
+<!-- why -->
+<section class="dv-sec dv-why">
+  <div class="dv-wrap">
+    <div class="dv-kicker">Why Tellera</div>
+    <h2 class="dv-h2">Not a proxy. The source.</h2>
+    <p class="dv-lede">Tellera owns the data and the agents — so it can do things a marketplace of third-party APIs can't.</p>
+    <div class="dv-why__grid">
+      <div class="dv-feat"><span class="dv-feat__ic"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M12 3l8 4v5c0 5-3.4 8.4-8 9-4.6-.6-8-4-8-9V7z"/><path d="M9 12l2 2 4-4" stroke-linecap="round"/></svg></span><div class="dv-feat__t">Confidence &amp; provenance</div><div class="dv-feat__d">Every field returns a confidence score and a source tier — require official-only when it matters.</div></div>
+      <div class="dv-feat"><span class="dv-feat__ic"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="10" width="16" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg></span><div class="dv-feat__t">Compliant by design</div><div class="dv-feat__d">Permissible-purpose gating per key, jurisdiction-aware opt-out, and audit logs — built in.</div></div>
+      <div class="dv-feat"><span class="dv-feat__ic"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9M13.7 21a2 2 0 0 1-3.4 0"/></svg></span><div class="dv-feat__t">Monitors &amp; webhooks</div><div class="dv-feat__d">Watch a record and get a webhook the moment it changes — ownership, title, filings, and more.</div></div>
+      <div class="dv-feat"><span class="dv-feat__ic"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M12 3l8 4.5v9L12 21l-8-4.5v-9z"/><path d="M4 7.5l8 4.5 8-4.5" stroke-linecap="round"/></svg></span><div class="dv-feat__t">15 years of data</div><div class="dv-feat__d">Built on billions of records and 11 licensed brands — BeenVerified, Bumper, Ownerly, FamFinder +7.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- pricing -->
+<section class="dv-sec" id="pricing">
+  <div class="dv-wrap">
+    <div class="dv-kicker">Pricing</div>
+    <h2 class="dv-h2">Start free. Pay for what you call.</h2>
+    <p class="dv-lede">Subscribe for included calls with overage as you grow, top up credits any time, or add monitoring. No per-provider accounts to manage.</p>
+    <div class="dv-price" id="dvPricing"></div>
+    <p class="dv-price__note">Per-endpoint pricing runs $0.01–$0.06 per call by agent. Monitoring add-on from $20/mo. <a href="/portal" style="color:var(--blue);font-weight:700;">See full pricing in the portal →</a></p>
+  </div>
+</section>
+
+<!-- split -->
+<section class="dv-sec dv-sec--alt">
+  <div class="dv-wrap">
+    <div class="dv-kicker">One engine, two front doors</div>
+    <h2 class="dv-h2">For humans and for agents.</h2>
+    <div class="dv-split">
+      <div class="dv-door">
+        <div class="dv-door__k">For people</div>
+        <div class="dv-door__t">Tellera Chat</div>
+        <div class="dv-door__d">A research assistant anyone can use — ask a question, get a straight answer with sources. The fastest way to see what the API returns.</div>
+        <a class="dv-door__go" href="/deep-search">Open Tellera Chat →</a>
+      </div>
+      <div class="dv-door">
+        <div class="dv-door__k">For developers</div>
+        <div class="dv-door__t">API &amp; MCP</div>
+        <div class="dv-door__d">Drop the same answers into your app, agent, or workflow. Prototype a question in chat, then export the exact API call from the portal playground.</div>
+        <a class="dv-door__go" href="/portal">Open the developer portal →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- cta band -->
+<section class="dv-sec"><div class="dv-wrap">
+  <div class="dv-ctaband">
+    <div class="dv-ctaband__h">Build with real-world truth.</div>
+    <div class="dv-ctaband__d">Free sandbox key in two minutes. No card required to start.</div>
+    <div class="dv-ctaband__cta"><a class="dv-btn dv-btn--lg" href="/portal">Get a free API key</a><a class="dv-btn dv-btn--out dv-btn--lg" href="#">Talk to sales</a></div>
+  </div>
+</div></section>
+
+<!-- footer -->
+<footer class="dv-footer">
+  <div class="dv-wrap">
+    <div class="dv-footer__grid">
+      <div>
+        <img src="/assets/tellera-wordmark-light.svg" alt="Tellera" class="dv-footer__word">
+        <div class="dv-footer__tag">the AI for what AI doesn't tell you — real answers, proven sources, your control.</div>
+      </div>
+      <div class="dv-footer__col"><div class="dv-footer__h">Platform</div><a href="#agents">Agents</a><a href="#ask">/ask API</a><a href="#connect">MCP server</a><a href="#pricing">Pricing</a><a href="#">Docs</a></div>
+      <div class="dv-footer__col"><div class="dv-footer__h">Product</div><a href="/">Homepage</a><a href="/deep-search">Tellera Chat</a><a href="/portal">Developer portal</a><a href="#">Status</a></div>
+      <div class="dv-footer__col"><div class="dv-footer__h">Company</div><a href="#">About</a><a href="#">Trust Center</a><a href="#">Contact sales</a><a href="#">Careers</a></div>
+    </div>
+    <div class="dv-footer__base">
+      <span>© 2026 Tellera, Inc.</span>
+      <span class="sep">·</span><a href="#">Privacy</a>
+      <span class="sep">·</span><a href="#">Do not sell or share my info</a>
+      <span class="sep">·</span><a href="#">Opt out / Remove my info</a>
+      <span class="sep">·</span><a href="#">Terms</a>
+      <span class="sep">·</span><span>Tellera is not a consumer reporting agency under the FCRA.</span>
+    </div>
+  </div>
+</footer>
+
+<div class="dv-mm" id="dvMenu" hidden></div>
+
+<script src="/js/connectors.js"></script>
+<script src="/js/developers.js"></script>
+</body>
+</html>
