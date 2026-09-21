@@ -22,7 +22,7 @@
     var side = $('#pfSide'); if (side) side.classList.remove('open');
   }
   document.addEventListener('click', function (e) {
-    var el = e.target.closest('[data-view]'); if (!el) return;
+    var el = e.target.closest('button[data-view], a[data-view]'); if (!el) return;
     if (el.tagName === 'A') e.preventDefault();
     showView(el.getAttribute('data-view'));
   });
@@ -37,7 +37,7 @@
     var o = T.OVERVIEW;
     var tiles = [
       { k: 'Requests', v: num(o.requests), sub: 'last 30 days', ic: 'M4 19V5M4 15l4-4 4 3 6-7' },
-      { k: 'Agents used', v: o.agents + ' / 10', sub: 'of your connectors', ic: 'M12 3l8 4.5v9L12 21l-8-4.5v-9z' },
+      { k: 'Agents used', v: o.agents + ' / ' + T.AGENTS.length, sub: 'of your connectors', ic: 'M12 3l8 4.5v9L12 21l-8-4.5v-9z' },
       { k: 'Endpoints used', v: o.endpoints, sub: 'across all agents', ic: 'M5 5h14M5 12h14M5 19h9' },
       { k: 'Plan usage', v: '83%', sub: num(o.planUsed) + ' / ' + num(o.planCalls) + ' calls', ic: 'M4 13h7V4H4zM13 20h7V4h-7z' }
     ];
@@ -84,7 +84,7 @@
       var eps = a.endpoints.map(function (e) {
         return '<div class="pf-ep"><span class="pf-ep__m">' + e.m + '</span><span class="pf-ep__path">' + esc(e.path) + '</span><span class="pf-ep__price">$' + e.price.toFixed(2) + '</span></div>';
       }).join('');
-      return '<div class="pf-conn"><div class="pf-conn__top"><span class="pf-conn__ic">' + agentIcon(a) + '</span>' +
+      return '<div class="pf-conn" data-slug="' + a.slug + '"><div class="pf-conn__top"><span class="pf-conn__ic">' + agentIcon(a) + '</span>' +
         '<div style="min-width:0"><div class="pf-conn__name">' + esc(a.app) + '</div><div class="pf-conn__cat" style="color:' + bk.color + '">' + esc(bk.label) + '</div></div>' + badge + '</div>' +
         '<div class="pf-conn__desc">' + esc(a.desc) + '</div>' +
         '<div class="pf-conn__eps">' + eps + '</div>' +
@@ -191,8 +191,16 @@
         '<div class="pf-plan__price">' + esc(p.price) + '<span>' + esc(p.cadence) + '</span></div>' +
         '<div class="pf-plan__calls">' + esc(p.calls) + '</div><div class="pf-plan__over">' + esc(p.overage) + '</div>' +
         '<ul class="pf-plan__feats">' + p.features.map(function (f) { return '<li>' + checkSvg + '<span>' + esc(f) + '</span></li>'; }).join('') + '</ul>' +
-        '<button class="pf-btn ' + (p.current ? 'pf-btn--ghost' : 'pf-btn--prism') + ' pf-plan__cta"' + (p.current ? ' disabled style="opacity:.6"' : '') + '>' + esc(p.cta) + '</button></div>';
+        '<button class="pf-btn ' + (p.current ? 'pf-btn--ghost' : 'pf-btn--prism') + ' pf-plan__cta" data-plan="' + esc(p.name) + '"' + (p.current ? ' disabled style="opacity:.6"' : '') + '>' + esc(p.cta) + '</button></div>';
     }).join('');
+    $$('#pfPlans .pf-plan__cta').forEach(function (b) {
+      if (b.disabled) return;
+      b.addEventListener('click', function () {
+        var name = b.getAttribute('data-plan');
+        if (name === 'Enterprise') { showView('support'); return; }
+        openUpgrade(name);
+      });
+    });
   }
 
   /* ---------- integrations ---------- */
@@ -203,6 +211,93 @@
         '<button class="pf-btn pf-btn--ghost">Connect</button></div>';
     }).join('');
   }
+
+  /* ---------- endpoint / agent detail ---------- */
+  function agentBySlug(s) { for (var i = 0; i < T.AGENTS.length; i++) if (T.AGENTS[i].slug === s) return T.AGENTS[i]; return null; }
+  function sampleVal(n) {
+    var m = { name: '"Martin R. Decker"', state: '"TX"', city: '"Austin"', age: '52', address: '"1234 Oakridge Dr, Austin TX"',
+      number: '"(512) 555-0142"', vin: '"1FTFW1E5XKFA00000"', query: '"latest news on Ramp"', person_id: '"prs_8c21f0"',
+      limit: '10', recency: '"week"', county: '"Travis"', type: '"person"' };
+    return m[n] !== undefined ? m[n] : '"…"';
+  }
+  function jsonBody(all) { return all.map(function (p) { return '    <span class="c-k">"' + p.n + '"</span>: <span class="c-g">' + sampleVal(p.n) + '</span>'; }).join(',\n'); }
+  function codeFor(ep, kind) {
+    var all = ep.params || [];
+    if (kind === 'curl') {
+      if (ep.m === 'GET') {
+        var qs = all.slice(0, 2).map(function (p) { return p.n + '=' + sampleVal(p.n).replace(/"/g, '').replace(/ /g, '%20'); }).join('&');
+        return '<span class="c-b">$</span> curl <span class="c-g">"https://api.tellera.com' + ep.path + (qs ? '?' + qs : '') + '"</span> \\\n  -H <span class="c-g">"Authorization: Bearer $TELLERA_KEY"</span>';
+      }
+      return '<span class="c-b">$</span> curl https://api.tellera.com<span class="c-v">' + ep.path + '</span> \\\n  -H <span class="c-g">"Authorization: Bearer $TELLERA_KEY"</span> \\\n  -d <span class="c-g">\x27</span>{\n' + jsonBody(all) + '\n}<span class="c-g">\x27</span>';
+    }
+    if (kind === 'sdk') {
+      var args = all.map(function (p) { return '  <span class="c-k">' + p.n + '</span>: <span class="c-g">' + sampleVal(p.n) + '</span>'; }).join(',\n');
+      return 'import Tellera from <span class="c-g">"@tellera/sdk"</span>;\n\nconst tellera = new Tellera({ apiKey: process.env.TELLERA_API_KEY });\n\nconst res = await tellera.<span class="c-v">call</span>(<span class="c-g">"' + ep.name + '"</span>, {\n' + args + '\n});';
+    }
+    return '{\n  <span class="c-k">"tool"</span>: <span class="c-g">"' + ep.name + '"</span>,\n  <span class="c-k">"arguments"</span>: {\n' + jsonBody(all) + '\n  }\n}';
+  }
+  var chatSvg = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8 8 0 0 1-11.5 7.2L4 20l1.1-4A8 8 0 1 1 21 12z"/></svg>';
+  function openEndpoint(slug) {
+    var a = agentBySlug(slug); if (!a) return;
+    var bk = bucketOf(a.bucket);
+    var firstPrompt = (a.prompts && a.prompts[0]) || '';
+    var badge = a.badge ? '<span class="pf-conn__badge pf-conn__badge--new" style="position:static;display:inline-block;margin-left:10px;">' + esc(a.badge) + '</span>' : '';
+    var hero = '<div class="pf-ephero"><span class="pf-ephero__ic">' + agentIcon(a) + '</span>' +
+      '<div class="pf-ephero__main"><div class="pf-ephero__name">' + esc(a.app) + badge + '</div>' +
+      '<div class="pf-ephero__cat" style="color:' + bk.color + '">' + esc(bk.label) + '</div>' +
+      '<div class="pf-ephero__desc">' + esc(a.desc) + '</div>' +
+      '<div class="pf-ephero__meta"><span><b>' + a.endpoints.length + '</b> endpoint' + (a.endpoints.length > 1 ? 's' : '') + '</span><span>from <b>$' + a.price.toFixed(2) + '</b>/call</span><span>REST · MCP · SDK</span></div></div>' +
+      '<div class="pf-ephero__actions"><a class="pf-trychat" href="/deep-search?q=' + encodeURIComponent(firstPrompt) + '">' + chatSvg + 'Try in Tellera Chat</a>' +
+      '<a class="pf-btn pf-btn--ghost" data-view="keys" href="#" style="justify-content:center">Get API key</a></div></div>';
+    var blocks = a.endpoints.map(function (ep, ei) {
+      var params = (ep.params || []).map(function (p) {
+        return '<tr><td style="font-family:var(--font-mono);color:var(--ink)">' + esc(p.n) + (p.req ? ' <span style="color:#B0402F">*</span>' : '') + '</td><td style="font-family:var(--font-mono);color:var(--muted)">' + esc(p.t) + '</td><td>' + esc(p.d) + '</td></tr>';
+      }).join('');
+      var id = 'ep' + ei;
+      return '<div class="pf-epblock"><div class="pf-epblock__head"><span class="pf-meth">' + ep.m + '</span><span class="pf-epblock__name">' + esc(ep.path) + '</span><span class="pf-epblock__price">$' + ep.price.toFixed(2) + ' / call</span></div>' +
+        '<div class="pf-epblock__desc">' + esc(ep.desc) + '</div>' +
+        '<div class="pf-eplabel">Parameters</div><table class="pf-table"><thead><tr><th>Name</th><th>Type</th><th>Description</th></tr></thead><tbody>' + params + '</tbody></table>' +
+        '<div class="pf-eplabel">Example request</div>' +
+        '<div class="pf-tabs" data-tabs="' + id + '"><button class="pf-tab active" data-k="curl">cURL</button><button class="pf-tab" data-k="sdk">SDK</button><button class="pf-tab" data-k="mcp">MCP</button></div>' +
+        '<div class="pf-tabbody"><pre data-body="' + id + '">' + codeFor(ep, 'curl') + '</pre></div></div>';
+    }).join('');
+    var prompts = '<div class="pf-epblock"><div class="pf-epblock__head"><span class="pf-epblock__name" style="font-family:inherit;font-size:16px;font-weight:700">Sample prompts</span></div>' +
+      '<div class="pf-epblock__desc">Try these in Tellera Chat — the agent picks the right endpoint automatically.</div>' +
+      '<div class="pf-prompts" style="margin-top:14px">' + (a.prompts || []).map(function (p) {
+        return '<div class="pf-prompt"><span class="pf-prompt__q">"' + esc(p) + '"</span><a class="pf-trychat" href="/deep-search?q=' + encodeURIComponent(p) + '">' + chatSvg + 'Try in chat</a></div>';
+      }).join('') + '</div></div>';
+    var host = $('#pfEpDetail');
+    host.innerHTML = hero + blocks + prompts;
+    host.__eps = a.endpoints;
+    showView('endpoint');
+  }
+
+  /* ---------- upgrade modal ---------- */
+  var upModal = $('#upgradeModal');
+  function openUpgrade(planName) {
+    var p = null; T.PLANS.forEach(function (x) { if (x.name === planName) p = x; });
+    if (!p) T.PLANS.forEach(function (x) { if (x.name === 'Scale') p = x; });
+    if (!p) return;
+    if (p.name === 'Enterprise') { showView('support'); return; }
+    $('#upTitle').textContent = 'Upgrade to ' + p.name;
+    $('#upPlan').textContent = p.name + ' — ' + p.price + ' ' + p.cadence;
+    $('#upCalls').textContent = p.calls;
+    $('#upOver').textContent = p.overage;
+    $('#upDue').textContent = p.name === 'Scale' ? '$412.06' : (p.name === 'Sandbox' ? '$0.00' : '$' + (p.price.replace(/[^0-9.]/g, '') || '0') + '.00');
+    upModal.classList.add('open');
+  }
+
+  /* ---------- add credits modal ---------- */
+  var creditModal = $('#creditModal'), creditAmt = 50;
+  function renderCreditAmts() {
+    $('#creditAmts').innerHTML = T.CREDITS.presets.map(function (a) {
+      return '<button class="pf-credit__amt' + (a === creditAmt ? ' active' : '') + '" data-amt="' + a + '">$' + a + '</button>';
+    }).join('');
+    $$('#creditAmts .pf-credit__amt').forEach(function (b) {
+      b.addEventListener('click', function () { creditAmt = +b.getAttribute('data-amt'); renderCreditAmts(); $('#creditConfirm').textContent = 'Add $' + creditAmt + ' in credits'; });
+    });
+  }
+  function openCredits() { $('#creditBal').textContent = '$' + T.CREDITS.balance.toFixed(2); renderCreditAmts(); $('#creditConfirm').textContent = 'Add $' + creditAmt + ' in credits'; creditModal.classList.add('open'); }
 
   /* ---------- cancel modal ---------- */
   var modal = $('#cancelModal');
@@ -224,4 +319,31 @@
   /* ---------- boot ---------- */
   renderOverview(); renderCats(); renderConns(); renderComing(); renderConnect();
   renderUsage(); renderLogs(); renderKeys(); renderPlans(); renderIntegrations();
+
+  var navBadge = document.querySelector('.pf-nav__item[data-view="agents"] .pf-nav__badge');
+  if (navBadge) navBadge.textContent = T.AGENTS.length;
+
+  var connsEl = $('#pfConns');
+  if (connsEl) connsEl.addEventListener('click', function (e) { var c = e.target.closest('.pf-conn[data-slug]'); if (c) openEndpoint(c.getAttribute('data-slug')); });
+
+  var epHost = $('#pfEpDetail');
+  if (epHost) epHost.addEventListener('click', function (e) {
+    var t = e.target.closest('.pf-tab'); if (!t) return;
+    var tabs = t.closest('.pf-tabs'); var id = tabs.getAttribute('data-tabs'); var idx = +id.replace('ep', '');
+    tabs.querySelectorAll('.pf-tab').forEach(function (b) { b.classList.toggle('active', b === t); });
+    var pre = epHost.querySelector('pre[data-body="' + id + '"]');
+    if (pre && epHost.__eps && epHost.__eps[idx]) pre.innerHTML = codeFor(epHost.__eps[idx], t.getAttribute('data-k'));
+  });
+
+  var ovUp = $('#pfOverviewUpgrade'); if (ovUp) ovUp.addEventListener('click', function () { openUpgrade('Scale'); });
+  var upCancel = $('#upCancel'); if (upCancel) upCancel.addEventListener('click', function () { upModal.classList.remove('open'); });
+  var upConfirm = $('#upConfirm'); if (upConfirm) upConfirm.addEventListener('click', function () { upModal.classList.remove('open'); });
+  if (upModal) upModal.addEventListener('click', function (e) { if (e.target === upModal) upModal.classList.remove('open'); });
+
+  var addCred = $('#pfAddCredits'); if (addCred) addCred.addEventListener('click', openCredits);
+  var crCancel = $('#creditCancel'); if (crCancel) crCancel.addEventListener('click', function () { creditModal.classList.remove('open'); });
+  var crConfirm = $('#creditConfirm'); if (crConfirm) crConfirm.addEventListener('click', function () {
+    T.CREDITS.balance += creditAmt; $('#creditBal').textContent = '$' + T.CREDITS.balance.toFixed(2); creditModal.classList.remove('open');
+  });
+  if (creditModal) creditModal.addEventListener('click', function (e) { if (e.target === creditModal) creditModal.classList.remove('open'); });
 })();

@@ -80,6 +80,12 @@
         </div>
       </div>
       <div class="pf-tiles" id="pfTiles"></div>
+      <div class="pf-apikey">
+        <span class="pf-apikey__ic"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><circle cx="8" cy="15" r="4"/><path d="M11 12l8-8M17 4l3 3M14 7l2 2"/></svg></span>
+        <div><div class="pf-apikey__t">Your API key</div><div class="pf-apikey__d">Use a key to call Tellera from your app or agent.</div></div>
+        <span class="pf-apikey__key">tlr_live_9f2c····7Ae1 <button title="Reveal"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/></svg></button><button title="Copy"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg></button></span>
+        <a class="pf-btn pf-btn--ghost" data-view="keys" href="#">Manage keys →</a>
+      </div>
       <div class="pf-grid2">
         <div class="pf-card">
           <div class="pf-card__head"><div><div class="pf-card__h">Recent requests</div><div class="pf-card__desc">The latest calls across your API keys.</div></div><a class="pf-card__link" data-view="logs" href="#">View logs →</a></div>
@@ -109,7 +115,7 @@
             <div class="pf-rank__top" style="margin-bottom:8px;"><span class="pf-rank__name">Calls this month</span><span class="pf-rank__n" id="pfPlanNum"></span></div>
             <div class="pf-rank__bar"><div class="pf-rank__fill" id="pfPlanFill" style="background:linear-gradient(90deg,#2E7BFF,#7B5BFF)"></div></div>
             <div class="pf-field" style="border-bottom:none;padding-bottom:0;"><span class="pf-field__k">Overage this period</span><span class="pf-field__v">$0.00</span></div>
-            <button class="pf-btn pf-btn--prism" data-view="plans" style="width:100%;justify-content:center;margin-top:8px;">Upgrade plan</button>
+            <button class="pf-btn pf-btn--prism" id="pfOverviewUpgrade" style="width:100%;justify-content:center;margin-top:8px;">Upgrade plan</button>
           </div>
         </div>
       </div>
@@ -123,6 +129,12 @@
       <div class="pf-conns" id="pfConns"></div>
       <div class="pf-head" style="margin-top:36px;"><div><h2 class="pf-card__h" style="font-size:20px;">Coming soon</h2><p class="pf-sub">New specialists we're bringing online.</p></div></div>
       <div class="pf-conns" id="pfComing"></div>
+    </section>
+
+    <!-- ENDPOINT DETAIL -->
+    <section class="pf-view" data-view="endpoint">
+      <a class="pf-back" data-view="agents" href="#"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"/></svg>All agents</a>
+      <div id="pfEpDetail"></div>
     </section>
 
     <!-- CONNECT -->
@@ -174,7 +186,7 @@
           <div class="pf-rank__top" style="margin-bottom:8px;"><span class="pf-rank__name">Pro — 12,480 / 15,000 calls</span><span class="pf-rank__n">83% used</span></div>
           <div class="pf-rank__bar"><div class="pf-rank__fill" style="width:83%;background:linear-gradient(90deg,#2E7BFF,#7B5BFF)"></div></div>
         </div>
-        <button class="pf-btn pf-btn--ghost">Add credits</button>
+        <button class="pf-btn pf-btn--ghost" id="pfAddCredits">Add credits</button>
         <button class="pf-btn pf-btn--ghost">Billing history</button>
       </div></div>
       <div class="pf-plans" id="pfPlans"></div>
@@ -197,6 +209,16 @@
           <div class="pf-field"><span class="pf-field__k">Name</span><span class="pf-field__v">Shawn Siegel</span></div>
           <div class="pf-field"><span class="pf-field__k">Email</span><span class="pf-field__v">ssiegel@ltvco.com</span></div>
           <div class="pf-field"><span class="pf-field__k">User ID</span><span class="pf-field__v" style="font-family:var(--font-mono);font-size:12px;">user_3JZXMqm7ynHft3sz</span></div>
+        </div>
+        <div class="pf-acctsec">
+          <div class="pf-acctsec__h">Company &amp; use case</div>
+          <div class="pf-field"><span class="pf-field__k">Company</span><span class="pf-field__v">The Lifetime Value Co.</span></div>
+          <div class="pf-field"><span class="pf-field__k">Website</span><span class="pf-field__v">ltvco.com</span></div>
+          <div class="pf-field"><span class="pf-field__k">Industry</span><span class="pf-field__v">Data &amp; SaaS</span></div>
+          <div class="pf-field"><span class="pf-field__k">Team size</span><span class="pf-field__v">201–500 employees</span></div>
+          <div class="pf-field"><span class="pf-field__k">Primary use case</span><span class="pf-field__v">Enriching leads &amp; records for internal agents</span></div>
+          <div class="pf-field"><span class="pf-field__k">Work phone</span><span class="pf-field__v">(212) 555-0134</span></div>
+          <div style="margin-top:14px;"><button class="pf-btn pf-btn--ghost">Edit details</button></div>
         </div>
         <div class="pf-acctsec">
           <div class="pf-acctsec__h">Plan &amp; billing</div>
@@ -249,6 +271,44 @@
     <div class="pf-modal__actions">
       <button class="pf-btn pf-btn--ghost" id="pfCancelKeep">Keep my plan</button>
       <button class="pf-btn" id="pfCancelConfirm" style="background:#B0402F;">Cancel subscription</button>
+    </div>
+  </div>
+</div>
+
+<!-- UPGRADE MODAL -->
+<div class="pf-modal" id="upgradeModal">
+  <div class="pf-modal__card pf-modal__card--wide">
+    <div class="pf-modal__strip"></div>
+    <div class="pf-modal__t" id="upTitle">Upgrade to Scale</div>
+    <div class="pf-modal__d" id="upDesc">More included calls, lower overage, and higher rate limits. Your new plan starts today and is prorated against the rest of this cycle.</div>
+    <div style="margin-top:18px;">
+      <div class="pf-up__row"><span>New plan</span><b id="upPlan">Scale — $749 / mo</b></div>
+      <div class="pf-up__row"><span>Included calls</span><b id="upCalls">75,000 / mo</b></div>
+      <div class="pf-up__row"><span>Overage</span><b id="upOver">$0.015 / call</b></div>
+      <div class="pf-up__row"><span>Payment method</span><b>Visa ···· 4242</b></div>
+      <div class="pf-up__total"><span>Due today (prorated)</span><span id="upDue">$412.06</span></div>
+    </div>
+    <div class="pf-modal__actions">
+      <button class="pf-btn pf-btn--ghost" id="upCancel">Not now</button>
+      <button class="pf-btn pf-btn--prism" id="upConfirm">Confirm upgrade</button>
+    </div>
+  </div>
+</div>
+
+<!-- ADD CREDITS MODAL -->
+<div class="pf-modal" id="creditModal">
+  <div class="pf-modal__card">
+    <div class="pf-modal__strip"></div>
+    <div class="pf-modal__t">Add credits</div>
+    <div class="pf-modal__d">Top up a one-off credit balance. Credits cover overage and pay-per-call usage — they never expire. 1 credit = $1.00.</div>
+    <div style="margin-top:18px;">
+      <div class="pf-field__k">Current balance</div>
+      <div class="pf-credit__bal" id="creditBal">$42.50</div>
+      <div class="pf-credit__amts" id="creditAmts"></div>
+    </div>
+    <div class="pf-modal__actions">
+      <button class="pf-btn pf-btn--ghost" id="creditCancel">Cancel</button>
+      <button class="pf-btn pf-btn--prism" id="creditConfirm">Add $50 in credits</button>
     </div>
   </div>
 </div>
