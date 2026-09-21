@@ -1,0 +1,154 @@
+/* ============================================================
+   Tellera — "Cool" brand direction
+   Design tokens + base + prism utilities
+   (extracted from the Claude Design handoff; tokens win over BV)
+   ============================================================ */
+
+/* ---- Fonts ---- */
+/* Nunito Sans self-hosted; Spectral + IBM Plex Mono via Google Fonts (in <head>) */
+@font-face{font-family:'Nunito Sans';src:url('../assets/fonts/NunitoSans-Light.ttf') format('truetype');font-weight:300;font-style:normal;font-display:swap;}
+@font-face{font-family:'Nunito Sans';src:url('../assets/fonts/NunitoSans-Regular.ttf') format('truetype');font-weight:400;font-style:normal;font-display:swap;}
+@font-face{font-family:'Nunito Sans';src:url('../assets/fonts/NunitoSans-Bold.ttf') format('truetype');font-weight:700;font-style:normal;font-display:swap;}
+
+:root{
+  /* Type families */
+  --font-display:'Spectral',Georgia,serif;
+  --font-mono:'IBM Plex Mono',ui-monospace,monospace;
+  --font-body:'Nunito Sans',system-ui,-apple-system,sans-serif;
+
+  /* Surfaces */
+  --canvas:#C6C8CE;            /* marketing outer canvas */
+  --paper-cool:#E9EEF5;        /* card interior / page bg */
+  --app-bg:#F5F8FC;            /* deep search app bg */
+  --white:#FFFFFF;
+  --nav-bg:#F5F8FC;
+  --panel:#F7F9FC;
+  --hover-neutral:#EEF2F7;
+  --section-alt:#DFE6F0;       /* alternating marketing band */
+  --section-alt2:#F2F5FB;
+
+  /* Ink & text */
+  --ink:#14161B;
+  --ink-2:#4A5160;
+  --ink-3:#5C6470;
+  --muted:#7E8798;
+  --muted-2:#8A93A1;
+  --muted-3:#9AA0AE;
+  --btn-ink:#211F1A;
+
+  /* Prism accents */
+  --blue:#2E6BFF;              /* UI blue / links */
+  --blue-grad:#2E7BFF;         /* gradient blue */
+  --violet:#7B5BFF;
+  --violet-ink:#5B45E0;        /* link hover / violet text */
+  --mauve:#B06BFF;
+  --rust:#B0402F;
+
+  /* Chips */
+  --chip-blue-bg:#E5EEFF; --chip-blue-bd:#CFE0FF; --chip-blue-tx:#2E6BFF;
+  --chip-violet-bg:#EEEBFF; --chip-violet-bd:#DAD3FF; --chip-violet-tx:#5B45E0;
+
+  /* Borders / dividers */
+  --bd:#D3DBE6;
+  --bd-card:#D8E0EA;
+  --bd-inner:#E1E7F1;
+  --bd-rule:#E4EAF3;
+  --bd-chip:#C6D0DE;
+
+  /* Semantic (from BV, unchanged) */
+  --error:#DC0015;
+  --success-ink:#357A46;
+  --pin-red:#DC0015;
+
+  /* Prism signature gradient */
+  --prism-bar:linear-gradient(90deg,#2E7BFF,#7B5BFF 55%,#B0402F);
+  --prism-headline:linear-gradient(95deg,#2E7BFF,#7B5BFF 60%,#B06BFF);
+  --prism-fill:linear-gradient(90deg,#2E7BFF,#7B5BFF);
+  --prism-btn:linear-gradient(135deg,#2E7BFF,#5B45E0);
+
+  /* Radii */
+  --r-shell:20px; --r-card:14px; --r-hero-card:18px; --r-prompt:18px;
+  --r-btn:8px; --r-badge:10px; --r-chip:6px; --r-pill:999px;
+
+  /* Shadows */
+  --sh-card:0 24px 54px -26px rgba(0,0,0,0.26);
+  --sh-shell:0 40px 90px -30px rgba(0,0,0,0.4);
+  --sh-cta:0 22px 50px -26px rgba(46,107,255,0.45);
+  --sh-overview:0 18px 44px -30px rgba(20,30,55,0.4);
+
+  /* Motion */
+  --ease:cubic-bezier(0.4,0,0.2,1);
+
+  /* Cross-hatch (prism texture) */
+  --hatch:repeating-linear-gradient(24deg,rgba(46,107,255,0.045) 0 1px,transparent 1px 24px),
+          repeating-linear-gradient(-24deg,rgba(123,91,255,0.032) 0 1px,transparent 1px 42px);
+}
+
+/* ---- Reset / base ---- */
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  margin:0;
+  font-family:var(--font-body);
+  color:var(--ink);
+  background:var(--app-bg);
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+}
+a{color:var(--blue);text-decoration:none;transition:color .15s var(--ease);}
+a:hover{color:var(--violet-ink);}
+button{font-family:inherit;}
+img,svg{display:block;}
+h1,h2,h3,h4,p{margin:0;}
+
+/* focus ring — WCAG AA */
+a:focus-visible,button:focus-visible,[tabindex]:focus-visible{
+  outline:2px solid var(--blue);
+  outline-offset:2px;
+  border-radius:4px;
+}
+
+.no-sb{scrollbar-width:none;-ms-overflow-style:none;}
+.no-sb::-webkit-scrollbar{display:none;}
+
+/* text cursor blink */
+@keyframes bvblink{0%,49%{opacity:1;}50%,100%{opacity:0;}}
+.caret{display:inline-block;width:2px;height:24px;background:var(--blue-grad);
+  animation:bvblink 1.1s step-end infinite;vertical-align:middle;}
+
+/* ---- Type helpers ---- */
+.eyebrow{font-family:var(--font-mono);font-size:12px;letter-spacing:0.16em;
+  text-transform:uppercase;color:var(--blue);}
+.mono{font-family:var(--font-mono);}
+.display{font-family:var(--font-display);font-weight:700;letter-spacing:-0.015em;}
+.accent-italic{font-style:italic;font-weight:400;
+  background:var(--prism-headline);-webkit-background-clip:text;
+  background-clip:text;color:transparent;}
+
+/* ---- Prism utilities ---- */
+.prism-bar{height:4px;background:var(--prism-bar);}
+.prism-bar--5{height:5px;}
+.hatch{background-image:var(--hatch);}
+
+/* buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  font-weight:700;font-size:15px;border:none;cursor:pointer;
+  border-radius:var(--r-btn);padding:11px 22px;text-transform:none;
+  transition:background .15s var(--ease),color .15s var(--ease),opacity .15s var(--ease);}
+.btn--dark{background:var(--btn-ink);color:#F4F7FB;}
+.btn--dark:hover{background:#2A2E38;color:#F4F7FB;}
+.btn--prism{background:var(--prism-btn);color:#fff;}
+.btn--prism:hover{opacity:.92;color:#fff;}
+
+/* chips (sample-question pills) */
+.qchip{font-family:var(--font-mono);font-size:13px;color:#545C6B;
+  padding:8px 14px;border-radius:var(--r-chip);border:1px solid var(--bd-chip);
+  background:transparent;cursor:pointer;transition:background .15s var(--ease),border-color .15s var(--ease);}
+.qchip:hover{background:var(--white);border-color:#B7C3D4;}
+
+/* generic container */
+.container{max-width:1280px;margin:0 auto;padding-left:40px;padding-right:40px;}
+
+/* screen-reader only */
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;
+  overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;}
