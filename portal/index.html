@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tellera — Agent Portal</title>
+<meta name="description" content="The Tellera developer console — API keys, connectors, usage, and billing for calling Tellera's agents by API and MCP.">
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,600&family=Spectral:ital,wght@0,300;0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/styles/tokens.css">
+<link rel="stylesheet" href="/styles/portal.css">
+</head>
+<body class="pf-body">
+
+<button class="pf-side__toggle" id="pfToggle" aria-label="Menu"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#5C6470" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+
+<!-- ===================== SIDEBAR ===================== -->
+<aside class="pf-side" id="pfSide">
+  <div class="pf-side__brand">
+    <a class="pf-side__logo" href="/"><img src="/assets/tellera-wordmark-dark.svg" alt="Tellera" class="pf-side__wordimg"></a>
+    <button class="pf-side__collapse" id="pfCollapse" aria-label="Collapse"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button>
+  </div>
+
+  <!-- chat / agent toggle -->
+  <div class="pf-toggle" role="tablist" aria-label="Portal mode">
+    <a href="/deep-search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8 8 0 0 1-11.5 7.2L4 20l1.1-4A8 8 0 1 1 21 12z"/></svg>Chat</a>
+    <button class="active" aria-selected="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M8 8l-4 4 4 4M16 8l4 4-4 4M13 5l-2 14"/></svg>Agent</button>
+  </div>
+
+  <!-- account switcher -->
+  <div class="pf-acct">
+    <button class="pf-acct__btn" id="acctBtn">
+      <span class="pf-acct__ic"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="8" r="4"/><path d="M5 20c0-3.3 3.1-5 7-5s7 1.7 7 5"/></svg></span>
+      <span class="pf-acct__name">Personal account</span>
+      <span class="pf-acct__cv"><svg viewBox="0 0 12 8" width="11" height="7"><path d="M1 1l5 5 5-5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></span>
+    </button>
+    <div class="pf-acct__menu" id="acctMenu">
+      <button class="pf-acct__item"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="8" r="4"/><path d="M5 20c0-3.3 3.1-5 7-5s7 1.7 7 5"/></svg>Personal account<span class="ck"><svg viewBox="0 0 24 24" width="15" height="15"><path d="M5 12l4 4 10-11" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span></button>
+      <button class="pf-acct__item"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>Create organization</button>
+    </div>
+  </div>
+
+  <nav class="pf-nav" id="pfNav" aria-label="Portal">
+    <button class="pf-nav__item active" data-view="overview"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 13h7V4H4zM13 20h7V4h-7zM4 20h7v-4H4z"/></svg>Overview</button>
+    <button class="pf-nav__item" data-view="agents"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M12 3l8 4.5v9L12 21l-8-4.5v-9z"/><path d="M4 7.5l8 4.5 8-4.5M12 12v9"/></svg>Agents &amp; endpoints<span class="pf-nav__badge">10</span></button>
+    <button class="pf-nav__item" data-view="connect"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M9 12l-3 3a3 3 0 0 0 4 4l3-3M15 12l3-3a3 3 0 0 0-4-4l-3 3M8.5 15.5l7-7"/></svg>Connect to your agent</button>
+    <div class="pf-nav__sec">Monitor</div>
+    <button class="pf-nav__item" data-view="usage"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19V5M4 15l4-4 4 3 6-7"/></svg>Usage</button>
+    <button class="pf-nav__item" data-view="logs"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M5 5h14M5 12h14M5 19h9"/></svg>Logs</button>
+    <div class="pf-nav__sec">Account</div>
+    <button class="pf-nav__item" data-view="keys"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="8" cy="15" r="4"/><path d="M11 12l8-8M17 4l3 3M14 7l2 2"/></svg>API keys</button>
+    <button class="pf-nav__item" data-view="plans"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 10h18"/></svg>Plans &amp; billing</button>
+    <button class="pf-nav__item" data-view="integrations"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M10 13a5 5 0 0 0 7 0l2-2a5 5 0 0 0-7-7l-1 1M14 11a5 5 0 0 0-7 0l-2 2a5 5 0 0 0 7 7l1-1"/></svg>Integrations</button>
+    <button class="pf-nav__item" data-view="account"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="8" r="4"/><path d="M5 20c0-3.3 3.1-5 7-5s7 1.7 7 5"/></svg>Account</button>
+    <button class="pf-nav__item" data-view="support"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M9.5 9.5a2.5 2.5 0 1 1 3.6 2.2c-.8.4-1.1.9-1.1 1.8M12 17h.01" stroke-linecap="round"/></svg>Support</button>
+  </nav>
+
+  <div class="pf-user">
+    <button class="pf-user__btn" data-view="account">
+      <span class="pf-user__avatar">S</span>
+      <span><span class="pf-user__name">Shawn Siegel</span><br><span class="pf-user__meta">Pro plan · 12.5k calls / mo</span></span>
+    </button>
+  </div>
+</aside>
+
+<!-- ===================== MAIN ===================== -->
+<div class="pf-main">
+  <div class="pf-scroll">
+
+    <!-- OVERVIEW -->
+    <section class="pf-view active" data-view="overview">
+      <div class="pf-crumb">Dashboard <b>/ Overview</b></div>
+      <div class="pf-head">
+        <div><h1 class="pf-title">Overview</h1><p class="pf-sub">A quick look at your API activity and the tools you need to make the next call.</p></div>
+        <div class="pf-head__actions">
+          <div class="pf-range"><button>7 days</button><button class="active">30 days</button><button>90 days</button></div>
+          <button class="pf-btn pf-btn--ghost"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M20 11A8 8 0 1 0 18 16M20 5v6h-6"/></svg>Refresh</button>
+        </div>
+      </div>
+      <div class="pf-tiles" id="pfTiles"></div>
+      <div class="pf-grid2">
+        <div class="pf-card">
+          <div class="pf-card__head"><div><div class="pf-card__h">Recent requests</div><div class="pf-card__desc">The latest calls across your API keys.</div></div><a class="pf-card__link" data-view="logs" href="#">View logs →</a></div>
+          <div class="pf-card__body"><table class="pf-table"><thead><tr><th>Agent</th><th>Request</th><th>Source</th><th>Status</th><th class="r">Price</th><th class="r">Time</th></tr></thead><tbody id="pfRecent"></tbody></table></div>
+        </div>
+        <div class="pf-card">
+          <div class="pf-card__head"><div><div class="pf-card__h">Most-called agents</div><div class="pf-card__desc">Successful calls, last 30 days.</div></div></div>
+          <div class="pf-card__body"><div class="pf-rank" id="pfTop"></div></div>
+        </div>
+      </div>
+      <div class="pf-keycard">
+        <div class="pf-code">
+          <div class="pf-code__bar"><span class="pf-code__dot" style="background:#E0574C"></span><span class="pf-code__dot" style="background:#E0B44C"></span><span class="pf-code__dot" style="background:#357A46"></span><span class="pf-code__title">tellera · property.lookup</span><button class="pf-code__copy">Copy</button></div>
+          <pre><span class="c-b">$</span> curl https://api.tellera.com<span class="c-v">/v1/property/lookup</span> \
+  -H <span class="c-g">"Authorization: Bearer $TELLERA_KEY"</span> \
+  -d <span class="c-g">'{"address":"1234 Oakridge Dr, Austin TX"}'</span>
+
+{
+  <span class="c-k">"owner"</span>:      <span class="c-g">"Martin R. Decker"</span>,
+  <span class="c-k">"confidence"</span>: <span class="c-g">"high"</span>,
+  <span class="c-k">"sources"</span>:    <span class="c-g">4</span>
+}</pre>
+        </div>
+        <div class="pf-card">
+          <div class="pf-card__head"><div><div class="pf-card__h">Plan usage</div><div class="pf-card__desc">Pro · resets in 11 days.</div></div><a class="pf-card__link" data-view="plans" href="#">Manage →</a></div>
+          <div class="pf-card__body">
+            <div class="pf-rank__top" style="margin-bottom:8px;"><span class="pf-rank__name">Calls this month</span><span class="pf-rank__n" id="pfPlanNum"></span></div>
+            <div class="pf-rank__bar"><div class="pf-rank__fill" id="pfPlanFill" style="background:linear-gradient(90deg,#2E7BFF,#7B5BFF)"></div></div>
+            <div class="pf-field" style="border-bottom:none;padding-bottom:0;"><span class="pf-field__k">Overage this period</span><span class="pf-field__v">$0.00</span></div>
+            <button class="pf-btn pf-btn--prism" data-view="plans" style="width:100%;justify-content:center;margin-top:8px;">Upgrade plan</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- AGENTS -->
+    <section class="pf-view" data-view="agents">
+      <div class="pf-crumb">Dashboard <b>/ Agents &amp; endpoints</b></div>
+      <div class="pf-head"><div><h1 class="pf-title">Agents &amp; endpoints</h1><p class="pf-sub">Every Tellera specialist, available by API and MCP — one connector per agent, priced per call.</p></div></div>
+      <div class="pf-cats" id="pfCats"></div>
+      <div class="pf-conns" id="pfConns"></div>
+      <div class="pf-head" style="margin-top:36px;"><div><h2 class="pf-card__h" style="font-size:20px;">Coming soon</h2><p class="pf-sub">New specialists we're bringing online.</p></div></div>
+      <div class="pf-conns" id="pfComing"></div>
+    </section>
+
+    <!-- CONNECT -->
+    <section class="pf-view" data-view="connect">
+      <div class="pf-crumb">Dashboard <b>/ Connect to your agent</b></div>
+      <div class="pf-head"><div><h1 class="pf-title">Connect to your agent</h1><p class="pf-sub">Connect a chat app, terminal agent, or product to Tellera's data.</p></div></div>
+      <div style="font-size:13px;font-weight:700;color:var(--ink-3);margin-bottom:12px;">Choose how to connect</div>
+      <div class="pf-connopts" id="pfConnOpts"></div>
+      <div style="font-size:13px;font-weight:700;color:var(--ink-3);margin:22px 0 12px;">Choose your app</div>
+      <div class="pf-apps" id="pfApps"></div>
+      <div class="pf-steps" id="pfSteps"></div>
+    </section>
+
+    <!-- USAGE -->
+    <section class="pf-view" data-view="usage">
+      <div class="pf-crumb">Dashboard <b>/ Usage</b></div>
+      <div class="pf-head"><div><h1 class="pf-title">Usage</h1><p class="pf-sub">Track your API usage and spend across agents.</p></div>
+        <div class="pf-head__actions"><div class="pf-range"><button>3m</button><button class="active">30d</button><button>7d</button></div></div></div>
+      <div class="pf-card"><div class="pf-card__body"><div class="pf-chart" id="pfChart"></div><div class="pf-chart__x" id="pfChartX"></div></div></div>
+      <div class="pf-card" style="margin-top:16px;"><div class="pf-card__body" style="padding-top:16px;">
+        <table class="pf-table"><thead><tr><th>Agent</th><th class="r">Calls</th><th class="r">Spend</th></tr></thead><tbody id="pfUsageTable"></tbody></table>
+      </div></div>
+    </section>
+
+    <!-- LOGS -->
+    <section class="pf-view" data-view="logs">
+      <div class="pf-crumb">Dashboard <b>/ Logs</b></div>
+      <div class="pf-head"><div><h1 class="pf-title">Request logs</h1><p class="pf-sub">Your API request history.</p></div>
+        <div class="pf-head__actions"><span class="pf-src" style="padding:8px 14px;">All API keys</span></div></div>
+      <div class="pf-card"><div class="pf-card__body" style="padding-top:16px;">
+        <table class="pf-table"><thead><tr><th>Time</th><th>Agent</th><th>Method</th><th>Path</th><th>Source</th><th>Status</th><th class="r">Price</th></tr></thead><tbody id="pfLogs"></tbody></table>
+      </div></div>
+    </section>
+
+    <!-- API KEYS -->
+    <section class="pf-view" data-view="keys">
+      <div class="pf-crumb">Dashboard <b>/ API keys</b></div>
+      <div class="pf-head"><div><h1 class="pf-title">API keys</h1><p class="pf-sub">Manage keys for programmatic access to Tellera.</p></div>
+        <div class="pf-head__actions"><button class="pf-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>Generate new key</button></div></div>
+      <div class="pf-keys" id="pfKeys"></div>
+    </section>
+
+    <!-- PLANS -->
+    <section class="pf-view" data-view="plans">
+      <div class="pf-crumb">Dashboard <b>/ Plans &amp; billing</b></div>
+      <div class="pf-head"><div><h1 class="pf-title">Plans &amp; billing</h1><p class="pf-sub">Subscribe for included calls, pay overage as you grow, or switch to pay-as-you-go.</p></div></div>
+      <div class="pf-card" style="margin-bottom:20px;"><div class="pf-card__body" style="padding:18px 20px;display:flex;align-items:center;gap:20px;flex-wrap:wrap;">
+        <div style="flex:1;min-width:220px;">
+          <div class="pf-rank__top" style="margin-bottom:8px;"><span class="pf-rank__name">Pro — 12,480 / 15,000 calls</span><span class="pf-rank__n">83% used</span></div>
+          <div class="pf-rank__bar"><div class="pf-rank__fill" style="width:83%;background:linear-gradient(90deg,#2E7BFF,#7B5BFF)"></div></div>
+        </div>
+        <button class="pf-btn pf-btn--ghost">Add credits</button>
+        <button class="pf-btn pf-btn--ghost">Billing history</button>
+      </div></div>
+      <div class="pf-plans" id="pfPlans"></div>
+    </section>
+
+    <!-- INTEGRATIONS -->
+    <section class="pf-view" data-view="integrations">
+      <div class="pf-crumb">Dashboard <b>/ Integrations</b></div>
+      <div class="pf-head"><div><h1 class="pf-title">Integrations</h1><p class="pf-sub">Drop Tellera into the tools and assistants your team already uses.</p></div></div>
+      <div class="pf-integr" id="pfIntegr"></div>
+    </section>
+
+    <!-- ACCOUNT -->
+    <section class="pf-view" data-view="account">
+      <div class="pf-crumb">Dashboard <b>/ Account</b></div>
+      <div class="pf-head"><div><h1 class="pf-title">Account</h1><p class="pf-sub">Manage your profile, plan, and subscription.</p></div></div>
+      <div class="pf-acctpage">
+        <div class="pf-acctsec">
+          <div class="pf-acctsec__h">Profile</div>
+          <div class="pf-field"><span class="pf-field__k">Name</span><span class="pf-field__v">Shawn Siegel</span></div>
+          <div class="pf-field"><span class="pf-field__k">Email</span><span class="pf-field__v">ssiegel@ltvco.com</span></div>
+          <div class="pf-field"><span class="pf-field__k">User ID</span><span class="pf-field__v" style="font-family:var(--font-mono);font-size:12px;">user_3JZXMqm7ynHft3sz</span></div>
+        </div>
+        <div class="pf-acctsec">
+          <div class="pf-acctsec__h">Plan &amp; billing</div>
+          <div class="pf-field"><span class="pf-field__k">Current plan</span><span class="pf-field__v">Pro · $199 / mo</span></div>
+          <div class="pf-field"><span class="pf-field__k">Renews</span><span class="pf-field__v">Oct 2, 2026</span></div>
+          <div class="pf-field"><span class="pf-field__k">Payment method</span><span class="pf-field__v">Visa ···· 4242</span></div>
+          <div style="margin-top:14px;display:flex;gap:10px;"><button class="pf-btn pf-btn--ghost" data-view="plans">Change plan</button><button class="pf-btn pf-btn--ghost">Update payment</button></div>
+        </div>
+        <div class="pf-acctsec pf-danger">
+          <div class="pf-acctsec__h">Cancel subscription</div>
+          <p style="font-size:14px;line-height:1.6;color:var(--ink-2);">Cancel anytime. You'll keep Pro access and your remaining calls until the end of the current billing period, then move to the free Sandbox tier — your keys and history stay intact.</p>
+          <div style="margin-top:16px;"><button class="pf-btn pf-btn--ghost" id="pfCancelBtn" style="color:#B0402F;border-color:rgba(176,64,47,.35);">Cancel my subscription</button></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SUPPORT -->
+    <section class="pf-view" data-view="support">
+      <div class="pf-crumb">Dashboard <b>/ Support</b></div>
+      <div class="pf-head"><div><h1 class="pf-title">Support</h1><p class="pf-sub">Choose the best way to reach the Tellera team.</p></div></div>
+      <div class="pf-acctpage">
+        <div class="pf-integr">
+          <div class="pf-integr__row"><span class="pf-integr__ic"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#2E6BFF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8 8 0 0 1-11.5 7.2L4 20l1.1-4A8 8 0 1 1 21 12z"/></svg></span><div style="flex:1;"><div class="pf-integr__name">Read the docs</div><div class="pf-integr__desc">Quickstart, MCP server, authentication, and API reference.</div></div><button class="pf-btn pf-btn--ghost">Open docs</button></div>
+          <div class="pf-integr__row"><span class="pf-integr__ic"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#2E6BFF" stroke-width="1.8" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M4 7l8 6 8-6"/></svg></span><div style="flex:1;"><div class="pf-integr__name">Email support</div><div class="pf-integr__desc">developers@tellera.com — we reply within a business day.</div></div><button class="pf-btn pf-btn--ghost">Email us</button></div>
+          <div class="pf-integr__row"><span class="pf-integr__ic"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#2E6BFF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a9 9 0 0 0-9 9v5a2 2 0 0 0 2 2h2v-6H5v-1a7 7 0 0 1 14 0v1h-2v6h2a2 2 0 0 0 2-2v-5a9 9 0 0 0-9-9z"/></svg></span><div style="flex:1;"><div class="pf-integr__name">Talk to sales</div><div class="pf-integr__desc">Volume pricing, permissible-purpose review, and enterprise terms.</div></div><button class="pf-btn">Contact sales</button></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="pf-foot">
+      <div class="pf-foot__inner">
+        <span class="pf-foot__copy">© 2026 Tellera, Inc.</span>
+        <span class="pf-foot__sep">·</span><a href="#">Privacy</a>
+        <span class="pf-foot__sep">·</span><a href="#">Do not sell or share my info</a>
+        <span class="pf-foot__sep">·</span><a href="#">Opt out / Remove my info</a>
+        <span class="pf-foot__sep">·</span><a href="#">Terms</a>
+        <span class="pf-foot__sep">·</span><a href="#">Tellera is not a consumer reporting agency (FCRA)</a>
+      </div>
+    </footer>
+  </div>
+</div>
+
+<!-- CANCEL MODAL -->
+<div class="pf-modal" id="cancelModal">
+  <div class="pf-modal__card">
+    <div class="pf-modal__strip"></div>
+    <div class="pf-modal__t">Cancel your Pro subscription?</div>
+    <div class="pf-modal__d">You'll keep Pro access and your remaining calls until <b>Oct 2, 2026</b>, then move to the free Sandbox tier. Your API keys, connectors, and request history stay intact — you can resubscribe anytime.</div>
+    <div class="pf-modal__actions">
+      <button class="pf-btn pf-btn--ghost" id="pfCancelKeep">Keep my plan</button>
+      <button class="pf-btn" id="pfCancelConfirm" style="background:#B0402F;">Cancel subscription</button>
+    </div>
+  </div>
+</div>
+
+<script src="/js/connectors.js"></script>
+<script src="/js/portal.js"></script>
+</body>
+</html>

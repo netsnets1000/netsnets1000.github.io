@@ -1,0 +1,227 @@
+/* Tellera Agent Portal — view switching + mock-data rendering. */
+(function () {
+  'use strict';
+  var T = window.TELLERA_API;
+  var $ = function (s, r) { return (r || document).querySelector(s); };
+  var $$ = function (s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); };
+  var esc = function (s) { return String(s).replace(/[&<>"]/g, function (c) { return ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]; }); };
+  var money = function (n) { return '$' + n.toFixed(2); };
+  var num = function (n) { return n.toLocaleString('en-US'); };
+  var bucketOf = function (k) { for (var i = 0; i < T.BUCKETS.length; i++) if (T.BUCKETS[i].key === k) return T.BUCKETS[i]; return { label: k, color: '#888' }; };
+  function agentIcon(a) {
+    if (a.iconSvg) return a.iconSvg;
+    if (a.icon) return '<img src="' + a.icon + '" alt="">';
+    return '<span style="font-weight:700;color:var(--ink-2)">' + esc(a.code || '') + '</span>';
+  }
+
+  /* ---------- view switching ---------- */
+  function showView(v) {
+    $$('.pf-view').forEach(function (s) { s.classList.toggle('active', s.getAttribute('data-view') === v); });
+    $$('.pf-nav__item').forEach(function (b) { b.classList.toggle('active', b.getAttribute('data-view') === v); });
+    var sc = $('.pf-scroll'); if (sc) sc.scrollTop = 0;
+    var side = $('#pfSide'); if (side) side.classList.remove('open');
+  }
+  document.addEventListener('click', function (e) {
+    var el = e.target.closest('[data-view]'); if (!el) return;
+    if (el.tagName === 'A') e.preventDefault();
+    showView(el.getAttribute('data-view'));
+  });
+
+  /* ---------- account switcher ---------- */
+  var acctBtn = $('#acctBtn'), acctMenu = $('#acctMenu');
+  if (acctBtn) acctBtn.addEventListener('click', function (e) { e.stopPropagation(); acctMenu.classList.toggle('open'); });
+  document.addEventListener('click', function () { if (acctMenu) acctMenu.classList.remove('open'); });
+
+  /* ---------- overview ---------- */
+  function renderOverview() {
+    var o = T.OVERVIEW;
+    var tiles = [
+      { k: 'Requests', v: num(o.requests), sub: 'last 30 days', ic: 'M4 19V5M4 15l4-4 4 3 6-7' },
+      { k: 'Agents used', v: o.agents + ' / 10', sub: 'of your connectors', ic: 'M12 3l8 4.5v9L12 21l-8-4.5v-9z' },
+      { k: 'Endpoints used', v: o.endpoints, sub: 'across all agents', ic: 'M5 5h14M5 12h14M5 19h9' },
+      { k: 'Plan usage', v: '83%', sub: num(o.planUsed) + ' / ' + num(o.planCalls) + ' calls', ic: 'M4 13h7V4H4zM13 20h7V4h-7z' }
+    ];
+    $('#pfTiles').innerHTML = tiles.map(function (t) {
+      return '<div class="pf-tile"><div class="pf-tile__ic"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="' + t.ic + '"/></svg></div>' +
+        '<div class="pf-tile__k">' + t.k + '</div><div class="pf-tile__v">' + t.v + '</div><div class="pf-tile__sub">' + t.sub + '</div></div>';
+    }).join('');
+
+    $('#pfRecent').innerHTML = T.RECENT.map(function (r) {
+      var ok = r.status < 400;
+      return '<tr><td><span class="pf-agentcell">' + esc(r.agent) + '</span></td>' +
+        '<td><span class="pf-meth">' + r.m + '</span> <span class="pf-path">' + esc(r.path) + '</span></td>' +
+        '<td><span class="pf-src">' + r.src + '</span></td>' +
+        '<td><span class="pf-status pf-status--' + (ok ? 'ok' : 'err') + '"><span class="dot"></span>' + r.status + '</span></td>' +
+        '<td class="r">' + money(r.price) + '</td><td class="r" style="color:var(--muted)">' + r.time + '</td></tr>';
+    }).join('');
+
+    var max = Math.max.apply(null, T.TOP.map(function (t) { return t.calls; }));
+    $('#pfTop').innerHTML = T.TOP.map(function (t) {
+      return '<div class="pf-rank__row"><div class="pf-rank__top"><span class="pf-rank__name">' + esc(t.app) + '</span><span class="pf-rank__n">' + num(t.calls) + ' calls</span></div>' +
+        '<div class="pf-rank__bar"><div class="pf-rank__fill" style="width:' + Math.round(t.calls / max * 100) + '%;background:' + t.color + '"></div></div></div>';
+    }).join('');
+
+    $('#pfPlanNum').textContent = num(o.planUsed) + ' / ' + num(o.planCalls);
+    $('#pfPlanFill').style.width = Math.round(o.planUsed / o.planCalls * 100) + '%';
+  }
+
+  /* ---------- agents catalog ---------- */
+  var activeBucket = 'all';
+  function renderCats() {
+    var cats = [{ key: 'all', label: 'All agents', n: T.AGENTS.length }].concat(T.BUCKETS.map(function (b) {
+      return { key: b.key, label: b.label, n: T.AGENTS.filter(function (a) { return a.bucket === b.key; }).length };
+    }));
+    $('#pfCats').innerHTML = cats.map(function (c) {
+      return '<button class="pf-cat' + (c.key === activeBucket ? ' active' : '') + '" data-bucket="' + c.key + '">' + esc(c.label) + '<span class="n">' + c.n + '</span></button>';
+    }).join('');
+    $$('#pfCats .pf-cat').forEach(function (b) { b.addEventListener('click', function () { activeBucket = b.getAttribute('data-bucket'); renderCats(); renderConns(); }); });
+  }
+  function renderConns() {
+    var list = T.AGENTS.filter(function (a) { return activeBucket === 'all' || a.bucket === activeBucket; });
+    $('#pfConns').innerHTML = list.map(function (a) {
+      var bk = bucketOf(a.bucket);
+      var badge = a.badge ? '<span class="pf-conn__badge pf-conn__badge--new">' + esc(a.badge) + '</span>' : '';
+      var eps = a.endpoints.map(function (e) {
+        return '<div class="pf-ep"><span class="pf-ep__m">' + e.m + '</span><span class="pf-ep__path">' + esc(e.path) + '</span><span class="pf-ep__price">$' + e.price.toFixed(2) + '</span></div>';
+      }).join('');
+      return '<div class="pf-conn"><div class="pf-conn__top"><span class="pf-conn__ic">' + agentIcon(a) + '</span>' +
+        '<div style="min-width:0"><div class="pf-conn__name">' + esc(a.app) + '</div><div class="pf-conn__cat" style="color:' + bk.color + '">' + esc(bk.label) + '</div></div>' + badge + '</div>' +
+        '<div class="pf-conn__desc">' + esc(a.desc) + '</div>' +
+        '<div class="pf-conn__eps">' + eps + '</div>' +
+        '<div class="pf-conn__foot"><span class="pf-conn__price">from <b>$' + a.price.toFixed(2) + '</b>/call</span><span class="pf-conn__go">View →</span></div></div>';
+    }).join('');
+  }
+  function renderComing() {
+    $('#pfComing').innerHTML = T.COMING.map(function (c) {
+      var bk = bucketOf(c.bucket);
+      return '<div class="pf-conn pf-conn--soon"><div class="pf-conn__top"><span class="pf-conn__ic"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="' + bk.color + '" stroke-width="1.7"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2" stroke-linecap="round"/></svg></span>' +
+        '<div style="min-width:0"><div class="pf-conn__name">' + esc(c.app) + '</div><div class="pf-conn__cat" style="color:' + bk.color + '">' + esc(bk.label) + '</div></div>' +
+        '<span class="pf-conn__badge pf-conn__badge--soon">Coming soon</span></div>' +
+        '<div class="pf-conn__desc">' + esc(c.desc) + '</div></div>';
+    }).join('');
+  }
+
+  /* ---------- connect ---------- */
+  var CONN = {
+    mcp: { name: 'MCP', icon: 'M8 8l-4 4 4 4M16 8l4 4-4 4', apps: ['Claude', 'ChatGPT', 'Cursor'], server: 'https://mcp.tellera.com', label: 'SERVER URL',
+      steps: ['Open Customize → Connectors in your app.', 'Select Add custom connector and paste the server URL.', 'Select Connect and sign in — then just ask.'] },
+    cli: { name: 'CLI', icon: 'M5 7l5 5-5 5M12 17h7', apps: ['Codex', 'Claude Code', 'Cursor'], server: 'https://tellera.com/skill.md', label: 'TERMINAL',
+      steps: ['Open the terminal your agent uses.', 'Set up the Tellera skill using the URL below.', 'Start a chat and ask your agent to use Tellera.'] },
+    sdk: { name: 'SDK', icon: 'M9 8l-3 4 3 4M15 8l3 4-3 4', apps: ['Node', 'Python', 'Go'], server: 'npm install @tellera/sdk', label: 'INSTALL',
+      steps: ['Install the Tellera SDK for your language.', 'Set TELLERA_API_KEY from your API keys.', 'Call any endpoint — auth and billing are handled.'] }
+  };
+  var connState = { opt: 'mcp', app: 'Claude' };
+  function renderConnect() {
+    $('#pfConnOpts').innerHTML = Object.keys(CONN).map(function (k) {
+      var c = CONN[k];
+      return '<button class="pf-opt' + (connState.opt === k ? ' active' : '') + '" data-opt="' + k + '"><span class="pf-opt__ic"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="' + c.icon + '"/></svg></span><div><div class="pf-opt__t">' + c.name + '</div><div class="pf-opt__d">' + (k === 'mcp' ? 'Chat apps &amp; agents' : k === 'cli' ? 'Terminal agents' : 'Your backend') + '</div></div></button>';
+    }).join('');
+    var apps = CONN[connState.opt].apps;
+    if (apps.indexOf(connState.app) < 0) connState.app = apps[0];
+    $('#pfApps').innerHTML = apps.map(function (a) {
+      return '<button class="pf-app' + (connState.app === a ? ' active' : '') + '" data-app="' + esc(a) + '"><span class="pf-app__ic">' + esc(a.slice(0, 2)) + '</span>' + esc(a) + '</button>';
+    }).join('');
+    var c = CONN[connState.opt];
+    $('#pfSteps').innerHTML =
+      '<div>' + c.steps.map(function (s, i) { return '<div class="pf-step"><span class="pf-step__n">' + (i + 1) + '</span><span class="pf-step__t">' + s + '</span></div>'; }).join('') + '</div>' +
+      '<div class="pf-code"><div class="pf-code__bar"><span class="pf-code__title">' + c.label + ' · ' + esc(connState.app) + '</span><button class="pf-code__copy">Copy</button></div>' +
+      '<pre><span class="c-b">' + esc(c.server) + '</span></pre></div>';
+    $$('#pfConnOpts .pf-opt').forEach(function (b) { b.addEventListener('click', function () { connState.opt = b.getAttribute('data-opt'); renderConnect(); }); });
+    $$('#pfApps .pf-app').forEach(function (b) { b.addEventListener('click', function () { connState.app = b.getAttribute('data-app'); renderConnect(); }); });
+  }
+
+  /* ---------- usage ---------- */
+  function renderUsage() {
+    var cols = 30, segColors = ['#2B8A88', '#565C99', '#2E6BFF', '#8B5E3C'];
+    var html = '';
+    for (var i = 0; i < cols; i++) {
+      var t = i / (cols - 1);
+      var total = 24 + t * 120 + (i % 4) * 8;          // px, trending up
+      var parts = [0.42, 0.26, 0.18, 0.14];
+      var seg = parts.map(function (p, j) { return '<div class="pf-chart__seg" style="height:' + Math.round(total * p) + 'px;background:' + segColors[j] + (j === 0 ? '' : '') + '"></div>'; }).join('');
+      html += '<div class="pf-chart__col" title="Sep ' + (i + 1) + '">' + seg + '</div>';
+    }
+    $('#pfChart').innerHTML = html;
+    var labs = ['Aug 24', 'Sep 1', 'Sep 8', 'Sep 15', 'Sep 21'];
+    $('#pfChartX').innerHTML = labs.map(function (l) { return '<span>' + l + '</span>'; }).join('');
+    $('#pfUsageTable').innerHTML = T.USAGE_ROWS.map(function (r) {
+      return '<tr><td><span class="pf-agentcell"><span class="pf-agentdot" style="background:' + r.color + '"></span>' + esc(r.app) + '</span></td><td class="r">' + num(r.calls) + '</td><td class="r" style="font-weight:700;color:var(--ink)">' + money(r.spend) + '</td></tr>';
+    }).join('');
+  }
+
+  /* ---------- logs ---------- */
+  function renderLogs() {
+    $('#pfLogs').innerHTML = T.LOGS.map(function (r) {
+      var ok = r.status < 400;
+      return '<tr><td style="color:var(--muted);white-space:nowrap">' + esc(r.time) + '</td>' +
+        '<td><span class="pf-agentcell">' + esc(r.agent) + '</span></td>' +
+        '<td><span class="pf-meth">' + r.m + '</span></td>' +
+        '<td><span class="pf-path">' + esc(r.path) + '</span></td>' +
+        '<td><span class="pf-src">' + r.src + '</span></td>' +
+        '<td><span class="pf-status pf-status--' + (ok ? 'ok' : 'err') + '"><span class="dot"></span>' + r.status + '</span></td>' +
+        '<td class="r">' + money(r.price) + '</td></tr>';
+    }).join('');
+  }
+
+  /* ---------- keys ---------- */
+  var eyeSvg = '<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/></svg>';
+  var copySvg = '<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>';
+  var gearSvg = '<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="3"/><path d="M4 12h2M18 12h2M12 4v2M12 18v2"/></svg>';
+  var trashSvg = '<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M4 7h16M9 7V5h6v2M6 7l1 13h10l1-13"/></svg>';
+  function renderKeys() {
+    $('#pfKeys').innerHTML =
+      '<div class="pf-keyrow" style="font-family:var(--font-mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted-2);">' +
+        '<span>Name</span><span>Key</span><span>Created</span><span>Last used</span><span>Status</span><span></span></div>' +
+      T.KEYS.map(function (k) {
+        return '<div class="pf-keyrow"><span class="pf-keyrow__name">' + esc(k.name) + '<div style="font-size:11px;font-weight:400;color:var(--muted)">' + esc(k.scope) + '</div></span>' +
+          '<span class="pf-keyrow__key">' + esc(k.key) + '<button title="Reveal">' + eyeSvg + '</button><button title="Copy">' + copySvg + '</button></span>' +
+          '<span style="color:var(--muted)">' + esc(k.created) + '</span><span style="color:var(--muted)">' + esc(k.last) + '</span>' +
+          '<span><span class="pf-pill pf-pill--active">' + esc(k.status) + '</span></span>' +
+          '<span class="pf-keyrow__actions"><button title="Edit">' + gearSvg + '</button><button title="Revoke">' + trashSvg + '</button></span></div>';
+      }).join('');
+  }
+
+  /* ---------- plans ---------- */
+  var checkSvg = '<svg viewBox="0 0 24 24" width="15" height="15"><path d="M5 12l4 4 10-11" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+  function renderPlans() {
+    $('#pfPlans').innerHTML = T.PLANS.map(function (p) {
+      var badge = p.badge ? '<span class="pf-plan__badge">' + esc(p.badge) + '</span>' : '';
+      return '<div class="pf-plan' + (p.current ? ' pf-plan--current' : '') + '">' + badge +
+        '<div class="pf-plan__name">' + esc(p.name) + '</div>' +
+        '<div class="pf-plan__price">' + esc(p.price) + '<span>' + esc(p.cadence) + '</span></div>' +
+        '<div class="pf-plan__calls">' + esc(p.calls) + '</div><div class="pf-plan__over">' + esc(p.overage) + '</div>' +
+        '<ul class="pf-plan__feats">' + p.features.map(function (f) { return '<li>' + checkSvg + '<span>' + esc(f) + '</span></li>'; }).join('') + '</ul>' +
+        '<button class="pf-btn ' + (p.current ? 'pf-btn--ghost' : 'pf-btn--prism') + ' pf-plan__cta"' + (p.current ? ' disabled style="opacity:.6"' : '') + '>' + esc(p.cta) + '</button></div>';
+    }).join('');
+  }
+
+  /* ---------- integrations ---------- */
+  function renderIntegrations() {
+    $('#pfIntegr').innerHTML = T.INTEGRATIONS.map(function (it) {
+      return '<div class="pf-integr__row"><span class="pf-integr__ic">' + esc(it.name.slice(0, 2)) + '</span>' +
+        '<div style="flex:1"><div class="pf-integr__name">' + esc(it.name) + ' <span class="pf-integr__cat">' + esc(it.cat) + '</span></div><div class="pf-integr__desc">' + esc(it.desc) + '</div></div>' +
+        '<button class="pf-btn pf-btn--ghost">Connect</button></div>';
+    }).join('');
+  }
+
+  /* ---------- cancel modal ---------- */
+  var modal = $('#cancelModal');
+  function openModal() { modal.classList.add('open'); }
+  function closeModal() { modal.classList.remove('open'); }
+  var cb = $('#pfCancelBtn'); if (cb) cb.addEventListener('click', openModal);
+  var keep = $('#pfCancelKeep'); if (keep) keep.addEventListener('click', closeModal);
+  var conf = $('#pfCancelConfirm'); if (conf) conf.addEventListener('click', function () {
+    closeModal();
+    var sec = $('.pf-danger'); if (sec) sec.innerHTML = '<div class="pf-acctsec__h" style="color:#357A46">Subscription cancelled</div><p style="font-size:14px;line-height:1.6;color:var(--ink-2)">Your Pro plan is set to cancel on <b>Oct 2, 2026</b>. You\'ll keep full access until then, and can resubscribe anytime.</p>';
+  });
+  if (modal) modal.addEventListener('click', function (e) { if (e.target === modal) closeModal(); });
+
+  /* ---------- mobile ---------- */
+  var side = $('#pfSide'), tog = $('#pfToggle'), col = $('#pfCollapse');
+  if (tog && side) tog.addEventListener('click', function () { side.classList.toggle('open'); });
+  if (col && side) col.addEventListener('click', function () { side.classList.remove('open'); });
+
+  /* ---------- boot ---------- */
+  renderOverview(); renderCats(); renderConns(); renderComing(); renderConnect();
+  renderUsage(); renderLogs(); renderKeys(); renderPlans(); renderIntegrations();
+})();
