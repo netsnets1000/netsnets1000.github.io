@@ -13,6 +13,11 @@
     if (a.icon) return '<img src="' + a.icon + '" alt="">';
     return '<span style="font-weight:700;color:var(--ink-2)">' + esc(a.code || '') + '</span>';
   }
+  function brandMark(p, big) {
+    if (!p) return '<span class="pf-brandtxt">Live web index</span>';
+    if (p.logo) return '<img class="pf-brandimg" src="' + p.logo + '" alt="' + esc(p.name) + '"' + (big ? ' style="height:20px"' : '') + '>';
+    return '<span class="pf-brandtxt' + (big ? ' pf-brandtxt--big' : '') + '">' + esc(p.name) + '</span>';
+  }
 
   /* ---------- view switching ---------- */
   function showView(v) {
@@ -88,7 +93,8 @@
         '<div style="min-width:0"><div class="pf-conn__name">' + esc(a.app) + '</div><div class="pf-conn__cat" style="color:' + bk.color + '">' + esc(bk.label) + '</div></div>' + badge + '</div>' +
         '<div class="pf-conn__desc">' + esc(a.desc) + '</div>' +
         '<div class="pf-conn__eps">' + eps + '</div>' +
-        '<div class="pf-conn__foot"><span class="pf-conn__price">from <b>$' + a.price.toFixed(2) + '</b>/call</span><span class="pf-conn__go">View →</span></div></div>';
+        '<div class="pf-conn__priceline">from <b>$' + a.price.toFixed(2) + '</b>/call</div>' +
+        '<div class="pf-conn__data"><div class="pf-conn__data-l"><div class="pf-conn__data-k">Featured data</div>' + brandMark(a.provider) + '</div><span class="pf-conn__go">View →</span></div></div>';
     }).join('');
   }
   function renderComing() {
@@ -261,7 +267,8 @@
       '<div class="pf-ephero__main"><div class="pf-ephero__name">' + esc(a.app) + badge + '</div>' +
       '<div class="pf-ephero__cat" style="color:' + bk.color + '">' + esc(bk.label) + '</div>' +
       '<div class="pf-ephero__desc">' + esc(a.desc) + '</div>' +
-      '<div class="pf-ephero__meta"><span><b>' + a.endpoints.length + '</b> endpoint' + (a.endpoints.length > 1 ? 's' : '') + '</span><span>from <b>$' + a.price.toFixed(2) + '</b>/call</span><span>REST · MCP · SDK</span></div></div>' +
+      '<div class="pf-ephero__meta"><span><b>' + a.endpoints.length + '</b> endpoint' + (a.endpoints.length > 1 ? 's' : '') + '</span><span>from <b>$' + a.price.toFixed(2) + '</b>/call</span><span>REST · MCP · SDK</span></div>' +
+      (a.provider ? '<div class="pf-ephero__prov"><span class="pf-ephero__prov-k">Featured data</span>' + brandMark(a.provider, true) + '</div>' : '') + '</div>' +
       '<div class="pf-ephero__actions"><a class="pf-trychat" href="/deep-search?q=' + encodeURIComponent(firstPrompt) + '">' + chatSvg + 'Try in Tellera Chat</a>' +
       '<a class="pf-btn pf-btn--ghost" data-view="keys" href="#" style="justify-content:center">Get API key</a></div></div>';
     var blocks = a.endpoints.map(function (ep, ei) {

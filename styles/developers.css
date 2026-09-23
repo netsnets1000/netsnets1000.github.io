@@ -116,6 +116,10 @@
 .dv-agent__badge--new{color:#2E6BFF;background:var(--chip-blue-bg);}
 .dv-agent__badge--soon{color:var(--muted);background:var(--panel);border:1px solid var(--bd-inner);}
 .dv-agent__desc{font-size:13px;color:var(--ink-3);line-height:1.5;margin-top:10px;flex:1;}
+.dv-agent__prov{margin-top:12px;padding-top:11px;border-top:1px solid var(--bd-rule);display:flex;align-items:center;gap:10px;}
+.dv-agent__prov-k{font-family:var(--font-mono);font-size:9px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted-2);flex:0 0 auto;}
+.dv-brandimg{height:15px;width:auto;display:block;}
+.dv-brandtxt{font-size:13px;font-weight:800;letter-spacing:-.01em;color:#14161B;}
 .dv-agent__foot{margin-top:12px;padding-top:11px;border-top:1px solid var(--bd-rule);display:flex;align-items:center;justify-content:space-between;}
 .dv-agent__price{font-size:12.5px;color:var(--muted);}
 .dv-agent__price b{color:var(--ink);}

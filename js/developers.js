@@ -5,6 +5,7 @@
   var $ = function (s) { return document.querySelector(s); };
   var esc = function (s) { return String(s).replace(/[&<>"]/g, function (c) { return ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]; }); };
   function icon(a) { if (a.iconSvg) return a.iconSvg; if (a.icon) return '<img src="' + a.icon + '" alt="">'; return ''; }
+  function brand(p) { if (!p) return '<span class="dv-brandtxt">Live web index</span>'; if (p.logo) return '<img class="dv-brandimg" src="' + p.logo + '" alt="' + esc(p.name) + '">'; return '<span class="dv-brandtxt">' + esc(p.name) + '</span>'; }
 
   var chatSvg = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8 8 0 0 1-11.5 7.2L4 20l1.1-4A8 8 0 1 1 21 12z"/></svg>';
 
@@ -29,6 +30,7 @@
         '<div class="dv-agent__top"><span class="dv-agent__ic">' + icon(a) + '</span>' +
         '<div style="min-width:0"><div class="dv-agent__name">' + esc(a.app) + '</div><div class="dv-agent__ep">' + esc(a.endpoints[0].name) + ' · from $' + a.price.toFixed(2) + '</div></div>' + badge + '</div>' +
         '<div class="dv-agent__desc">' + esc(a.desc) + '</div>' +
+        '<div class="dv-agent__prov"><span class="dv-agent__prov-k">Featured data</span>' + brand(a.provider) + '</div>' +
         '<div class="dv-agent__foot"><a class="dv-agent__try" href="/deep-search?q=' + encodeURIComponent(q) + '">' + chatSvg + 'Try in chat</a><a class="dv-agent__view" href="/portal">View API →</a></div></div>';
     }).join('');
     var soon = T.COMING.map(function (c) {

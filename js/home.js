@@ -30,6 +30,18 @@
   ];
   AGENTS.forEach(function (a) { var g = GROUPS[a.group]; a.color = g.color; a.tint200 = g.tint200; a.catIcon = g.icon; a.bgIcon = g.bg; });
 
+  /* featured LTV data brand behind each agent (relative asset paths for the root page) */
+  var HPROV = {
+    bv: { name: 'BeenVerified', logo: 'assets/logo-bv.svg' },
+    rp: { name: 'ReversePhone.com', logo: null },
+    ff: { name: 'FamFinder', logo: 'assets/logo-famfinder.svg' },
+    bumper: { name: 'Bumper', logo: 'assets/logo-bumper.svg' },
+    ownerly: { name: 'Ownerly', logo: 'assets/logo-ownerly.svg' }
+  };
+  var HPMAP = { Phone: 'rp', Vehicle: 'bumper', Property: 'ownerly', People: 'bv', Legal: 'bv', Family: 'ff', 'Trust & Safety': 'bv', Business: 'bv', Money: 'bv', Web: null };
+  AGENTS.forEach(function (a) { var k = HPMAP[a.name]; a.provider = k ? HPROV[k] : null; });
+  function hbrand(p) { if (!p) return '<span class="agent-card__brandtxt">Live web index</span>'; if (p.logo) return '<img class="agent-card__brandimg" src="' + p.logo + '" alt="' + esc(p.name) + '">'; return '<span class="agent-card__brandtxt">' + esc(p.name) + '</span>'; }
+
   var BRANDS = [
     { name: 'BeenVerified', logo: 'assets/logo-bv.svg', cat: 'People & background', desc: 'A decade-plus of people search, background reports, and contact data at consumer scale.', color: '#357A46' },
     { name: 'Bumper.com', logo: 'assets/logo-bumper.svg', cat: 'Vehicle history', desc: 'VIN checks, title and lien history, recalls, and market value on used vehicles.', color: '#2E6BFF' },
@@ -72,6 +84,7 @@
         '<div class="agent-card__app">' + esc(a.app) + '</div>' +
         '<div class="agent-card__desc">' + esc(a.desc) + '</div>' +
         '<div class="agent-card__extra">' + esc(a.extra) + '</div>' +
+        '<div class="agent-card__prov"><span class="agent-card__prov-k">Featured data</span>' + hbrand(a.provider) + '</div>' +
         '<div class="agent-card__foot"><span class="agent-card__ex">' + esc(a.ex) + '</span><span class="agent-card__go">→</span></div>' +
       '</div></a>';
   }

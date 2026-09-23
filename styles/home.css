@@ -153,7 +153,11 @@ a:hover{color:inherit;}
 .agent-card__app{font-size:24px;font-weight:600;margin-top:48px;line-height:1.05;}
 .agent-card__desc{font-size:15px;color:#14161B;margin-top:8px;line-height:1.5;}
 .agent-card__extra{font-size:14px;color:#7E8798;margin-top:20px;line-height:1.5;flex:1;}
-.agent-card__foot{margin-top:18px;padding-top:14px;border-top:1px solid #E4EAF3;display:flex;align-items:center;justify-content:space-between;gap:10px;}
+.agent-card__prov{margin-top:16px;padding-top:14px;border-top:1px solid #E4EAF3;display:flex;align-items:center;gap:10px;}
+.agent-card__prov-k{font-family:var(--font-mono);font-size:9px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted-2);flex:0 0 auto;}
+.agent-card__brandimg{height:16px;width:auto;display:block;}
+.agent-card__brandtxt{font-size:14px;font-weight:800;letter-spacing:-.01em;color:#14161B;}
+.agent-card__foot{margin-top:14px;padding-top:14px;border-top:1px solid #E4EAF3;display:flex;align-items:center;justify-content:space-between;gap:10px;}
 .agent-card__ex{font-size:11px;color:#7E8798;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
 .agent-card__go{font-size:13px;font-weight:700;color:#2E7BFF;white-space:nowrap;flex:0 0 auto;opacity:0;transition:opacity .15s ease;}
 .agent-card:hover .agent-card__go{opacity:1;}

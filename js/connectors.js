@@ -85,6 +85,18 @@ window.TELLERA_API = (function () {
       ] }
   ];
 
+  // Featured LTV data brand behind each agent (logos where we have them, else a mock wordmark)
+  var PROVIDERS = {
+    bv: { name: 'BeenVerified', logo: '/assets/logo-bv.svg' },
+    rp: { name: 'ReversePhone.com', logo: null },
+    ff: { name: 'FamFinder', logo: '/assets/logo-famfinder.svg' },
+    bumper: { name: 'Bumper', logo: '/assets/logo-bumper.svg' },
+    ownerly: { name: 'Ownerly', logo: '/assets/logo-ownerly.svg' },
+    ps: { name: 'PeopleSmart', logo: null }
+  };
+  var PROV_MAP = { people: 'bv', 'person-filter': 'bv', phone: 'rp', family: 'ff', property: 'ownerly', vehicle: 'bumper', assets: 'bv', court: 'bv', business: 'bv', safety: 'bv', 'web-search': null };
+  AGENTS.forEach(function (a) { var k = PROV_MAP[a.slug]; a.provider = k ? PROVIDERS[k] : null; });
+
   var COMING = [
     { app: 'Tellera Short-Term Rental', bucket: 'property', desc: 'Airbnb / VRBO listing, host, and revenue signals.' },
     { app: 'Tellera Homes for Sale', bucket: 'property', desc: 'For-sale listings, price history, and market comps.' },
