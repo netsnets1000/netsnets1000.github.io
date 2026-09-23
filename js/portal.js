@@ -70,6 +70,43 @@
     $('#pfPlanFill').style.width = Math.round(o.planUsed / o.planCalls * 100) + '%';
   }
 
+  /* ---------- first-login / getting started ---------- */
+  var GS_SETUP = {
+    mcp: { title: 'claude_desktop_config.json', code: '{\n  <span class="c-k">"mcpServers"</span>: {\n    <span class="c-k">"tellera"</span>: {\n      <span class="c-k">"url"</span>: <span class="c-g">"https://mcp.tellera.com"</span>,\n      <span class="c-k">"headers"</span>: { <span class="c-k">"Authorization"</span>: <span class="c-g">"Bearer $TELLERA_KEY"</span> }\n    }\n  }\n}' },
+    sdk: { title: 'setup.ts', code: '<span class="c-b">import</span> Tellera <span class="c-b">from</span> <span class="c-g">"@tellera/sdk"</span>;\n\n<span class="c-b">const</span> t = <span class="c-b">new</span> <span class="c-v">Tellera</span>({ apiKey: process.env.<span class="c-k">TELLERA_KEY</span> });\n<span class="c-b">const</span> a = <span class="c-b">await</span> t.<span class="c-v">ask</span>(<span class="c-g">"Who owns 13 Roland Dr?"</span>);' },
+    curl: { title: 'Terminal', code: '<span class="c-b">curl</span> https://api.tellera.com<span class="c-v">/v1/ask</span> \\\n  -H <span class="c-g">"Authorization: Bearer $TELLERA_KEY"</span> \\\n  -d <span class="c-g">\'{ "question": "Who owns 13 Roland Dr?" }\'</span>' }
+  };
+  function renderGettingStarted() {
+    var chipEl = $('#pfGsChips');
+    if (chipEl) {
+      var chips = ['Who owns this address?', 'Skip-trace a person', 'Look up a phone number', 'Pull court records', 'Enrich a company'];
+      chipEl.innerHTML = chips.map(function (c) { return '<button class="pf-gschip" data-q="' + esc(c) + '">' + esc(c) + '</button>'; }).join('');
+    }
+    var setupSeg = $('#pfGsSetupSeg'), setupCode = $('#pfGsSetupCode'), setupTitle = $('#pfGsSetupTitle');
+    function setSetup(k) { if (setupCode) setupCode.innerHTML = GS_SETUP[k].code; if (setupTitle) setupTitle.textContent = GS_SETUP[k].title; }
+    setSetup('mcp');
+    if (setupSeg) setupSeg.addEventListener('click', function (e) {
+      var b = e.target.closest('button'); if (!b) return;
+      setupSeg.querySelectorAll('button').forEach(function (x) { x.classList.toggle('active', x === b); });
+      setSetup(b.getAttribute('data-s'));
+    });
+    var agEl = $('#pfGsAgents');
+    if (agEl) agEl.innerHTML = T.AGENTS.filter(function (a) { return a.badge !== 'Teaser'; }).map(function (a) {
+      var prov = a.provider ? a.provider.name : 'Live web index';
+      return '<button class="pf-gsagent" data-slug-open="' + a.slug + '"><span class="pf-gsagent__ic">' + agentIcon(a) + '</span><span><span class="pf-gsagent__n">' + esc(a.app) + '</span><span class="pf-gsagent__b">' + esc(prov) + '</span></span></button>';
+    }).join('');
+  }
+
+  /* overview state toggle (prototype preview) */
+  function setOvState(s) {
+    var isNew = s !== 'active';
+    var nEl = $('#pfOvNew'), aEl = $('#pfOvActive');
+    if (nEl) nEl.hidden = !isNew;
+    if (aEl) aEl.hidden = isNew;
+    var seg = $('#pfOvSeg');
+    if (seg) seg.querySelectorAll('button').forEach(function (b) { b.classList.toggle('active', b.getAttribute('data-ov') === (isNew ? 'new' : 'active')); });
+  }
+
   /* ---------- agents catalog ---------- */
   var activeBucket = 'all';
   function renderCats() {
@@ -451,7 +488,21 @@
   if (col && side) col.addEventListener('click', function () { side.classList.remove('open'); });
 
   /* ---------- boot ---------- */
-  renderOverview(); renderCats(); renderConns(); renderComing(); renderConnect();
+  renderOverview(); renderGettingStarted(); renderCats(); renderConns(); renderComing(); renderConnect();
+
+  /* overview preview toggle + getting-started ask bar */
+  var ovSeg = $('#pfOvSeg');
+  if (ovSeg) ovSeg.addEventListener('click', function (e) { var b = e.target.closest('button'); if (b) setOvState(b.getAttribute('data-ov')); });
+  var gsAsk = $('#pfGsAsk'), gsChips = $('#pfGsChips');
+  function gsGo(q) {
+    var play = $('#pfPlayInput');
+    if (play && q) { play.value = q; var run = $('#pfPlayRun'); if (run) run.click(); }
+    showView('playground');
+  }
+  if (gsAsk) gsAsk.addEventListener('keydown', function (e) { if (e.key === 'Enter') { e.preventDefault(); gsGo((gsAsk.value || '').trim()); } });
+  var gsGoBtn = document.querySelector('.pf-gsask__go');
+  if (gsGoBtn) gsGoBtn.addEventListener('click', function (e) { e.preventDefault(); gsGo((gsAsk && gsAsk.value || '').trim() || 'Who owns 13 Roland Dr, White Plains NY?'); });
+  if (gsChips) gsChips.addEventListener('click', function (e) { var b = e.target.closest('.pf-gschip'); if (b) { if (gsAsk) gsAsk.value = b.getAttribute('data-q'); gsGo(b.getAttribute('data-q')); } });
   renderUsage(); renderLogs(); renderKeys(); renderPlans(); renderIntegrations();
 
   var navBadge = document.querySelector('.pf-nav__item[data-view="agents"] .pf-nav__badge');

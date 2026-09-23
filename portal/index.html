@@ -73,6 +73,79 @@
 
     <!-- OVERVIEW -->
     <section class="pf-view active" data-view="overview">
+      <div class="pf-ovseg">
+        <span class="pf-ovseg__lbl"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 8v5l3 2"/></svg>Prototype preview</span>
+        <div class="pf-seg" id="pfOvSeg"><button class="active" data-ov="new">First login (empty)</button><button data-ov="active">Active account</button></div>
+      </div>
+
+      <!-- ===== FIRST-LOGIN / GETTING STARTED ===== -->
+      <div id="pfOvNew">
+        <div class="pf-crumb">Dashboard <b>/ Home</b></div>
+        <div class="pf-gshero">
+          <div class="pf-gshero__badge"><span class="d"></span>Sandbox plan · $25.00 in free credits</div>
+          <h1 class="pf-gshero__h">What are you building, Shawn?</h1>
+          <p class="pf-gshero__d">Ask a real-world question in plain language and Tellera routes it to the right specialists — answered with a confidence score and cited sources. Or grab a key and call the API directly.</p>
+          <div class="pf-gsask">
+            <span class="pf-gsask__spark"><svg viewBox="0 0 24 24" width="22" height="22"><path d="M12 3l1.6 5.2L19 10l-5.4 1.8L12 17l-1.6-5.2L5 10l5.4-1.8z" fill="#5B45E0"/></svg></span>
+            <input class="pf-gsask__input" id="pfGsAsk" placeholder="e.g. Who owns 13 Roland Dr, White Plains NY?">
+            <button class="pf-gsask__go" data-view="playground" aria-label="Ask"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M6 11l6-6 6 6"/></svg></button>
+          </div>
+          <div class="pf-gschips" id="pfGsChips"></div>
+        </div>
+
+        <div class="pf-gsgrid">
+          <div class="pf-gscard">
+            <div class="pf-gscard__head">
+              <div><div class="pf-card__h">Get set up</div><div class="pf-card__desc">Four steps to your first answer.</div></div>
+              <span class="pf-gsprog__lbl">1 of 4</span>
+            </div>
+            <div class="pf-gsprog"><div class="pf-gsprog__fill" style="width:25%"></div></div>
+            <ol class="pf-gssteps">
+              <li class="pf-gsstep done"><span class="pf-gsstep__n"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l4 4 10-11"/></svg></span><div><div class="pf-gsstep__t">Create your account</div><div class="pf-gsstep__d">You're in — welcome to Tellera.</div></div></li>
+              <li class="pf-gsstep" data-view="keys"><span class="pf-gsstep__n">2</span><div><div class="pf-gsstep__t">Grab your API key</div><div class="pf-gsstep__d">One key calls every agent. Reveal &amp; copy it below.</div></div><span class="pf-gsstep__go">→</span></li>
+              <li class="pf-gsstep" data-view="connect"><span class="pf-gsstep__n">3</span><div><div class="pf-gsstep__t">Connect Tellera to your agent</div><div class="pf-gsstep__d">Add the MCP server or drop in the SDK.</div></div><span class="pf-gsstep__go">→</span></li>
+              <li class="pf-gsstep" data-view="playground"><span class="pf-gsstep__n">4</span><div><div class="pf-gsstep__t">Make your first call</div><div class="pf-gsstep__d">Try a question in the playground or in chat.</div></div><span class="pf-gsstep__go">→</span></li>
+            </ol>
+          </div>
+
+          <div class="pf-gscol">
+            <div class="pf-apikey pf-apikey--gs">
+              <span class="pf-apikey__ic"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><circle cx="8" cy="15" r="4"/><path d="M11 12l8-8M17 4l3 3M14 7l2 2"/></svg></span>
+              <div><div class="pf-apikey__t">Your first API key <span class="pf-apikey__new">new</span></div><div class="pf-apikey__d">Ready to use — no card required.</div></div>
+              <span class="pf-apikey__key">tlr_live_9f2c····7Ae1 <button title="Reveal"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/></svg></button><button title="Copy"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg></button></span>
+            </div>
+            <div class="pf-gssetup">
+              <div class="pf-gssetup__head"><div class="pf-card__h" style="font-size:15px;">Your setup</div><div class="pf-seg pf-seg--sm" id="pfGsSetupSeg"><button class="active" data-s="mcp">MCP</button><button data-s="sdk">SDK</button><button data-s="curl">cURL</button></div></div>
+              <div class="pf-code pf-code--sm"><div class="pf-code__bar"><span class="pf-code__dot" style="background:#E0574C"></span><span class="pf-code__dot" style="background:#E0B44C"></span><span class="pf-code__dot" style="background:#357A46"></span><span class="pf-code__title" id="pfGsSetupTitle">claude_desktop_config.json</span><button class="pf-code__copy">Copy</button></div><pre id="pfGsSetupCode"></pre></div>
+              <a class="pf-gsmore" data-view="connect" href="#">Full connection guide →</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="pf-gsgrid2">
+          <div class="pf-gsempty">
+            <div class="pf-gsempty__ic"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19V5M4 15l4-4 4 3 6-7"/></svg></div>
+            <div class="pf-gsempty__t">No calls yet</div>
+            <div class="pf-gsempty__d">Once you make your first request, usage, recent calls and your most-used agents show up here. Every call is on us until your free credits run out.</div>
+            <button class="pf-btn pf-btn--prism" data-view="playground">Make your first call</button>
+          </div>
+          <div class="pf-gscredit">
+            <div class="pf-gscredit__head"><span class="pf-card__h" style="font-size:15px;">Free credits</span><span class="pf-gscredit__badge">Sandbox</span></div>
+            <div class="pf-gscredit__big">$25.00 <span>ready to use</span></div>
+            <div class="pf-gsprog"><div class="pf-gsprog__fill" style="width:2%;background:linear-gradient(90deg,#31C48D,#2E7BFF)"></div></div>
+            <div class="pf-gscredit__note">$0.00 used · about 1,250 orchestrated calls at Sandbox rates.</div>
+            <a class="pf-gsmore" data-view="plans" href="#">See plans &amp; pricing →</a>
+          </div>
+        </div>
+
+        <div class="pf-gsexplore">
+          <div class="pf-gscard__head" style="margin-bottom:14px;"><div><div class="pf-card__h">Explore the agents</div><div class="pf-card__desc">Ten specialists, one orchestrator. Tap one to see its endpoint &amp; docs.</div></div><a class="pf-card__link" data-view="agents" href="#">All agents →</a></div>
+          <div class="pf-gsagents" id="pfGsAgents"></div>
+        </div>
+      </div>
+
+      <!-- ===== ACTIVE ACCOUNT ===== -->
+      <div id="pfOvActive" hidden>
       <div class="pf-crumb">Dashboard <b>/ Overview</b></div>
       <div class="pf-head">
         <div><h1 class="pf-title">Overview</h1><p class="pf-sub">A quick look at your API activity and the tools you need to make the next call.</p></div>
@@ -121,6 +194,7 @@
           </div>
         </div>
       </div>
+      </div><!-- /pfOvActive -->
     </section>
 
     <!-- AGENTS -->
