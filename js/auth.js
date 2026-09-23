@@ -38,7 +38,7 @@
   function go(btn) {
     btn.disabled = true;
     btn.innerHTML = '<span class="au-spin"></span>Connecting…';
-    setTimeout(function () { window.location.href = '/portal'; }, 750);
+    setTimeout(function () { window.location.href = mode === 'signin' ? '/portal' : '/onboarding'; }, 750);
   }
 
   document.addEventListener('click', function (e) {

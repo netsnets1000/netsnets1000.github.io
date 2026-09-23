@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Set up Tellera — Create your setup prompt</title>
+<meta name="description" content="Answer three quick questions and Tellera generates the MCP config or code snippet to connect your AI agent or app.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,600&family=Spectral:ital,wght@0,300;0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/styles/tokens.css">
+<link rel="stylesheet" href="/styles/developers.css">
+<link rel="stylesheet" href="/styles/onboarding.css">
+</head>
+<body class="dv-body ob-body">
+
+<header class="ob-nav">
+  <a href="/" aria-label="Tellera home" style="display:flex;align-items:center;"><img src="/assets/tellera-wordmark-dark.svg" alt="Tellera" class="ob-nav__word"></a>
+  <a class="ob-nav__skip" href="/portal">Skip for now &rarr;</a>
+</header>
+
+<main class="ob">
+  <div class="ob__eyebrow">Welcome to Tellera</div>
+  <h1 class="ob__h1">Create your setup prompt</h1>
+  <p class="ob__sub">Answer three quick questions and we'll generate the exact config to drop into your stack — plus tailor your dashboard to what you're building. You can change any of this later.</p>
+
+  <div class="ob__q">What are you building with?</div>
+  <div class="ob__chips" id="obTool"></div>
+
+  <div class="ob__q">How do you want to connect?</div>
+  <div class="ob__chips" id="obConn"></div>
+
+  <div class="ob__q">What are you building? <span>select all that apply</span></div>
+  <div class="ob__chips" id="obUse"></div>
+
+  <div class="ob__q">Tell us about your product &amp; use case <span>optional</span></div>
+  <textarea class="ob__desc" id="obDesc" placeholder="e.g. We enrich inbound leads in our CRM with property ownership and phone data before routing to sales…"></textarea>
+
+  <button class="ob__gen" id="obGen">Generate my setup &rarr;</button>
+
+  <section class="ob__result" id="obResult" aria-live="polite"></section>
+</main>
+
+<script src="/js/connectors.js"></script>
+<script src="/js/onboarding.js"></script>
+</body>
+</html>
