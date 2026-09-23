@@ -260,19 +260,34 @@
       <div class="pf-acctpage">
         <div class="pf-acctsec">
           <div class="pf-acctsec__h">Profile</div>
-          <div class="pf-field"><span class="pf-field__k">Name</span><span class="pf-field__v">Shawn Siegel</span></div>
-          <div class="pf-field"><span class="pf-field__k">Email</span><span class="pf-field__v">ssiegel@ltvco.com</span></div>
+          <div class="pf-prof">
+            <span class="pf-prof__avatar" id="acAvatar">S</span>
+            <div><div class="pf-prof__name" id="acName">Shawn Siegel</div><div class="pf-prof__email" id="acEmailTop">ssiegel@ltvco.com</div></div>
+            <button class="pf-btn pf-btn--ghost" id="pfEditProfile" style="margin-left:auto;">Edit profile</button>
+          </div>
+          <div class="pf-field"><span class="pf-field__k">Full name</span><span class="pf-field__v" id="acNameV">Shawn Siegel</span></div>
+          <div class="pf-field"><span class="pf-field__k">Primary email</span><span class="pf-field__v" id="acEmail">ssiegel@ltvco.com</span></div>
+          <div class="pf-field"><span class="pf-field__k">Additional email</span><span class="pf-field__v" id="acEmail2">shawn.siegel2@gmail.com</span></div>
+          <div class="pf-field"><span class="pf-field__k">Phone</span><span class="pf-field__v" id="acPhone">(212) 555-0134</span></div>
+          <div class="pf-field"><span class="pf-field__k">Job title</span><span class="pf-field__v" id="acTitle">VP, Product</span></div>
           <div class="pf-field"><span class="pf-field__k">User ID</span><span class="pf-field__v" style="font-family:var(--font-mono);font-size:12px;">user_3JZXMqm7ynHft3sz</span></div>
+          <div class="pf-field" style="border-bottom:none;"><span class="pf-field__k">Connected accounts</span><span class="pf-field__v" style="display:inline-flex;align-items:center;gap:8px;"><svg viewBox="0 0 24 24" width="15" height="15"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.76h3.56c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.56-2.76c-.98.66-2.23 1.06-3.72 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84A11 11 0 0 0 12 23z"/><path fill="#FBBC05" d="M5.84 14.11a6.6 6.6 0 0 1 0-4.22V7.05H2.18a11 11 0 0 0 0 9.9l3.66-2.84z"/><path fill="#EA4335" d="M12 4.75c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 1.46 14.97.5 12 .5A11 11 0 0 0 2.18 7.05l3.66 2.84C6.71 6.68 9.14 4.75 12 4.75z"/></svg>Google · ssiegel@ltvco.com</span></div>
+        </div>
+        <div class="pf-acctsec">
+          <div class="pf-acctsec__h">Security</div>
+          <div class="pf-field"><span class="pf-field__k">Password</span><span class="pf-field__v">••••••••••</span></div>
+          <div class="pf-field"><span class="pf-field__k">Two-factor authentication</span><span class="pf-field__v" style="color:var(--muted);">Not enabled</span></div>
+          <div style="margin-top:14px;display:flex;gap:10px;"><button class="pf-btn pf-btn--ghost" id="pfChangePw">Change password</button><button class="pf-btn pf-btn--ghost">Enable 2FA</button></div>
         </div>
         <div class="pf-acctsec">
           <div class="pf-acctsec__h">Company &amp; use case</div>
-          <div class="pf-field"><span class="pf-field__k">Company</span><span class="pf-field__v">The Lifetime Value Co.</span></div>
-          <div class="pf-field"><span class="pf-field__k">Website</span><span class="pf-field__v">ltvco.com</span></div>
-          <div class="pf-field"><span class="pf-field__k">Industry</span><span class="pf-field__v">Data &amp; SaaS</span></div>
-          <div class="pf-field"><span class="pf-field__k">Team size</span><span class="pf-field__v">201–500 employees</span></div>
-          <div class="pf-field"><span class="pf-field__k">Primary use case</span><span class="pf-field__v">Enriching leads &amp; records for internal agents</span></div>
-          <div class="pf-field"><span class="pf-field__k">Work phone</span><span class="pf-field__v">(212) 555-0134</span></div>
-          <div style="margin-top:14px;"><button class="pf-btn pf-btn--ghost">Edit details</button></div>
+          <div class="pf-field"><span class="pf-field__k">Company</span><span class="pf-field__v" id="acCompany">The Lifetime Value Co.</span></div>
+          <div class="pf-field"><span class="pf-field__k">Website</span><span class="pf-field__v" id="acWebsite">ltvco.com</span></div>
+          <div class="pf-field"><span class="pf-field__k">Industry</span><span class="pf-field__v" id="acIndustry">Data &amp; SaaS</span></div>
+          <div class="pf-field"><span class="pf-field__k">Team size</span><span class="pf-field__v" id="acTeam">201–500 employees</span></div>
+          <div class="pf-field"><span class="pf-field__k">Primary use case</span><span class="pf-field__v" id="acUseCase">Enriching leads &amp; records for internal agents</span></div>
+          <div class="pf-field"><span class="pf-field__k">Work phone</span><span class="pf-field__v" id="acWorkPhone">(212) 555-0134</span></div>
+          <div style="margin-top:14px;"><button class="pf-btn pf-btn--ghost" id="pfEditCompany">Edit details</button></div>
         </div>
         <div class="pf-acctsec">
           <div class="pf-acctsec__h">Plan &amp; billing</div>
@@ -349,6 +364,54 @@
     <div class="pf-modal__actions">
       <button class="pf-btn pf-btn--ghost" id="upCancel">Not now</button>
       <button class="pf-btn pf-btn--prism" id="upConfirm">Confirm upgrade</button>
+    </div>
+  </div>
+</div>
+
+<!-- EDIT PROFILE MODAL -->
+<div class="pf-modal" id="profileModal">
+  <div class="pf-modal__card pf-modal__card--wide">
+    <div class="pf-modal__strip"></div>
+    <div class="pf-modal__t">Edit profile</div>
+    <div class="pf-modal__d">Update your name, emails, and contact details.</div>
+    <div class="pf-form__label">Full name</div>
+    <input class="pf-form__input" id="fName">
+    <div class="pf-form__label">Primary email</div>
+    <input class="pf-form__input" id="fEmail" type="email">
+    <div class="pf-form__label">Additional email</div>
+    <input class="pf-form__input" id="fEmail2" type="email" placeholder="optional">
+    <div class="pf-form__label">Phone</div>
+    <input class="pf-form__input" id="fPhone">
+    <div class="pf-form__label">Job title</div>
+    <input class="pf-form__input" id="fTitle">
+    <div class="pf-modal__actions">
+      <button class="pf-btn pf-btn--ghost" id="profCancel">Cancel</button>
+      <button class="pf-btn pf-btn--prism" id="profSave">Save changes</button>
+    </div>
+  </div>
+</div>
+
+<!-- EDIT COMPANY MODAL -->
+<div class="pf-modal" id="companyModal">
+  <div class="pf-modal__card pf-modal__card--wide">
+    <div class="pf-modal__strip"></div>
+    <div class="pf-modal__t">Edit company &amp; use case</div>
+    <div class="pf-modal__d">Helps us tailor rate limits, support, and permissible-purpose review.</div>
+    <div class="pf-form__label">Company</div>
+    <input class="pf-form__input" id="cCompany">
+    <div class="pf-form__label">Website</div>
+    <input class="pf-form__input" id="cWebsite">
+    <div class="pf-form__label">Industry</div>
+    <input class="pf-form__input" id="cIndustry">
+    <div class="pf-form__label">Team size</div>
+    <select class="pf-form__select" id="cTeam"><option>1–10 employees</option><option>11–50 employees</option><option>51–200 employees</option><option>201–500 employees</option><option>500+ employees</option></select>
+    <div class="pf-form__label">Primary use case</div>
+    <input class="pf-form__input" id="cUseCase">
+    <div class="pf-form__label">Work phone</div>
+    <input class="pf-form__input" id="cWorkPhone">
+    <div class="pf-modal__actions">
+      <button class="pf-btn pf-btn--ghost" id="compCancel">Cancel</button>
+      <button class="pf-btn pf-btn--prism" id="compSave">Save changes</button>
     </div>
   </div>
 </div>
