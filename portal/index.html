@@ -304,6 +304,16 @@
           <div style="margin-top:14px;"><button class="pf-btn pf-btn--ghost" id="pfEditCompany">Edit details</button></div>
         </div>
         <div class="pf-acctsec">
+          <div class="pf-acctsec__h" style="display:flex;align-items:center;justify-content:space-between;gap:12px;">Team &amp; seats
+            <button class="pf-btn pf-btn--ghost" id="pfInvite" style="font-size:13px;padding:8px 14px;">Invite member</button>
+          </div>
+          <p style="font-size:13.5px;line-height:1.6;color:var(--ink-2);margin-bottom:16px;">Seats share this account's plan and usage — everyone draws from the same call quota and credits. Add teammates so they can sign in with their own credentials and roles.</p>
+          <div class="pf-usebar__row"><span class="pf-usebar__k">Seats used</span><span class="pf-usebar__v" id="pfSeatV">4 of 5 seats</span></div>
+          <div class="pf-rank__bar"><div class="pf-rank__fill" id="pfSeatFill" style="width:80%;background:linear-gradient(90deg,#2E7BFF,#7B5BFF)"></div></div>
+          <div class="pf-usebar__note" id="pfSeatNote" style="margin-top:8px;">Pro includes 5 seats · additional seats $19/seat / mo.</div>
+          <div class="pf-members" id="pfMembers" style="margin-top:16px;"></div>
+        </div>
+        <div class="pf-acctsec">
           <div class="pf-acctsec__h">Plan &amp; billing</div>
           <div class="pf-field"><span class="pf-field__k">Current plan</span><span class="pf-field__v">Pro · $199 / mo</span></div>
           <div class="pf-field"><span class="pf-field__k">Renews</span><span class="pf-field__v">Oct 2, 2026</span></div>
@@ -378,6 +388,23 @@
     <div class="pf-modal__actions">
       <button class="pf-btn pf-btn--ghost" id="upCancel">Not now</button>
       <button class="pf-btn pf-btn--prism" id="upConfirm">Confirm upgrade</button>
+    </div>
+  </div>
+</div>
+
+<!-- INVITE MEMBER MODAL -->
+<div class="pf-modal" id="inviteModal">
+  <div class="pf-modal__card pf-modal__card--wide">
+    <div class="pf-modal__strip"></div>
+    <div class="pf-modal__t">Invite a teammate</div>
+    <div class="pf-modal__d">They'll get their own login and share this account's plan and usage. Seats beyond your plan bill at $19/seat / mo.</div>
+    <div class="pf-form__label">Email</div>
+    <input class="pf-form__input" id="invEmail" type="email" placeholder="teammate@company.com">
+    <div class="pf-form__label">Role</div>
+    <select class="pf-form__select" id="invRole"><option>Admin</option><option selected>Developer</option><option>Billing</option><option>Read-only</option></select>
+    <div class="pf-modal__actions">
+      <button class="pf-btn pf-btn--ghost" id="invCancel">Cancel</button>
+      <button class="pf-btn pf-btn--prism" id="invSend">Send invite</button>
     </div>
   </div>
 </div>

@@ -119,6 +119,9 @@ window.TELLERA_API = (function () {
       mon: { add: 'custom', count: 'Portfolio monitoring', cadence: 'Real-time + SLA' },
       features: ['On-prem / BAA options', 'Custom SLAs', 'Permissible-purpose review', 'Solutions engineer'] }
   ];
+  // seats share a plan's calls, credits, and monitors — extra seats bill per-seat
+  var SEATS = { Sandbox: '1 seat', Starter: '1 seat', Pro: '5 seats', Scale: '20 seats', Enterprise: 'Unlimited seats' };
+  PLANS.forEach(function (p) { p.seats = SEATS[p.name] || ''; });
 
   var SPARK = '<svg viewBox="0 0 24 24" width="26" height="26"><path d="M12 3l1.6 5.2L19 10l-5.4 1.8L12 17l-1.6-5.2L5 10l5.4-1.8z" fill="#7B5BFF"/><path d="M18.6 3.4l.6 1.9 1.9.6-1.9.6-.6 1.9-.6-1.9-1.9-.6 1.9-.6z" fill="#2E7BFF"/></svg>';
 

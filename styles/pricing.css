@@ -14,6 +14,7 @@
 .pr-plan__monnote--muted{color:var(--muted);font-weight:600;}
 .pr-plan__calls{font-size:12.5px;font-weight:700;margin-top:10px;}
 .pr-plan__over{font-size:11.5px;color:var(--muted);margin-top:2px;}
+.pr-plan__seats{font-size:11.5px;color:var(--violet-ink);font-weight:600;margin-top:4px;}
 .pr-plan__feats{list-style:none;margin:14px 0 0;padding:14px 0 0;border-top:1px solid var(--bd-rule);display:flex;flex-direction:column;gap:8px;flex:1;}
 .pr-plan__feats li{display:flex;gap:8px;font-size:12.5px;color:var(--ink-2);line-height:1.4;}
 .pr-plan__feats li svg{flex:0 0 auto;margin-top:2px;color:#357A46;width:14px;height:14px;}

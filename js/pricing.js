@@ -35,6 +35,7 @@
         '<div class="pr-plan__name">' + esc(p.name) + '</div>' +
         '<div class="pr-plan__price">' + esc(price) + '<span>' + esc(p.cadence) + '</span></div>' + monNote +
         '<div class="pr-plan__calls">' + esc(p.calls) + '</div><div class="pr-plan__over">' + esc(p.overage) + '</div>' +
+        (p.seats ? '<div class="pr-plan__seats">' + esc(p.seats) + ' · shared usage</div>' : '') +
         '<ul class="pr-plan__feats">' + monFeat + p.features.map(function (f) { return '<li>' + check + '<span>' + esc(f) + '</span></li>'; }).join('') + '</ul>' +
         cta + '</div>';
     }).join('');

@@ -211,6 +211,7 @@
         '<div class="pf-plan__name">' + esc(p.name) + '</div>' +
         '<div class="pf-plan__price">' + esc(price) + '<span>' + esc(p.cadence) + '</span></div>' + monNote +
         '<div class="pf-plan__calls">' + esc(p.calls) + '</div><div class="pf-plan__over">' + esc(p.overage) + '</div>' +
+        (p.seats ? '<div class="pf-plan__seats">' + esc(p.seats) + ' · shared usage</div>' : '') +
         '<ul class="pf-plan__feats">' + monFeat + p.features.map(function (f) { return '<li>' + checkSvg + '<span>' + esc(f) + '</span></li>'; }).join('') + '</ul>' +
         '<button class="pf-btn ' + (p.current ? 'pf-btn--ghost' : 'pf-btn--prism') + ' pf-plan__cta" data-plan="' + esc(p.name) + '"' + (p.current ? ' disabled style="opacity:.6"' : '') + '>' + esc(p.cta) + '</button></div>';
     }).join('');
@@ -404,6 +405,34 @@
     compModal.classList.remove('open');
   }
 
+  /* ---------- team & seats ---------- */
+  var MEMBERS = [
+    { name: 'Shawn Siegel', email: 'ssiegel@ltvco.com', role: 'Owner', status: 'Active', initial: 'S' },
+    { name: 'Jordan Lee', email: 'jordan@ltvco.com', role: 'Admin', status: 'Active', initial: 'J' },
+    { name: 'Priya Nair', email: 'priya@ltvco.com', role: 'Developer', status: 'Active', initial: 'P' },
+    { name: 'Pending invite', email: 'newhire@ltvco.com', role: 'Developer', status: 'Invited', initial: '?' }
+  ];
+  var SEAT_CAP = 5, invModal = $('#inviteModal');
+  function renderMembers() {
+    var el = $('#pfMembers'); if (!el) return;
+    el.innerHTML = MEMBERS.map(function (m) {
+      var pending = m.status === 'Invited';
+      return '<div class="pf-member"><span class="pf-member__av' + (pending ? ' pf-member__av--pending' : '') + '">' + esc(m.initial) + '</span>' +
+        '<div style="min-width:0"><div class="pf-member__name">' + esc(m.name) + '</div><div class="pf-member__email">' + esc(m.email) + '</div></div>' +
+        '<span class="pf-member__role">' + esc(m.role) + '</span>' +
+        '<span class="pf-member__status pf-member__status--' + (pending ? 'invited' : 'active') + '">' + esc(m.status) + '</span>' +
+        (m.role === 'Owner' ? '<span style="width:28px;flex:0 0 auto"></span>' : '<button class="pf-member__x" title="Remove seat" data-rm="' + esc(m.email) + '">✕</button>') + '</div>';
+    }).join('');
+    var used = MEMBERS.length;
+    var v = $('#pfSeatV'); if (v) v.textContent = used + ' of ' + SEAT_CAP + ' seats' + (used > SEAT_CAP ? ' · ' + (used - SEAT_CAP) + ' over' : '');
+    var fill = $('#pfSeatFill'); if (fill) fill.style.width = Math.min(used / SEAT_CAP, 1) * 100 + '%';
+    var note = $('#pfSeatNote'); if (note) note.textContent = used > SEAT_CAP
+      ? ((used - SEAT_CAP) + ' seat' + (used - SEAT_CAP > 1 ? 's' : '') + ' over your plan · billed at $19/seat / mo.')
+      : ('Pro includes ' + SEAT_CAP + ' seats · additional seats $19/seat / mo.');
+    el.querySelectorAll('[data-rm]').forEach(function (b) { b.addEventListener('click', function () { var em = b.getAttribute('data-rm'); MEMBERS = MEMBERS.filter(function (x) { return x.email !== em; }); renderMembers(); }); });
+  }
+  function openInvite() { if ($('#invEmail')) $('#invEmail').value = ''; invModal.classList.add('open'); }
+
   /* ---------- cancel modal ---------- */
   var modal = $('#cancelModal');
   function openModal() { modal.classList.add('open'); }
@@ -484,4 +513,14 @@
   var compCancel = $('#compCancel'); if (compCancel) compCancel.addEventListener('click', function () { compModal.classList.remove('open'); });
   var compSave = $('#compSave'); if (compSave) compSave.addEventListener('click', saveCompany);
   if (compModal) compModal.addEventListener('click', function (e) { if (e.target === compModal) compModal.classList.remove('open'); });
+
+  renderMembers();
+  var inviteBtn = $('#pfInvite'); if (inviteBtn) inviteBtn.addEventListener('click', openInvite);
+  var invCancel = $('#invCancel'); if (invCancel) invCancel.addEventListener('click', function () { invModal.classList.remove('open'); });
+  var invSend = $('#invSend'); if (invSend) invSend.addEventListener('click', function () {
+    var e = ($('#invEmail').value || '').trim(); if (!e) { $('#invEmail').focus(); return; }
+    MEMBERS.push({ name: 'Pending invite', email: e, role: $('#invRole').value, status: 'Invited', initial: '?' });
+    renderMembers(); invModal.classList.remove('open');
+  });
+  if (invModal) invModal.addEventListener('click', function (e) { if (e.target === invModal) invModal.classList.remove('open'); });
 })();
