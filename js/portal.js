@@ -363,8 +363,45 @@
   function askCode(q, kind) {
     var qq = esc(q);
     if (kind === 'curl') return '<span class="c-b">$</span> curl https://api.tellera.com<span class="c-v">/v1/ask</span> \\\n  -H <span class="c-g">"Authorization: Bearer $TELLERA_KEY"</span> \\\n  -d <span class="c-g">\x27</span>{ <span class="c-k">"question"</span>: <span class="c-g">"' + qq + '"</span> }<span class="c-g">\x27</span>';
-    if (kind === 'sdk') return 'import Tellera from <span class="c-g">"@tellera/sdk"</span>;\n\nconst tellera = new Tellera({ apiKey: process.env.TELLERA_API_KEY });\n\nconst res = await tellera.<span class="c-v">ask</span>(<span class="c-g">"' + qq + '"</span>);\nconsole.log(res.answer, res.confidence, res.sources);';
+    if (kind === 'py') return '<span class="c-b">from</span> tellera <span class="c-b">import</span> Tellera\n\ntellera = <span class="c-v">Tellera</span>(api_key=<span class="c-g">"$TELLERA_KEY"</span>)\nres = tellera.<span class="c-v">ask</span>(<span class="c-g">"' + qq + '"</span>)\n<span class="c-v">print</span>(res.answer, res.confidence, res.sources)';
+    if (kind === 'js' || kind === 'sdk') return '<span class="c-b">import</span> Tellera <span class="c-b">from</span> <span class="c-g">"@tellera/sdk"</span>;\n\n<span class="c-b">const</span> tellera = <span class="c-b">new</span> <span class="c-v">Tellera</span>({ apiKey: process.env.<span class="c-k">TELLERA_KEY</span> });\n<span class="c-b">const</span> res = <span class="c-b">await</span> tellera.<span class="c-v">ask</span>(<span class="c-g">"' + qq + '"</span>);\nconsole.<span class="c-v">log</span>(res.answer, res.confidence, res.sources);';
     return '{\n  <span class="c-k">"tool"</span>: <span class="c-g">"ask"</span>,\n  <span class="c-k">"arguments"</span>: { <span class="c-k">"question"</span>: <span class="c-g">"' + qq + '"</span> }\n}';
+  }
+  /* plain-text prompt+context blob to paste into an LLM */
+  function askAIContext(q) {
+    return [
+      'I\'m integrating the Tellera API. Here\'s the endpoint and my request — please write the integration and explain the response shape.',
+      '',
+      '## Endpoint',
+      'POST https://api.tellera.com/v1/ask (orchestrator).',
+      'Send a plain-language question; Tellera routes it to the right specialist agents (People, Property, Phone, Court, Business, and more), cross-checks the record, and returns one synthesized answer with a confidence score and cited sources.',
+      '',
+      '## Auth',
+      'Header: Authorization: Bearer $TELLERA_KEY',
+      '',
+      '## Example request (cURL)',
+      'curl https://api.tellera.com/v1/ask \\',
+      '  -H "Authorization: Bearer $TELLERA_KEY" \\',
+      '  -d \'{ "question": "' + q + '" }\'',
+      '',
+      '## Example response',
+      '{ "answer": "…", "confidence": "high", "sources": [ { "name": "…", "url": "…" } ] }',
+      '',
+      '## My question',
+      '"' + q + '"'
+    ].join('\n');
+  }
+  function flashCopied(btn, label) {
+    if (!btn) return;
+    if (!btn.__html) btn.__html = btn.innerHTML;
+    btn.classList.add('copied');
+    btn.textContent = label || 'Copied!';
+    clearTimeout(btn.__t);
+    btn.__t = setTimeout(function () { btn.classList.remove('copied'); btn.innerHTML = btn.__html; }, 1400);
+  }
+  function copyText(txt, btn, label) {
+    if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(txt).catch(function () {});
+    flashCopied(btn, label);
   }
   function initPlayground() {
     var chips = $('#pfPlayChips'), input = $('#pfPlayInput'), out = $('#pfPlayOut'), code = $('#pfPlayCode'), tabs = $('#pfPlayTabs'), chat = $('#pfPlayChat'), run = $('#pfPlayRun');
@@ -383,6 +420,8 @@
     input.addEventListener('keydown', function (e) { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); go(); } });
     if (chips) chips.addEventListener('click', function (e) { var b = e.target.closest('.pf-play__chip'); if (!b) return; input.value = b.getAttribute('data-q'); go(); });
     if (tabs) tabs.addEventListener('click', function (e) { var t = e.target.closest('.pf-tab'); if (!t) return; tabs.querySelectorAll('.pf-tab').forEach(function (b) { b.classList.toggle('active', b === t); }); code.innerHTML = askCode(current || T.ASK.prompts[0], t.getAttribute('data-k')); });
+    var copyAI = $('#pfPlayCopyAI');
+    if (copyAI) copyAI.addEventListener('click', function () { copyText(askAIContext(current || T.ASK.prompts[0]), copyAI, 'Copied for AI'); });
   }
 
   /* ---------- monitors ---------- */

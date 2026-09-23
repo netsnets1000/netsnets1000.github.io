@@ -401,6 +401,12 @@
 .pf-play__srcchip{display:inline-flex;align-items:center;gap:6px;font-size:11.5px;color:var(--ink-2);background:var(--panel);border:1px solid var(--bd-inner);border-radius:999px;padding:4px 10px;}
 .pf-play__srcchip .d{width:6px;height:6px;border-radius:50%;background:#357A46;}
 .pf-play__codelabel{font-family:var(--font-mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted-2);margin:18px 0 8px;}
+.pf-play__codehead{display:flex;align-items:center;justify-content:space-between;gap:12px;}
+.pf-play__codehead .pf-play__codelabel{margin:18px 0 8px;}
+.pf-copyai{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:700;color:var(--violet-ink);background:rgba(123,91,255,.07);border:1px solid rgba(123,91,255,.2);border-radius:8px;padding:6px 12px;cursor:pointer;transition:background .12s var(--ease),color .12s var(--ease);}
+.pf-copyai:hover{background:rgba(123,91,255,.13);}
+.pf-copyai svg{flex:0 0 auto;}
+.pf-copyai.copied{color:#fff;background:#31C48D;border-color:#31C48D;}
 
 /* ---------- Monitors ---------- */
 .pf-mon{background:#fff;border:1px solid var(--bd-card);border-radius:14px;overflow:hidden;}
