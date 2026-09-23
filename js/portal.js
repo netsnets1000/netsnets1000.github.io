@@ -446,6 +446,7 @@
   if (upModal) upModal.addEventListener('click', function (e) { if (e.target === upModal) upModal.classList.remove('open'); });
 
   var addCred = $('#pfAddCredits'); if (addCred) addCred.addEventListener('click', openCredits);
+  var addCred2 = $('#pfUsageCredits'); if (addCred2) addCred2.addEventListener('click', openCredits);
   var crCancel = $('#creditCancel'); if (crCancel) crCancel.addEventListener('click', function () { creditModal.classList.remove('open'); });
   var crConfirm = $('#creditConfirm'); if (crConfirm) crConfirm.addEventListener('click', function () {
     T.CREDITS.balance += creditAmt; $('#creditBal').textContent = '$' + T.CREDITS.balance.toFixed(2); creditModal.classList.remove('open');

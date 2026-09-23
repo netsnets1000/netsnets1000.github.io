@@ -225,6 +225,16 @@
 .pf-keyrow__actions button{border:none;background:none;color:var(--muted);width:30px;height:30px;border-radius:8px;}
 .pf-keyrow__actions button:hover{background:var(--panel);color:var(--ink);}
 
+/* usage summary bars */
+.pf-usebar__row{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin-bottom:8px;}
+.pf-usebar__k{font-size:14px;font-weight:700;color:var(--ink);}
+.pf-usebar__v{font-size:12.5px;color:var(--muted);white-space:nowrap;}
+.pf-usebar__tag{font-family:var(--font-mono);font-size:9px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#357A46;background:rgba(53,122,70,.12);border-radius:999px;padding:2px 7px;margin-left:6px;vertical-align:2px;}
+.pf-usebar__foot{margin-top:16px;display:flex;align-items:center;gap:12px;flex-wrap:wrap;}
+.pf-usebar__note{font-size:13px;color:var(--muted);}
+.pf-usebar__note b{color:var(--ink);font-weight:700;}
+.pf-usebar__acts{margin-left:auto;display:flex;gap:10px;}
+
 /* usage chart */
 .pf-chart{display:flex;align-items:flex-end;gap:6px;height:200px;padding:16px 4px 0;}
 .pf-chart__col{flex:1;display:flex;flex-direction:column;justify-content:flex-end;gap:2px;min-width:0;}

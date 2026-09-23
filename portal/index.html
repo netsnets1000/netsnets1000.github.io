@@ -206,6 +206,20 @@
       <div class="pf-crumb">Dashboard <b>/ Usage</b></div>
       <div class="pf-head"><div><h1 class="pf-title">Usage</h1><p class="pf-sub">Track your API usage and spend across agents.</p></div>
         <div class="pf-head__actions"><div class="pf-range"><button>3m</button><button class="active">30d</button><button>7d</button></div></div></div>
+      <div class="pf-card" style="margin-bottom:16px;"><div class="pf-card__body" style="padding:18px 20px;">
+        <div class="pf-usebar">
+          <div class="pf-usebar__row"><span class="pf-usebar__k">Plan calls — Pro</span><span class="pf-usebar__v">12,480 / 15,000 · 83% used</span></div>
+          <div class="pf-rank__bar"><div class="pf-rank__fill" style="width:83%;background:linear-gradient(90deg,#2E7BFF,#7B5BFF)"></div></div>
+        </div>
+        <div class="pf-usebar" style="margin-top:16px;">
+          <div class="pf-usebar__row"><span class="pf-usebar__k">Free credits <span class="pf-usebar__tag">promo</span></span><span class="pf-usebar__v">$12.50 / $25.00 used</span></div>
+          <div class="pf-rank__bar"><div class="pf-rank__fill" style="width:50%;background:linear-gradient(90deg,#37B6A6,#357A46)"></div></div>
+        </div>
+        <div class="pf-usebar__foot">
+          <span class="pf-usebar__note">Total spend this period <b>$462.30</b> · overage <b>$0.00</b> · credit balance <b>$42.50</b></span>
+          <span class="pf-usebar__acts"><button class="pf-btn pf-btn--ghost" id="pfUsageCredits">Add credits</button><button class="pf-btn pf-btn--ghost">Billing history</button></span>
+        </div>
+      </div></div>
       <div class="pf-card"><div class="pf-card__body"><div class="pf-chart" id="pfChart"></div><div class="pf-chart__x" id="pfChartX"></div></div></div>
       <div class="pf-card" style="margin-top:16px;"><div class="pf-card__body" style="padding-top:16px;">
         <table class="pf-table"><thead><tr><th>Agent</th><th class="r">Calls</th><th class="r">Spend</th></tr></thead><tbody id="pfUsageTable"></tbody></table>
