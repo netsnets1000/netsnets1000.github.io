@@ -193,17 +193,6 @@
 .uc-card__try svg{width:14px;height:14px;flex:0 0 auto;}
 .uc-card__try:hover{color:#4A38C4;}
 
-.uc-featured{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:30px;}
-.uc-feat{position:relative;border-radius:18px;padding:26px;color:#fff;overflow:hidden;min-height:250px;display:flex;flex-direction:column;}
-.uc-feat::after{content:"";position:absolute;right:-60px;bottom:-60px;width:220px;height:220px;border-radius:50%;background:rgba(255,255,255,.08);}
-.uc-feat__tag{font-family:var(--font-mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;opacity:.8;}
-.uc-feat__t{font-family:var(--font-display);font-size:25px;font-weight:700;line-height:1.2;margin-top:12px;}
-.uc-feat__d{font-size:14.5px;line-height:1.6;opacity:.9;margin-top:10px;flex:1;}
-.uc-feat__go{margin-top:16px;font-size:14px;font-weight:700;position:relative;z-index:1;}
-.uc-feat--a{background:linear-gradient(135deg,#2E7BFF,#5B45E0);}
-.uc-feat--b{background:linear-gradient(135deg,#14161B,#2A2F45);}
-.uc-feat--c{background:linear-gradient(135deg,#7B5BFF,#B0402F);}
-
 .uc-count{font-size:13px;color:var(--muted);margin-top:14px;}
 .uc-not{display:grid;grid-template-columns:auto 1fr;gap:20px;align-items:start;background:#FFF8F4;border:1px solid #F1D9CB;border-radius:16px;padding:24px 26px;margin-top:34px;}
 .uc-not__ic{width:42px;height:42px;border-radius:11px;background:#fff;border:1px solid #F1D9CB;color:#B0402F;display:flex;align-items:center;justify-content:center;}
@@ -217,7 +206,7 @@
   .st-stats,.ag-strip{grid-template-columns:1fr 1fr;}
   .st-stat:nth-child(2),.ag-strip__i:nth-child(2){border-right:none;}
   .st-stat:nth-child(-n+2),.ag-strip__i:nth-child(-n+2){border-bottom:1px solid var(--bd-inner);}
-  .st-tiers,.st-comply,.uc-featured,.ag-related{grid-template-columns:1fr;}
+  .st-tiers,.st-comply,.ag-related{grid-template-columns:1fr;}
   .st-srcgrid,.ag-eps,.ag-faq{grid-template-columns:1fr;}
   .st-brands{grid-template-columns:repeat(3,minmax(0,1fr));}
   .st-pipe{grid-template-columns:repeat(3,minmax(0,1fr));}
