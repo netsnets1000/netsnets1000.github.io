@@ -17,7 +17,7 @@
 
   /* ---------- 9 agents (order = design rows) ---------- */
   var AGENTS = [
-    { name: 'Phone', app: 'Tellera Phone', cat: 'PHONE INTELLIGENCE', group: 'People & identity', desc: 'Identify callers, numbers, and carrier details.', ex: 'who owns (512) 555-0142?', extra: "Some AI can write your texts — we'll tell you who they're actually going to." },
+    { name: 'Phone', app: 'Tellera Phone', page: '/agents/phone', cat: 'PHONE INTELLIGENCE', group: 'People & identity', desc: 'Identify callers, numbers, and carrier details.', ex: 'who owns (512) 555-0142?', extra: "Some AI can write your texts — we'll tell you who they're actually going to." },
     { name: 'Vehicle', app: 'Tellera Vehicle', cat: 'VEHICLE HISTORY', group: 'Property & assets', desc: 'VIN checks, title history, recalls, and more.', ex: 'is VIN 1FTFW1E5… clean?', extra: "Some AI can design your next car — ours finds the hidden history of the one in the driveway." },
     { name: 'Property', app: 'Tellera Property', cat: 'PROPERTY RECORDS', group: 'Property & assets', desc: 'Ownership, value, liens, taxes, and history.', ex: 'who owns 1234 Oakridge Dr?', extra: "Some AI can stage your dream home — we'll tell you who actually owns the one next door." },
     { name: 'People', app: 'Tellera People', cat: 'PEOPLE SEARCH', group: 'People & identity', desc: 'Backgrounds, relatives, and associations.', ex: "what's known about M. Decker?", extra: "Some AI can write your Tinder bio — we'll tell you who you're actually meeting up with." },
@@ -76,8 +76,10 @@
 
   /* ---------- agents: rail + category filter ---------- */
   var railTrack = $('#agentsTrack'), catsWrap = $('#agentCats'), activeCat = 'All';
+  /* agents with a dedicated page link there; the rest open the example in Tellera Chat */
+  function agentHref(a) { return a.page || '/deep-search?q=' + encodeURIComponent(a.ex); }
   function agentCard(a) {
-    return '<a class="agent-card" href="/deep-search?q=' + encodeURIComponent(a.ex) + '">' +
+    return '<a class="agent-card" href="' + agentHref(a) + '">' +
       (a.bgIcon ? '<div class="agent-card__bg" style="background-image:url(\'' + a.bgIcon + '\')"></div>' : '<div class="agent-card__bg" style="background:radial-gradient(120px 120px at 22% 16%,' + a.tint200 + '77,transparent)"></div>') +
       '<div class="agent-card__body">' +
         '<span class="agent-card__ic">' + (a.iconSvg ? a.iconSvg : '<img src="' + a.catIcon + '" alt="' + esc(a.name) + '">') + '</span>' +
@@ -121,7 +123,7 @@
     }
     var list = AGENTS.filter(function (a) { return menuCat === 'All' || a.group === menuCat; });
     megaGrid.innerHTML = list.map(function (a) {
-      return '<a class="mega__tile" href="/deep-search?q=' + encodeURIComponent(a.ex) + '">' +
+      return '<a class="mega__tile" href="' + agentHref(a) + '">' +
         '<span class="mega__tile-ic">' + (a.iconSvg ? a.iconSvg : '<img src="' + a.catIcon + '" alt="' + esc(a.name) + '">') + '</span>' +
         '<div class="mega__tile-name">' + esc(a.app) + '</div>' +
         '<div class="mega__tile-desc">' + esc(a.desc) + '</div>' +
@@ -248,7 +250,7 @@
   /* ---------- mobile menu ---------- */
   function initMobile() {
     var burger = $('#burger'), menu = $('#mobileMenu'); if (!burger || !menu) return;
-    menu.innerHTML = '<a href="#agents">Agents</a><a href="#build">Developers</a><a href="#data">Our data</a><a href="#how">Trust</a><a href="#">Pricing</a>' +
+    menu.innerHTML = '<a href="#agents">Agents</a><a href="/developers">Developers</a><a href="/data">Our data</a><a href="/use-cases">Use cases</a><a href="#how">Trust</a><a href="/pricing">Pricing</a>' +
       '<a href="/get-started">Sign in</a><a class="mm-get" href="/deep-search">Get started</a>';
     menu.hidden = false;
     var openState = false;

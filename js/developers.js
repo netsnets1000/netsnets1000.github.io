@@ -31,7 +31,7 @@
         '<div style="min-width:0"><div class="dv-agent__name">' + esc(a.app) + '</div><div class="dv-agent__ep">' + esc(a.endpoints[0].name) + ' · from $' + a.price.toFixed(2) + '</div></div>' + badge + '</div>' +
         '<div class="dv-agent__desc">' + esc(a.desc) + '</div>' +
         '<div class="dv-agent__prov"><span class="dv-agent__prov-k">Featured data</span>' + brand(a.provider) + '</div>' +
-        '<div class="dv-agent__foot"><a class="dv-agent__try" href="/deep-search?q=' + encodeURIComponent(q) + '">' + chatSvg + 'Try in chat</a><a class="dv-agent__view" href="/portal">View API →</a></div></div>';
+        '<div class="dv-agent__foot"><a class="dv-agent__try" href="/deep-search?q=' + encodeURIComponent(q) + '">' + chatSvg + 'Try in chat</a><a class="dv-agent__view" href="' + (a.page || '/portal') + '">View API →</a></div></div>';
     }).join('');
     var soon = T.COMING.map(function (c) {
       return '<div class="dv-agent" style="opacity:.72">' +

@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Our Data — Where Tellera's answers come from</title>
+<meta name="description" content="Tellera answers come from official public records, the LTV family of data brands, and vetted vendors — NMVTIS, county recorders, PACER, state unclaimed-property offices, the U.S. Census and more — with a source and confidence on every field.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,600&family=Spectral:ital,wght@0,300;0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/styles/tokens.css">
+<link rel="stylesheet" href="/styles/developers.css">
+<link rel="stylesheet" href="/styles/site.css">
+</head>
+<body class="dv-body">
+
+<header class="dv-nav">
+  <div class="dv-nav__inner">
+    <a href="/" aria-label="Tellera home"><img src="/assets/tellera-wordmark-dark.svg" alt="Tellera" class="dv-nav__word"></a>
+    <nav class="dv-nav__links">
+      <a href="/#agents">Agents</a><a href="/data" class="active">Our data</a><a href="/use-cases">Use cases</a><a href="/developers">Developers</a><a href="/pricing">Pricing</a>
+    </nav>
+    <div class="dv-nav__cta">
+      <a class="dv-nav__signin" href="/portal" data-auth="signin">Sign in</a>
+      <a class="dv-btn dv-btn--prism" href="/deep-search">Try Tellera</a>
+    </div>
+    <button class="dv-burger" id="stBurger" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+</header>
+
+<!-- hero -->
+<section class="st-hero">
+  <div class="dv-wrap">
+    <div class="st-crumb"><a href="/">Home</a> / <b>Our data</b></div>
+    <div class="st-hero__grid">
+      <div>
+        <span class="dv-eyebrow">Our data</span>
+        <h1 class="st-hero__h1">The records behind <em>every answer.</em></h1>
+        <p class="st-hero__sub">Most AI answers from what it read on the internet. Tellera answers from the record itself — county deeds, federal title data, court dockets, state registries — plus 15 years of connected data from the LTV family of brands. Every field comes back with its source, its tier, and a confidence score.</p>
+        <div class="dv-hero__cta"><a class="dv-btn dv-btn--prism dv-btn--lg" href="#sources">Browse the sources</a><a class="dv-btn dv-btn--ghost dv-btn--lg" href="/deep-search">See it in an answer</a></div>
+      </div>
+      <div class="st-prov">
+        <div class="st-prov__bar"></div>
+        <div class="st-prov__head"><div class="st-prov__q">"Who owns 1234 Oakridge Dr, Austin TX?"</div><div class="st-prov__a">Martin R. Decker</div></div>
+        <div class="st-prov__row"><div><div class="st-prov__k">Owner of record</div><div class="st-prov__v">Martin R. Decker</div><div class="st-prov__s">Travis County Clerk · deed recorded Jun 2019</div></div><span class="st-tier st-tier--official">Official</span></div>
+        <div class="st-prov__row"><div><div class="st-prov__k">Assessed value</div><div class="st-prov__v">$612,400</div><div class="st-prov__s">Travis Central Appraisal District · 2026 roll</div></div><span class="st-tier st-tier--official">Official</span></div>
+        <div class="st-prov__row"><div><div class="st-prov__k">Estimated market value</div><div class="st-prov__v">$688,000</div><div class="st-prov__s">Ownerly valuation model</div></div><span class="st-tier st-tier--partner">Partner</span></div>
+        <div class="st-prov__row"><div><div class="st-prov__k">Flood zone</div><div class="st-prov__v">Zone X · minimal risk</div><div class="st-prov__s">FEMA National Flood Hazard Layer</div></div><span class="st-tier st-tier--official">Official</span></div>
+        <div class="st-prov__row"><div><div class="st-prov__k">Open liens</div><div class="st-prov__v">None found</div><div class="st-prov__s">Licensed lien index · checked today</div></div><span class="st-tier st-tier--vendor">Vendor</span></div>
+      </div>
+    </div>
+    <div class="st-stats">
+      <div class="st-stat"><div class="st-stat__n">15 yrs</div><div class="st-stat__l">Connecting public records at consumer scale</div></div>
+      <div class="st-stat"><div class="st-stat__n">11</div><div class="st-stat__l">Data brands across the LTV network</div></div>
+      <div class="st-stat"><div class="st-stat__n">50 + Fed</div><div class="st-stat__l">Every state, plus federal sources like PACER &amp; NMVTIS</div></div>
+      <div class="st-stat"><div class="st-stat__n">Billions</div><div class="st-stat__l">Records indexed, linked, and cross-checked</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- tiers -->
+<section class="dv-sec">
+  <div class="dv-wrap">
+    <div class="dv-kicker">Three tiers of sources</div>
+    <h2 class="dv-h2">Not all data is equal. We label it.</h2>
+    <p class="dv-lede">Every field in a Tellera answer is tagged with the tier it came from. When sources disagree, the official record wins — and developers can require official-only data on any call.</p>
+    <div class="st-tiers">
+      <div class="st-tiercard">
+        <span class="st-tier st-tier--official">Official</span>
+        <div class="st-tiercard__t">Government records</div>
+        <div class="st-tiercard__d">Pulled from the agency that keeps the record — county, state, and federal. The highest-confidence tier.</div>
+        <ul><li>County recorders, assessors &amp; courts</li><li>State registries, DMVs &amp; unclaimed-property offices</li><li>Federal systems — PACER, NMVTIS, SEC, OFAC, Census</li></ul>
+      </div>
+      <div class="st-tiercard">
+        <span class="st-tier st-tier--partner">Partner</span>
+        <div class="st-tiercard__t">The LTV brand network</div>
+        <div class="st-tiercard__d">Fifteen years of linked data from BeenVerified, Bumper, Ownerly, FamFinder, ReversePhone and more — the connective tissue between raw records.</div>
+        <ul><li>Identity &amp; contact graphs</li><li>Valuation &amp; vehicle-history models</li><li>Community reports &amp; verifications</li></ul>
+      </div>
+      <div class="st-tiercard">
+        <span class="st-tier st-tier--vendor">Vendor</span>
+        <div class="st-tiercard__t">Vetted third parties</div>
+        <div class="st-tiercard__d">Licensed suppliers that fill gaps government sources don't cover. Audited for accuracy and freshness before they reach an answer.</div>
+        <ul><li>Carrier &amp; portability data</li><li>Insurance total-loss &amp; auction records</li><li>Listing history &amp; adverse media</li></ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- source catalog -->
+<section class="dv-sec dv-sec--alt" id="sources">
+  <div class="dv-wrap">
+    <div class="dv-kicker">The source catalog</div>
+    <h2 class="dv-h2">Where the answers come from.</h2>
+    <p class="dv-lede">A look at the kinds of sources behind each Tellera agent. Filter by category — every agent draws from a mix of official, partner, and vendor data.</p>
+    <div class="st-filter" id="dataFilter"></div>
+    <div class="st-srcgrid" id="dataSources"></div>
+    <p class="st-note">Source examples show the types of records Tellera draws on. Availability varies by jurisdiction, and some sources are only used for purposes permitted by law (for example, DMV data under the DPPA).</p>
+  </div>
+</section>
+
+<!-- brands -->
+<section class="dv-sec">
+  <div class="dv-wrap">
+    <div class="dv-kicker">The LTV network</div>
+    <h2 class="dv-h2">Eleven brands. One connected graph.</h2>
+    <p class="dv-lede">Tellera is built by the team behind some of the most-used public-records products in the U.S. Their data — and 15 years of learning how to connect it — powers every agent.</p>
+    <div class="st-brands" id="dataBrands"></div>
+  </div>
+</section>
+
+<!-- pipeline -->
+<section class="dv-sec dv-why">
+  <div class="dv-wrap">
+    <div class="dv-kicker">How we keep it right</div>
+    <h2 class="dv-h2">From raw record to cited answer.</h2>
+    <p class="dv-lede">Public records are messy — misspelled names, duplicate parcels, stale addresses. Here's what happens before a record ever reaches an answer.</p>
+    <div class="st-pipe">
+      <div class="st-step"><div class="st-step__n">01</div><div class="st-step__t">Collect</div><div class="st-step__d">Scheduled pulls from thousands of sources — court dockets daily, tax rolls each cycle.</div></div>
+      <div class="st-step"><div class="st-step__n">02</div><div class="st-step__t">Normalize</div><div class="st-step__d">Standardize names, dates, and addresses (USPS CASS) so records can be compared.</div></div>
+      <div class="st-step"><div class="st-step__n">03</div><div class="st-step__t">Link</div><div class="st-step__d">Entity resolution joins records into one person, property, vehicle, or business.</div></div>
+      <div class="st-step"><div class="st-step__n">04</div><div class="st-step__t">Cross-check</div><div class="st-step__d">Conflicts are resolved by tier and recency — the official record wins ties.</div></div>
+      <div class="st-step"><div class="st-step__n">05</div><div class="st-step__t">Score</div><div class="st-step__d">Every field gets a confidence score based on source agreement and freshness.</div></div>
+      <div class="st-step"><div class="st-step__n">06</div><div class="st-step__t">Cite</div><div class="st-step__d">Answers ship with source, tier, and as-of date — so you can check the work.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- compliance -->
+<section class="dv-sec">
+  <div class="dv-wrap">
+    <div class="dv-kicker">Responsible by design</div>
+    <h2 class="dv-h2">Powerful data, used the right way.</h2>
+    <div class="st-comply">
+      <div class="st-card">
+        <span class="st-card__ic"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M12 3l8 4v5c0 5-3.4 8.4-8 9-4.6-.6-8-4-8-9V7z"/><path d="M9 12l2 2 4-4" stroke-linecap="round"/></svg></span>
+        <div class="st-card__t">Not a consumer reporting agency</div>
+        <div class="st-card__d">Tellera isn't covered by the FCRA and can't be used for decisions about credit, employment, housing, or insurance. <a href="/use-cases#not-for">See what Tellera is not for →</a></div>
+      </div>
+      <div class="st-card">
+        <span class="st-card__ic"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="4" y="10" width="16" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg></span>
+        <div class="st-card__t">Regulated data stays gated</div>
+        <div class="st-card__d">Data covered by laws like the DPPA and GLBA is only returned for permitted purposes, declared per API key and logged for audit.</div>
+      </div>
+      <div class="st-card">
+        <span class="st-card__ic"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-6 8-6s8 2 8 6"/><path d="M17 3l4 4M21 3l-4 4"/></svg></span>
+        <div class="st-card__t">You control your record</div>
+        <div class="st-card__d">Anyone can request to opt out or have their information removed, and exercise state privacy rights. <a href="#">Opt out / remove my info →</a></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="dv-sec" style="padding-top:0"><div class="dv-wrap">
+  <div class="dv-ctaband">
+    <div class="dv-ctaband__h">Don't take our word for it. Check the source.</div>
+    <div class="dv-ctaband__d">Every Tellera answer shows exactly where it came from.</div>
+    <div class="dv-ctaband__cta"><a class="dv-btn dv-btn--lg" href="/deep-search">Try Tellera Chat</a><a class="dv-btn dv-btn--out dv-btn--lg" href="/use-cases">Explore use cases</a><a class="dv-btn dv-btn--out dv-btn--lg" href="/developers">Build with the API</a></div>
+  </div>
+</div></section>
+
+<footer class="dv-footer">
+  <div class="dv-wrap">
+    <div class="dv-footer__grid">
+      <div><img src="/assets/tellera-wordmark-light.svg" alt="Tellera" class="dv-footer__word"><div class="dv-footer__tag">the AI for what AI doesn't tell you — real answers, proven sources, your control.</div></div>
+      <div class="dv-footer__col"><div class="dv-footer__h">Agents</div><a href="/agents/phone">Tellera Phone</a><a href="/#agents">All agents</a><a href="/deep-search">Tellera Chat</a></div>
+      <div class="dv-footer__col"><div class="dv-footer__h">Platform</div><a href="/data">Our data</a><a href="/use-cases">Use cases</a><a href="/developers">API &amp; MCP</a><a href="/pricing">Pricing</a><a href="/portal">Agent portal</a></div>
+      <div class="dv-footer__col"><div class="dv-footer__h">Company</div><a href="#">About</a><a href="#">Trust Center</a><a href="#">Contact</a><a href="#">Careers</a></div>
+    </div>
+    <div class="dv-footer__base">
+      <span>© 2026 Tellera, Inc.</span>
+      <span class="sep">·</span><a href="#">Privacy</a>
+      <span class="sep">·</span><a href="#">Do not sell or share my info</a>
+      <span class="sep">·</span><a href="#">Opt out / Remove my info</a>
+      <span class="sep">·</span><a href="#">Terms</a>
+      <span class="sep">·</span><span>Tellera is not a consumer reporting agency under the FCRA.</span>
+    </div>
+  </div>
+</footer>
+<div class="dv-mm" id="stMenu" hidden></div>
+
+<script src="/js/data-page.js"></script>
+<script src="/js/site.js"></script>
+<script src="/js/auth.js"></script>
+</body>
+</html>

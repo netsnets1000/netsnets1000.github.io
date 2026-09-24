@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Use Cases — What people and teams do with Tellera</title>
+<meta name="description" content="From screening scam calls and verifying leads to property due diligence, VIN checks, and grounding AI agents in real records — see how people and teams use Tellera's agents.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,600&family=Spectral:ital,wght@0,300;0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/styles/tokens.css">
+<link rel="stylesheet" href="/styles/developers.css">
+<link rel="stylesheet" href="/styles/site.css">
+</head>
+<body class="dv-body">
+
+<header class="dv-nav">
+  <div class="dv-nav__inner">
+    <a href="/" aria-label="Tellera home"><img src="/assets/tellera-wordmark-dark.svg" alt="Tellera" class="dv-nav__word"></a>
+    <nav class="dv-nav__links">
+      <a href="/#agents">Agents</a><a href="/data">Our data</a><a href="/use-cases" class="active">Use cases</a><a href="/developers">Developers</a><a href="/pricing">Pricing</a>
+    </nav>
+    <div class="dv-nav__cta">
+      <a class="dv-nav__signin" href="/portal" data-auth="signin">Sign in</a>
+      <a class="dv-btn dv-btn--prism" href="/deep-search">Try Tellera</a>
+    </div>
+    <button class="dv-burger" id="stBurger" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+</header>
+
+<!-- hero -->
+<section class="st-hero st-hero--center">
+  <div class="dv-wrap">
+    <div class="st-crumb"><a href="/">Home</a> / <b>Use cases</b></div>
+    <span class="dv-eyebrow" style="margin-top:22px">Use cases</span>
+    <h1 class="st-hero__h1">Real questions. <em>Real records.</em></h1>
+    <p class="st-hero__sub">From screening a scam call to grounding an AI agent — here's how people, teams, and developers put Tellera's agents to work.</p>
+    <div class="ag-lookup" style="margin:26px auto 0;"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#7E8798" stroke-width="2" stroke-linecap="round" style="align-self:center;flex:0 0 auto"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg><input id="ucSearch" placeholder="Search use cases — e.g. fraud, VIN, LLC, unclaimed money…" aria-label="Search use cases" style="padding:10px 0"></div>
+  </div>
+</section>
+
+<!-- featured -->
+<section class="dv-sec" style="padding-bottom:40px">
+  <div class="dv-wrap">
+    <div class="dv-kicker">Featured</div>
+    <h2 class="dv-h2">Where Tellera shines.</h2>
+    <div class="uc-featured">
+      <a class="uc-feat uc-feat--a" href="/developers">
+        <div class="uc-feat__tag">AI agents &amp; automation</div>
+        <div class="uc-feat__t">Give your AI agent a paper trail.</div>
+        <div class="uc-feat__d">Connect Claude, ChatGPT, or your own agent to Tellera over MCP, and its answers about people, property, and vehicles come from the record — with sources — instead of a guess.</div>
+        <div class="uc-feat__go">Explore the API &amp; MCP →</div>
+      </a>
+      <a class="uc-feat uc-feat--b" href="/agents/phone">
+        <div class="uc-feat__tag">Fraud &amp; trust</div>
+        <div class="uc-feat__t">Stop fraud at the phone line.</div>
+        <div class="uc-feat__d">Owner match, line type, burner flags, and recent-port (SIM-swap) signals on any number — before your team resets a password or ships an order.</div>
+        <div class="uc-feat__go">See Tellera Phone →</div>
+      </a>
+      <a class="uc-feat uc-feat--c" href="/deep-search?q=Any%20liens%2C%20permits%2C%20or%20flood%20risk%20on%2055%20Elm%20St%2C%20Denver%3F">
+        <div class="uc-feat__tag">Real estate</div>
+        <div class="uc-feat__t">Know a property before you make a move.</div>
+        <div class="uc-feat__d">Owner of record, liens, permits, flood zone, taxes, and value — pulled from county records and cited, in one answer.</div>
+        <div class="uc-feat__go">Try it in Tellera Chat →</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- all use cases -->
+<section class="dv-sec dv-sec--alt" id="all">
+  <div class="dv-wrap">
+    <div class="dv-kicker">All use cases</div>
+    <h2 class="dv-h2">Pick a job. Tellera has an agent for it.</h2>
+    <p class="dv-lede">Every card shows the agents involved — or skip the choosing and ask your question in plain language. Tellera routes it for you.</p>
+    <div class="st-filter" id="ucFilter"></div>
+    <div class="uc-count" id="ucCount"></div>
+    <div class="uc-grid" id="ucGrid"></div>
+
+    <div class="uc-not" id="not-for">
+      <span class="uc-not__ic"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M5.6 5.6l12.8 12.8"/></svg></span>
+      <div>
+        <div class="uc-not__t">What Tellera is not for</div>
+        <div class="uc-not__d">Tellera is not a consumer reporting agency under the Fair Credit Reporting Act (FCRA). Its answers can't be used to decide someone's eligibility for any of the following — and can never be used to stalk or harass anyone.</div>
+        <div class="uc-not__list"><span>Tenant screening</span><span>Employment &amp; hiring</span><span>Credit or lending</span><span>Insurance underwriting</span><span>Government benefits</span><span>Stalking or harassment</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- three ways -->
+<section class="dv-sec">
+  <div class="dv-wrap">
+    <div class="dv-kicker">Three ways in</div>
+    <h2 class="dv-h2">Same answers — wherever you work.</h2>
+    <div class="st-comply">
+      <a class="st-card" href="/deep-search">
+        <span class="st-card__ic"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8 8 0 0 1-11.5 7.2L4 20l1.1-4A8 8 0 1 1 21 12z"/></svg></span>
+        <div class="st-card__t">Tellera Chat</div>
+        <div class="st-card__d">For people. Ask a question in plain language and get a straight, cited answer — no setup. <span style="color:var(--blue);font-weight:700">Try it →</span></div>
+      </a>
+      <a class="st-card" href="/developers">
+        <span class="st-card__ic"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 7l5 5-5 5M12 17h7"/></svg></span>
+        <div class="st-card__t">REST API</div>
+        <div class="st-card__d">For products. Drop verified records into your app, CRM, or workflow — priced per call. <span style="color:var(--blue);font-weight:700">See the API →</span></div>
+      </a>
+      <a class="st-card" href="/developers#connect">
+        <span class="st-card__ic"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M8 8l-4 4 4 4M16 8l4 4-4 4M13 5l-2 14"/></svg></span>
+        <div class="st-card__t">MCP server</div>
+        <div class="st-card__d">For AI agents. Add one connector and your agent can call every Tellera specialist on its own. <span style="color:var(--blue);font-weight:700">Connect an agent →</span></div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="dv-sec" style="padding-top:0"><div class="dv-wrap">
+  <div class="dv-ctaband">
+    <div class="dv-ctaband__h">Don't see your use case? Just ask.</div>
+    <div class="dv-ctaband__d">If it's in the public record, there's a good chance Tellera can find it.</div>
+    <div class="dv-ctaband__cta"><a class="dv-btn dv-btn--lg" href="/deep-search">Ask Tellera</a><a class="dv-btn dv-btn--out dv-btn--lg" href="/data">See our data</a><a class="dv-btn dv-btn--out dv-btn--lg" href="#">Talk to sales</a></div>
+  </div>
+</div></section>
+
+<footer class="dv-footer">
+  <div class="dv-wrap">
+    <div class="dv-footer__grid">
+      <div><img src="/assets/tellera-wordmark-light.svg" alt="Tellera" class="dv-footer__word"><div class="dv-footer__tag">the AI for what AI doesn't tell you — real answers, proven sources, your control.</div></div>
+      <div class="dv-footer__col"><div class="dv-footer__h">Agents</div><a href="/agents/phone">Tellera Phone</a><a href="/#agents">All agents</a><a href="/deep-search">Tellera Chat</a></div>
+      <div class="dv-footer__col"><div class="dv-footer__h">Platform</div><a href="/data">Our data</a><a href="/use-cases">Use cases</a><a href="/developers">API &amp; MCP</a><a href="/pricing">Pricing</a><a href="/portal">Agent portal</a></div>
+      <div class="dv-footer__col"><div class="dv-footer__h">Company</div><a href="#">About</a><a href="#">Trust Center</a><a href="#">Contact</a><a href="#">Careers</a></div>
+    </div>
+    <div class="dv-footer__base">
+      <span>© 2026 Tellera, Inc.</span>
+      <span class="sep">·</span><a href="#">Privacy</a>
+      <span class="sep">·</span><a href="#">Do not sell or share my info</a>
+      <span class="sep">·</span><a href="#">Opt out / Remove my info</a>
+      <span class="sep">·</span><a href="#">Terms</a>
+      <span class="sep">·</span><span>Tellera is not a consumer reporting agency under the FCRA.</span>
+    </div>
+  </div>
+</footer>
+<div class="dv-mm" id="stMenu" hidden></div>
+
+<script src="/js/connectors.js"></script>
+<script src="/js/use-cases.js"></script>
+<script src="/js/site.js"></script>
+<script src="/js/auth.js"></script>
+</body>
+</html>

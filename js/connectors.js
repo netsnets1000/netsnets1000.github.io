@@ -25,11 +25,17 @@ window.TELLERA_API = (function () {
         { m: 'POST', path: '/v1/people/match', name: 'people.match', price: 0.01, desc: 'Return a ranked list of candidate people for a name — names, rough locations, and ages only.',
           params: [{ n: 'name', t: 'string', req: true, d: 'Name to search for candidates.' }, { n: 'state', t: 'string', req: false, d: 'Two-letter state to narrow candidates.' }, { n: 'limit', t: 'integer', req: false, d: 'Max candidates to return (default 10).' }] }
       ] },
-    { code: 'PH', slug: 'phone', app: 'Tellera Phone', bucket: 'people', icon: '/assets/pills/phone.png', price: 0.03, desc: 'Identify callers, numbers, carrier, and spam signal.',
+    { code: 'PH', slug: 'phone', page: '/agents/phone', app: 'Tellera Phone', bucket: 'people', icon: '/assets/pills/phone.png', price: 0.03, desc: 'Identify callers, numbers, carrier, and spam signal.',
       prompts: ['Who owns (512) 555-0142?', 'Is (212) 555-0100 a spam number?'],
       endpoints: [
-        { m: 'POST', path: '/v1/phone/lookup', name: 'phone.lookup', price: 0.03, desc: 'Owner, carrier, line type, and spam signal for a number.',
-          params: [{ n: 'number', t: 'string', req: true, d: 'Phone number in E.164 or national format.' }] }
+        { m: 'POST', path: '/v1/phone/lookup', name: 'phone.lookup', price: 0.03, desc: 'Owner, carrier, line type, location, and risk signals for a number.',
+          params: [{ n: 'number', t: 'string', req: true, d: 'Phone number in E.164 or national format.' }, { n: 'include', t: 'string[]', req: false, d: 'Optional blocks: owner, line, location, risk, connections.' }] },
+        { m: 'POST', path: '/v1/phone/verify', name: 'phone.verify', price: 0.02, desc: 'Does this number belong to this person or business? Returns a match score.',
+          params: [{ n: 'number', t: 'string', req: true, d: 'Phone number to check.' }, { n: 'name', t: 'string', req: true, d: 'Full name or business name to match.' }, { n: 'address', t: 'string', req: false, d: 'Optional address to strengthen the match.' }] },
+        { m: 'GET', path: '/v1/phone/reputation', name: 'phone.reputation', price: 0.01, desc: 'Spam / robocall score, community report categories, and complaint matches.',
+          params: [{ n: 'number', t: 'string', req: true, d: 'Phone number to score.' }] },
+        { m: 'GET', path: '/v1/phone/history', name: 'phone.history', price: 0.04, desc: 'Ownership and porting timeline — including recent-port (SIM-swap) signals.',
+          params: [{ n: 'number', t: 'string', req: true, d: 'Phone number.' }, { n: 'since', t: 'date', req: false, d: 'Only return events after this date.' }] }
       ] },
     { code: 'FA', slug: 'family', app: 'Tellera Family', bucket: 'people', icon: '/assets/agents/family.svg', price: 0.04, desc: 'Relatives, ancestry, marriages, and lineage.',
       prompts: ['Map the household at 13 Roland Dr', "Who are Martin Decker's relatives?"],

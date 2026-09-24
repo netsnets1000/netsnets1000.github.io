@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tellera Phone API &amp; MCP — Know who's behind any number | Tellera</title>
+<meta name="description" content="Tellera Phone turns a phone number into a verified identity — owner, carrier, line type, location, and risk signals — by API or MCP.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,600&family=Spectral:ital,wght@0,300;0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/styles/tokens.css">
+<link rel="stylesheet" href="/styles/developers.css">
+<link rel="stylesheet" href="/styles/site.css">
+</head>
+<!-- Agent page template: change data-agent to any slug configured in /js/agent-page.js -->
+<body class="dv-body" data-agent="phone">
+
+<header class="dv-nav">
+  <div class="dv-nav__inner">
+    <a href="/" aria-label="Tellera home"><img src="/assets/tellera-wordmark-dark.svg" alt="Tellera" class="dv-nav__word"></a>
+    <nav class="dv-nav__links">
+      <a href="/#agents" class="active">Agents</a><a href="/data">Our data</a><a href="/use-cases">Use cases</a><a href="/developers">Developers</a><a href="/pricing">Pricing</a>
+    </nav>
+    <div class="dv-nav__cta">
+      <a class="dv-nav__signin" href="/portal" data-auth="signin">Sign in</a>
+      <a class="dv-btn dv-btn--prism" href="/deep-search">Try Tellera</a>
+    </div>
+    <button class="dv-burger" id="stBurger" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+</header>
+
+<main id="agMain"></main>
+
+<footer class="dv-footer">
+  <div class="dv-wrap">
+    <div class="dv-footer__grid">
+      <div><img src="/assets/tellera-wordmark-light.svg" alt="Tellera" class="dv-footer__word"><div class="dv-footer__tag">the AI for what AI doesn't tell you — real answers, proven sources, your control.</div></div>
+      <div class="dv-footer__col"><div class="dv-footer__h">Agents</div><a href="/agents/phone">Tellera Phone</a><a href="/#agents">All agents</a><a href="/deep-search">Tellera Chat</a></div>
+      <div class="dv-footer__col"><div class="dv-footer__h">Platform</div><a href="/data">Our data</a><a href="/use-cases">Use cases</a><a href="/developers">API &amp; MCP</a><a href="/pricing">Pricing</a><a href="/portal">Agent portal</a></div>
+      <div class="dv-footer__col"><div class="dv-footer__h">Company</div><a href="#">About</a><a href="#">Trust Center</a><a href="#">Contact</a><a href="#">Careers</a></div>
+    </div>
+    <div class="dv-footer__base">
+      <span>© 2026 Tellera, Inc.</span>
+      <span class="sep">·</span><a href="#">Privacy</a>
+      <span class="sep">·</span><a href="#">Do not sell or share my info</a>
+      <span class="sep">·</span><a href="#">Opt out / Remove my info</a>
+      <span class="sep">·</span><a href="#">Terms</a>
+      <span class="sep">·</span><span>Tellera is not a consumer reporting agency under the FCRA.</span>
+    </div>
+  </div>
+</footer>
+<div class="dv-mm" id="stMenu" hidden></div>
+
+<script src="/js/connectors.js"></script>
+<script src="/js/agent-page.js"></script>
+<script src="/js/site.js"></script>
+<script src="/js/auth.js"></script>
+</body>
+</html>
